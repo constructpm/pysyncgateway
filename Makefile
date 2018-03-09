@@ -22,6 +22,10 @@ dev:
 requirements:
 	$(bin_prefix)pip-compile requirements.in
 
+.PHONY: lint
+lint:
+	$(bin_prefix)flake8 pysyncgateway tests
+
 .PHONY: test
 test:
 	$(bin_prefix)pytest

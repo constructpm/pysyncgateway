@@ -3,7 +3,9 @@ jobs:
   build:
     docker:
       - image: python:2.7
+      - image: couchbase/sync-gateway:1.5.1-community
     steps:
       - checkout
       - run: make install
+      - run: make lint
       - run: make test
