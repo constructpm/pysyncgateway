@@ -1,7 +1,8 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from requests import get
+from requests import get, put
 
+from .database import Database
 from .helpers import ComparableMixin, sg_method
 
 
@@ -47,8 +48,26 @@ class AdminClient(object, ComparableMixin):
         """
         return self.get(self.url).json()
 
+    # --- Databases ---
+
+    def get_database(self, database_name):
+        """
+        Get a `Database` instance connected to this client
+
+        Args:
+            database_name (str): Name of database.
+
+        Returns:
+            Database
+        """
+        return Database(self, database_name)
+
     # --- REST Verbs ---
 
     @sg_method
     def get(self, url, **kwargs):
         return get(url, **kwargs)
+
+    @sg_method
+    def put(self, url, data):
+        return put(url, json=data)
