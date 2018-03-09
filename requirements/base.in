@@ -1,4 +1,6 @@
 # Test requirements
 
 flake8
+isort
 pytest
+yapf
