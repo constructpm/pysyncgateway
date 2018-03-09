@@ -1,6 +1,8 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from .helpers import ComparableMixin
+from requests import get
+
+from .helpers import ComparableMixin, sg_method
 
 
 class AdminClient(object, ComparableMixin):
@@ -37,3 +39,16 @@ class AdminClient(object, ComparableMixin):
         """
         assert isinstance(other, AdminClient)
         return self.url < other.url
+
+    def get_server(self):
+        """
+        Returns:
+            dict: Meta-information about the server.
+        """
+        return self.get(self.url).json()
+
+    # --- REST Verbs ---
+
+    @sg_method
+    def get(self, url, **kwargs):
+        return get(url, **kwargs)
