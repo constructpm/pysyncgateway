@@ -24,7 +24,13 @@ requirements:
 
 .PHONY: lint
 lint:
+	@echo "=== flake8 ==="
 	$(bin_prefix)flake8 pysyncgateway tests
+	@echo "=== isort ==="
+	$(bin_prefix)isort --quiet --recursive --diff pysyncgateway tests > isort.out
+	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
+	@echo "=== yapf ==="
+	$(bin_prefix)yapf --recursive --diff pysyncgateway tests
 
 .PHONY: test
 test:
