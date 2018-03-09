@@ -14,6 +14,10 @@ venv:
 install:
 	$(bin_prefix)pip install -r requirements/base.txt
 
+.PHONY: dev
+dev:
+	$(bin_prefix)pip install -r requirements/dev.txt
+
 .PHONY: requirements
 requirements:
 	$(bin_prefix)pip-compile requirements.in

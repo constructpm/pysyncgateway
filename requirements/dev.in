@@ -1,0 +1,7 @@
+# Development requirements
+
+-r base.txt
+
+isort
+pip-tools
+yapf
