@@ -9,4 +9,5 @@ all: $(outputs)
 	$(compile_cmd) -v --output-file $@ $<
 
 # Dependency chain
-dev.txt: base.txt
+test.txt: base.txt
+dev.txt: test.txt

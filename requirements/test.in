@@ -1,0 +1,8 @@
+# Test requirements
+
+-r base.txt
+
+flake8
+isort
+pytest
+yapf
