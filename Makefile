@@ -12,7 +12,7 @@ venv:
 
 .PHONY: install
 install:
-	$(bin_prefix)pip install -r requirements.txt
+	$(bin_prefix)pip install -r requirements/base.txt
 
 .PHONY: requirements
 requirements:
