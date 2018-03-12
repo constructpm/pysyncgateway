@@ -54,6 +54,7 @@ class Database(object, ComparableMixin):
         Raises:
             AssertionError: When other is not Database.
         """
+        assert isinstance(other, Database)
         return self.url < other.url
 
     def create(self):

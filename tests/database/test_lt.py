@@ -1,5 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+import pytest
+
 from pysyncgateway import AdminClient, Database
 
 
@@ -38,3 +40,11 @@ def test_ne_db():
     result = a_database == b_database
 
     assert result is False
+
+
+def test_other_type():
+    admin_client = AdminClient('__URL__')
+    database = Database(admin_client, 'test')
+
+    with pytest.raises(AssertionError):
+        database < 1
