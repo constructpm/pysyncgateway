@@ -1,9 +1,9 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from .helpers import assert_valid_database_name
+from .helpers import ComparableMixin, assert_valid_database_name
 
 
-class Database(object):
+class Database(object, ComparableMixin):
     """
     A Couchbase Database.
 
@@ -38,6 +38,22 @@ class Database(object):
 
     def __repr__(self):
         return '<Database "{url}">'.format(url=self.url)
+
+    def __lt__(self, other):
+        """
+        Comparison is only carried out on the url, however this will call the
+        current client's settings and use them to build the url each time.
+
+        Args:
+            other (Database)
+
+        Returns:
+            bool
+
+        Raises:
+            AssertionError: When other is not Database.
+        """
+        return self.url < other.url
 
     def create(self):
         """

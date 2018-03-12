@@ -62,6 +62,15 @@ class AdminClient(object, ComparableMixin):
         """
         return Database(self, database_name)
 
+    def all_databases(self):
+        """
+        Provide all Databases on the server.
+
+        GET /_all_dbs
+        """
+        response = self.get('{}{}'.format(self.url, '_all_dbs')).json()
+        return [self.get_database(name) for name in response]
+
     # --- REST Verbs ---
 
     @sg_method
