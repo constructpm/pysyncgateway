@@ -3,7 +3,13 @@ jobs:
   build:
     docker:
       - image: python:2.7
+      - image: couchbase/sync-gateway:1.5.1-community
+        # SG image starts up with a database called DB. Pass it empty JSON to
+        # start with no databases.
+        command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
+
     steps:
       - checkout
       - run: make install
+      - run: make lint
       - run: make test

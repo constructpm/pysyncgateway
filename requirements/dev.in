@@ -1,0 +1,6 @@
+# Development requirements
+
+-r test.txt
+
+ipdb
+pip-tools

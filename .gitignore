@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Unit test / coverage reports
+.pytest_cache/
+
 # Environments
 .env
 .venv
@@ -11,3 +14,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# isort output
+/isort.out
