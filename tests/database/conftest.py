@@ -9,6 +9,10 @@ from pysyncgateway import AdminClient
 def admin_client(syncgateway_admin_url):
     """
     Returns:
-        AdminClient: Pointed at default admin URL.
+        AdminClient: Pointed at default admin URL. Deletes all databases at end
+            of test.
     """
-    return AdminClient(syncgateway_admin_url)
+    admin_client = AdminClient(syncgateway_admin_url)
+    yield admin_client
+    for database in admin_client.all_databases():
+        database.delete()

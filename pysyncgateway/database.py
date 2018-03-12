@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+from .exceptions import DoesNotExist
 from .helpers import ComparableMixin, assert_valid_database_name
 
 
@@ -71,3 +72,56 @@ class Database(object, ComparableMixin):
         data = {}
         response = self.client.put(self.url, data)
         return response.status_code == 201
+
+    def get(self):
+        """
+        Return information about this Database from Sync Gateway.
+
+        GET /:name/
+
+        Returns:
+            dict: Information loaded from SG.
+        """
+        response = self.client.get(self.url)
+        return response.json()
+
+    def delete(self):
+        """
+        Remove database.
+
+        Whereas SyncGateway will raise 404 if the database is not found, this
+        fails silently with the intention that it can be used 'scatter gun'
+        style at the end of test runs to clean up database lists. Since
+        documents appear to hang around after database delete, this gets a list
+        of all document IDs in the database and removes them before dropping
+        the DB.
+
+        DELETE /:name/
+
+        NOTE this code is not optimal and there may be some value in using a
+        _purge call instead / as well. This from Simon @ couchbase:
+
+            I've just confirmed that you need to delete, then purge the
+            documents.
+
+        Returns:
+            bool: Database was found and deleted.
+        """
+        '''
+        # TODO build out doc cleanup
+        try:
+            docs = self.all_docs()
+        except DoesNotExist:
+            docs = []
+        for doc in docs:
+            try:
+                doc.delete()
+            except DoesNotExist:
+                pass
+        '''
+
+        try:
+            response = self.client.delete(self.url)
+        except DoesNotExist:
+            return False
+        return response.status_code == 200

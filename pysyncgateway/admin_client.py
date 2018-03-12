@@ -1,6 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from requests import get, put
+from requests import delete, get, put
 
 from .database import Database
 from .helpers import ComparableMixin, sg_method
@@ -80,3 +80,7 @@ class AdminClient(object, ComparableMixin):
     @sg_method
     def put(self, url, data):
         return put(url, json=data)
+
+    @sg_method
+    def delete(self, url, **kwargs):
+        return delete(url, **kwargs)
