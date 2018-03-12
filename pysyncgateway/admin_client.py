@@ -67,6 +67,13 @@ class AdminClient(object, ComparableMixin):
         Provide all Databases on the server.
 
         GET /_all_dbs
+
+        Returns:
+            list (Database): All databases found, connected with this client.
+
+        Raises:
+            GatewayDown: When sync gateway instance can not be reached by
+                client.
         """
         response = self.get('{}{}'.format(self.url, '_all_dbs')).json()
         return [self.get_database(name) for name in response]
