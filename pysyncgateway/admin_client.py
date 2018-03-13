@@ -1,6 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from requests import get, put
+from requests import delete, get, put
 
 from .database import Database
 from .helpers import ComparableMixin, sg_method
@@ -15,6 +15,8 @@ class AdminClient(object, ComparableMixin):
     Attributes:
         url (str): URL of admin port.
     """
+
+    CREATED = 1
 
     def __init__(self, url):
         """
@@ -67,6 +69,13 @@ class AdminClient(object, ComparableMixin):
         Provide all Databases on the server.
 
         GET /_all_dbs
+
+        Returns:
+            list (Database): All databases found, connected with this client.
+
+        Raises:
+            GatewayDown: When sync gateway instance can not be reached by
+                client.
         """
         response = self.get('{}{}'.format(self.url, '_all_dbs')).json()
         return [self.get_database(name) for name in response]
@@ -80,3 +89,7 @@ class AdminClient(object, ComparableMixin):
     @sg_method
     def put(self, url, data):
         return put(url, json=data)
+
+    @sg_method
+    def delete(self, url, **kwargs):
+        return delete(url, **kwargs)
