@@ -8,6 +8,10 @@ class Resource(object, ComparableMixin):
     """
     A Couchbase object stored within a Database, identified by a URL and
     accessible through REST verbs. Data is stored in a DataDict manager.
+
+    Attributes:
+        _data (DataDict)
+        database (Database)
     """
 
     def __init__(self, database):
