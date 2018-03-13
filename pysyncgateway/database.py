@@ -156,7 +156,7 @@ class Database(object, ComparableMixin):
                 populated with the revision ID from `value.rev`.
 
         Raises:
-            DoesNotExist: If Database can't be found.
+            DoesNotExist: Database can't be found on sync gateway.
         """
         url = '{}{}'.format(self.url, '_all_docs')
 

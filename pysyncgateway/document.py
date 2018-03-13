@@ -104,3 +104,69 @@ class Document(Resource):
             raise RevisionMismatch(response.json())
 
         return False
+
+    def retrieve(self):
+        """
+        Load document contents. Once loaded, `_rev` and `channels` are used to
+        update the internal attributes before the data is sent to the DataDict.
+
+        NOTE: DataDict never contains the private SG fields '_id', '_rev',
+        'channels'.
+
+        NOTE *not* running through `_raw`.
+
+        GET /<database_name>/<doc_id>
+
+        Returns:
+            bool: Load was successful.
+
+        Raises:
+            DoesNotExist: Document with provided doc_id can not be loaded.
+        """
+        response = self.database.client.get(self.url)
+        response_data = response.json()
+
+        self.set_rev(response_data['_rev'])
+        if 'channels' in response_data:
+            self.set_channels(*response_data['channels'])
+
+        self.data = response_data
+
+        return True
+
+    def delete(self):
+        """
+        Delete Document from its Database. Document must have been retrieved in
+        order for a valid revision ID to be provided. If there isn't a cache of
+        this information when a `delete` is asked for, then a pre-fetch will
+        occur.
+
+        Uses the default `Resource.delete` action, but then inspects the
+        response to ensure that `ok` is `True`.
+
+        DELETE /<database_name>/<doc_id>?rev=<revision id>
+
+        Returns:
+            bool: Delete was successful.
+
+        Raises:
+            DoesNotExist: If Document can't be found (doc has to be loaded
+                first to retrieve the revision number, which can yield a 404 if
+                it doesn't exist). Also can be raised if the Database does not
+                exist.
+            RevisionMismatch: If provided `rev` parameter does not match the
+                live revision ID at request time.
+        """
+        if not self.rev:
+            self.retrieve()
+
+        params = {
+            'rev': self.rev,
+        }
+
+        response = self.database.client.delete(self.url, params=params)
+
+        if response.status_code == 409:
+            raise RevisionMismatch()
+
+        return response.status_code == 200 and response.json()['ok']
