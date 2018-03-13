@@ -13,6 +13,18 @@ class GatewayDown(PysyncgatewayException):
     """
 
 
+class InvalidChannelName(PysyncgatewayException):
+    pass
+
+
+class InvalidDatabaseName(PysyncgatewayException):
+    pass
+
+
+class InvalidDocumentID(PysyncgatewayException):
+    pass
+
+
 class DoesNotExist(PysyncgatewayException):
     """
     Generic exception to replace 404s. Used if databases, users or documents
