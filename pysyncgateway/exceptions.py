@@ -30,3 +30,7 @@ class DoesNotExist(PysyncgatewayException):
     Generic exception to replace 404s. Used if databases, users or documents
     can't be loaded.
     """
+
+
+class RevisionMismatch(PysyncgatewayException):
+    pass

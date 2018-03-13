@@ -16,6 +16,8 @@ class AdminClient(object, ComparableMixin):
         url (str): URL of admin port.
     """
 
+    CREATED = 1
+
     def __init__(self, url):
         """
         Args:

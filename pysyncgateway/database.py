@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+from .document import Document
 from .exceptions import DoesNotExist
 from .helpers import ComparableMixin, assert_valid_database_name
 
@@ -126,3 +127,46 @@ class Database(object, ComparableMixin):
         except DoesNotExist:
             return False
         return response.status_code == 200
+
+    # --- Documents ---
+
+    def get_document(self, doc_id):
+        return Document(self, doc_id)
+
+    def all_docs(self):
+        """
+        Get list of all Documents in database.
+
+        GET /:_database_name/_all_docs
+
+        NOTE Use for testing only. From Simon @ couchbase::
+
+            We would strongly advise against using the `_all_docs` endpoint. As
+            your database grows relying on the View that this calls to return
+            to you every document key is inadvisable and does not scale well to
+            very high numbers of documents.
+
+            If you need to retrieve or update multiple documents please use the
+            _bulk_get and _bulk_docs end points to supply a list of keys (or
+            documents) for retrieval or update.
+
+        Returns:
+            list (Document): An instance of Document for each document returned
+                by the endpoint. For each instance the `data['_rev']` value is
+                populated with the revision ID from `value.rev`.
+
+        Raises:
+            DoesNotExist: If Database can't be found.
+        """
+        url = '{}{}'.format(self.url, '_all_docs')
+
+        response = self.client.get(url)
+
+        documents = []
+
+        for doc_info in response.json()['rows']:
+            document = self.get_document(doc_info['id'])
+            document.set_rev(doc_info['value']['rev'])
+            documents.append(document)
+
+        return documents
