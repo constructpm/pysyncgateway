@@ -2,7 +2,9 @@
 
 -r base.txt
 
+Sphinx
 flake8
 isort
 pytest
+sphinx-rtd-theme
 yapf

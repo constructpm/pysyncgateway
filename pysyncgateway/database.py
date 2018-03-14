@@ -109,19 +109,6 @@ class Database(object, ComparableMixin):
         Returns:
             bool: Database was found and deleted.
         """
-        '''
-        # TODO build out doc cleanup
-        try:
-            docs = self.all_docs()
-        except DoesNotExist:
-            docs = []
-        for doc in docs:
-            try:
-                doc.delete()
-            except DoesNotExist:
-                pass
-        '''
-
         try:
             response = self.client.delete(self.url)
         except DoesNotExist:
@@ -156,7 +143,7 @@ class Database(object, ComparableMixin):
                 populated with the revision ID from `value.rev`.
 
         Raises:
-            DoesNotExist: If Database can't be found.
+            DoesNotExist: Database can't be found on sync gateway.
         """
         url = '{}{}'.format(self.url, '_all_docs')
 
