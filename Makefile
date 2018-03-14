@@ -35,3 +35,8 @@ lint:
 .PHONY: test
 test:
 	$(bin_prefix)pytest
+
+.PHONY: doc
+doc:
+	$(bin_prefix)sphinx-apidoc -f -o docs pysyncgateway/
+	$(MAKE) -C docs html

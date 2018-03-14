@@ -15,5 +15,14 @@ ENV/
 env.bak/
 venv.bak/
 
+# Sphinx documentation
+docs/_build/
+
+# --- Custom rules ---
+
 # isort output
 /isort.out
+
+# Auto-generated docs
+/docs/modules.rst
+/docs/pysyncgateway.rst
