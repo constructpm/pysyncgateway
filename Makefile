@@ -14,12 +14,16 @@ venv:
 install:
 	$(bin_prefix)pip install -r requirements/test.txt
 
+.PHONY: pip-tools
+pip-tools:
+	$(bin_prefix)pip install pip-tools
+
 .PHONY: dev
-dev:
-	$(bin_prefix)pip install -r requirements/dev.txt
+dev: pip-tools
+	$(bin_prefix)pip-sync requirements/dev.txt
 
 .PHONY: requirements
-requirements:
+requirements: pip-tools
 	$(bin_prefix)pip-compile requirements.in
 
 .PHONY: lint
