@@ -17,6 +17,8 @@ class AdminClient(object, ComparableMixin):
     """
 
     CREATED = 1
+    UPDATED = 2
+    CONFLICT = 3
 
     def __init__(self, url):
         """
