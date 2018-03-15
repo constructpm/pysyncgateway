@@ -25,6 +25,10 @@ class InvalidDocumentID(PysyncgatewayException):
     pass
 
 
+class InvalidPassword(PysyncgatewayException):
+    pass
+
+
 class DoesNotExist(PysyncgatewayException):
     """
     Generic exception to replace 404s. Used if databases, users or documents
@@ -34,3 +38,35 @@ class DoesNotExist(PysyncgatewayException):
 
 class RevisionMismatch(PysyncgatewayException):
     pass
+
+
+class SyncGatewayClientErrorResponse(PysyncgatewayException):
+    """
+    Sync gateway responded with a 4xx error.
+
+    Attributes:
+        status_code (int): Error code in the response from sync gateway.
+        json (dict): Body of response from sync gateway.
+    """
+
+    def __init__(self, status_code, json):
+        self.status_code = status_code
+        self.json = json
+
+    @classmethod
+    def from_response(obj, response):
+        """
+        Args:
+            response (requests.Response)
+
+        Returns:
+            SyncGatewayClientErrorResponse
+        """
+        return obj(response.status_code, response.json())
+
+    def __repr__(self):
+        """
+        Returns:
+            str: Containing `status_code` and `json['error']`.
+        """
+        return '<SyncGatewayClientErrorResponse {} "{}">'.format(self.status_code, self.json['error'])
