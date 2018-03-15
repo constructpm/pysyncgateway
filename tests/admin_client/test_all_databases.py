@@ -22,6 +22,9 @@ def test_happy_multiple(admin_client):
     assert sorted(result) == [admin_client.get_database('test_' + n) for n in ('a', 'b', 'c')]
 
 
+# --- FAILURES ---
+
+
 def test_server_down():
     bad_client = AdminClient('http://localhost:9999/')
 
