@@ -1,6 +1,9 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+import pytest
+
 from pysyncgateway import Database
+from pysyncgateway.exceptions import SyncGatewayClientErrorResponse
 
 
 def test(admin_client):
@@ -22,6 +25,7 @@ def test_collision(admin_client):
     existing_database = admin_client.get_database('test_collision')
     existing_database.create()
 
-    result = admin_client.get_database('test_collision').create()
+    with pytest.raises(SyncGatewayClientErrorResponse) as excinfo:
+        admin_client.get_database('test_collision').create()
 
-    assert result is False
+    assert 'Duplicate database name' in excinfo.value.json['reason']

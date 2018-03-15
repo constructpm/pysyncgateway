@@ -67,6 +67,15 @@ class SyncGatewayClientErrorResponse(PysyncgatewayException):
     def __repr__(self):
         """
         Returns:
+            str
+        """
+        return '<SyncGatewayClientErrorResponse {}>'.format(self)
+
+    def __str__(self):
+        """
+        Used by pytest to show stack trace.
+
+        Returns:
             str: Containing `status_code` and `json['error']`.
         """
-        return '<SyncGatewayClientErrorResponse {} "{}">'.format(self.status_code, self.json['error'])
+        return '{} "{}"'.format(self.status_code, self.json['error'])

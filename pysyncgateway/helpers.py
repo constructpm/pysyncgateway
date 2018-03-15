@@ -11,6 +11,7 @@ from .exceptions import (
     InvalidChannelName,
     InvalidDatabaseName,
     InvalidDocumentID,
+    RevisionMismatch,
     SyncGatewayClientErrorResponse,
 )
 
@@ -54,8 +55,11 @@ def sg_method(func, *args, **kwargs):
             response = func(*args, **kwargs)
         except ConnectionError as ce:
             raise GatewayDown(ce.message)
+
         if response.status_code == 404:
             raise DoesNotExist('{} not found'.format(response.url))
+        elif response.status_code == 409:
+            raise RevisionMismatch()
         if not response.ok:
             raise SyncGatewayClientErrorResponse.from_response(response)
         return response

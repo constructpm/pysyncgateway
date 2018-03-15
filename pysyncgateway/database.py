@@ -72,9 +72,7 @@ class Database(object, ComparableMixin):
         Returns:
             bool: Creation was successful.
         """
-        data = {}
-        response = self.client.put(self.url, data)
-        return response.status_code == 201
+        return self.client.put(self.url, {}).status_code == 201
 
     def get(self):
         """

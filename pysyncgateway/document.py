@@ -166,7 +166,4 @@ class Document(Resource):
 
         response = self.database.client.delete(self.url, params=params)
 
-        if response.status_code == 409:
-            raise RevisionMismatch()
-
         return response.status_code == 200 and response.json()['ok']
