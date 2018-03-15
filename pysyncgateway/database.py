@@ -3,6 +3,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 from .document import Document
 from .exceptions import DoesNotExist
 from .helpers import ComparableMixin, assert_valid_database_name
+from .user import User
 
 
 class Database(object, ComparableMixin):
@@ -124,7 +125,7 @@ class Database(object, ComparableMixin):
         """
         Get list of all Documents in database.
 
-        GET /:_database_name/_all_docs
+        `GET /:_database_name/_all_docs`
 
         NOTE Use for testing only. From Simon @ couchbase::
 
@@ -157,3 +158,13 @@ class Database(object, ComparableMixin):
             documents.append(document)
 
         return documents
+
+    # --- Users ---
+
+    def get_user(self, username):
+        return User(self, username)
+
+    def all_users(self):
+        url = '{}_user/'.format(self.url)
+        response = self.client.get(url)
+        return [self.get_user(username) for username in response.json()]
