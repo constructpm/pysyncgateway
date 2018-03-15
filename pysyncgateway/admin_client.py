@@ -1,32 +1,16 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from requests import delete, get, put
-
+from .client import Client
 from .database import Database
-from .helpers import ComparableMixin, sg_method
 
 
-class AdminClient(object, ComparableMixin):
+class AdminClient(Client):
     """
-    SyncGateway client for performing admin actions on the private admin port.
-    This client is hardened to handle the Sync Gateway endpoint not being
-    available - for example if Couchbase is being restarted.
+    Sync Gateway admin client for performing actions on the private admin API.
 
     Attributes:
-        url (str): URL of admin port.
+        url (str): Sync Gateway admin REST API URL.
     """
-
-    CREATED = 1
-    UPDATED = 2
-    CONFLICT = 3
-
-    def __init__(self, url):
-        """
-        Args:
-            url (str): Pass base Sync Gateway URL (excluding database but
-                including trailing slash) for this instance to connect to.
-        """
-        self.url = url
 
     def __repr__(self):
         return '<AdminClient on "{url}">'.format(url=self.url)
@@ -44,13 +28,6 @@ class AdminClient(object, ComparableMixin):
         """
         assert isinstance(other, AdminClient)
         return self.url < other.url
-
-    def get_server(self):
-        """
-        Returns:
-            dict: Meta-information about the server.
-        """
-        return self.get(self.url).json()
 
     # --- Databases ---
 
@@ -81,17 +58,3 @@ class AdminClient(object, ComparableMixin):
         """
         response = self.get('{}{}'.format(self.url, '_all_dbs')).json()
         return [self.get_database(name) for name in response]
-
-    # --- REST Verbs ---
-
-    @sg_method
-    def get(self, url, **kwargs):
-        return get(url, **kwargs)
-
-    @sg_method
-    def put(self, url, data):
-        return put(url, json=data)
-
-    @sg_method
-    def delete(self, url, **kwargs):
-        return delete(url, **kwargs)
