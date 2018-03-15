@@ -5,7 +5,14 @@ import re
 
 from requests import ConnectionError
 
-from .exceptions import DoesNotExist, GatewayDown, InvalidChannelName, InvalidDatabaseName, InvalidDocumentID
+from .exceptions import (
+    DoesNotExist,
+    GatewayDown,
+    InvalidChannelName,
+    InvalidDatabaseName,
+    InvalidDocumentID,
+    SyncGatewayClientErrorResponse,
+)
 
 
 class ComparableMixin:
@@ -31,11 +38,14 @@ class ComparableMixin:
 
 def sg_method(func, *args, **kwargs):
     """
-    Wrap a normal request Verb in GatewayDown and DoesNotExist logic
+    Wrap a normal request Verb (E.g. `requests.get`) in exception handling
+    logic.
 
     Raises:
-        GatewayDown: If SyncGateway can't be reached.
         DoesNotExist: If a 404 was received for a request.
+        GatewayDown: If SyncGateway can't be reached.
+        SyncGatewayClientErrorResponse: When any "not OK" response (according
+            to `requests.Response.ok` is received that is not a 404.
     """
 
     @functools.wraps(func)
@@ -46,6 +56,8 @@ def sg_method(func, *args, **kwargs):
             raise GatewayDown(ce.message)
         if response.status_code == 404:
             raise DoesNotExist('{} not found'.format(response.url))
+        if not response.ok:
+            raise SyncGatewayClientErrorResponse.from_response(response)
         return response
 
     return wrapper
