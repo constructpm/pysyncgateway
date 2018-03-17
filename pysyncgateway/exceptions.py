@@ -7,6 +7,12 @@ class PysyncgatewayException(Exception):
     """
 
 
+class ClientUnauthorized(PysyncgatewayException):
+    """
+    Client is not authorized to access this URL
+    """
+
+
 class GatewayDown(PysyncgatewayException):
     """
     SyncGateway could not be reached on configured URL

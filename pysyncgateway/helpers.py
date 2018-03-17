@@ -6,6 +6,7 @@ import re
 from requests import ConnectionError
 
 from .exceptions import (
+    ClientUnauthorized,
     DoesNotExist,
     GatewayDown,
     InvalidChannelName,
@@ -56,7 +57,9 @@ def sg_method(func, *args, **kwargs):
         except ConnectionError as ce:
             raise GatewayDown(ce.message)
 
-        if response.status_code == 404:
+        if response.status_code == 401:
+            raise ClientUnauthorized(response.json()['reason'])
+        elif response.status_code == 404:
             raise DoesNotExist('{} not found'.format(response.url))
         elif response.status_code == 409:
             raise RevisionMismatch()

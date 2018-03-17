@@ -1,7 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 from .client import Client
-from .database import Database
 
 
 class AdminClient(Client):
@@ -30,18 +29,6 @@ class AdminClient(Client):
         return self.url < other.url
 
     # --- Databases ---
-
-    def get_database(self, database_name):
-        """
-        Get a `Database` instance connected to this client
-
-        Args:
-            database_name (str): Name of database.
-
-        Returns:
-            Database
-        """
-        return Database(self, database_name)
 
     def all_databases(self):
         """
