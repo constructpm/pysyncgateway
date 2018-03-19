@@ -17,7 +17,7 @@ class Document(Resource):
         doc_id (str): ID of document.
         rev (str): Revision identifier of document. Set to empty string when no
             document has been retrieved.
-        url (str): URL for this resource on sync gateway.
+        url (str): URL for this resource on Sync Gateway.
     """
 
     def __init__(self, database, doc_id):
@@ -74,7 +74,7 @@ class Document(Resource):
 
     def create_update(self):
         """
-        Save or update Document in sync gateway. Saves the received revision id
+        Save or update Document in Sync Gateway. Saves the received revision id
         into Documents `rev` attribute.
 
         PUT /<database_name>/<doc_id>
@@ -119,6 +119,11 @@ class Document(Resource):
 
         Raises:
             DoesNotExist: Document with provided doc_id can not be loaded.
+
+        Side effects:
+            channels: Updated based on returned JSON using `set_channels`.
+            data: Updates internal data dictionary with data loaded from JSON.
+            rev: Updated from revision passed in JSON using `set_rev`.
         """
         response = self.database.client.get(self.url)
         response_data = response.json()
