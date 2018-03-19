@@ -1,6 +1,5 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from .exceptions import RevisionMismatch
 from .helpers import assert_valid_channel_name, assert_valid_document_id
 from .resource import Resource
 
@@ -100,8 +99,6 @@ class Document(Resource):
             response_data = response.json()
             self.set_rev(response_data['rev'])
             return self.database.client.CREATED
-        elif response.status_code == 409:
-            raise RevisionMismatch(response.json())
 
         return False
 
