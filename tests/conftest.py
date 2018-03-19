@@ -20,7 +20,7 @@ def syncgateway_public_url():
     Returns:
         str: URL to reach public SG.
     """
-    return 'http://localhost:4985/'
+    return 'http://localhost:4984/'
 
 
 @pytest.fixture
