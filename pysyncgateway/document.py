@@ -1,6 +1,5 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from .exceptions import RevisionMismatch
 from .helpers import assert_valid_channel_name, assert_valid_document_id
 from .resource import Resource
 
@@ -18,7 +17,7 @@ class Document(Resource):
         doc_id (str): ID of document.
         rev (str): Revision identifier of document. Set to empty string when no
             document has been retrieved.
-        url (str): URL for this resource on sync gateway.
+        url (str): URL for this resource on Sync Gateway.
     """
 
     def __init__(self, database, doc_id):
@@ -75,7 +74,7 @@ class Document(Resource):
 
     def create_update(self):
         """
-        Save or update Document in sync gateway. Saves the received revision id
+        Save or update Document in Sync Gateway. Saves the received revision id
         into Documents `rev` attribute.
 
         PUT /<database_name>/<doc_id>
@@ -100,8 +99,6 @@ class Document(Resource):
             response_data = response.json()
             self.set_rev(response_data['rev'])
             return self.database.client.CREATED
-        elif response.status_code == 409:
-            raise RevisionMismatch(response.json())
 
         return False
 
@@ -122,6 +119,11 @@ class Document(Resource):
 
         Raises:
             DoesNotExist: Document with provided doc_id can not be loaded.
+
+        Side effects:
+            channels: Updated based on returned JSON using `set_channels`.
+            data: Updates internal data dictionary with data loaded from JSON.
+            rev: Updated from revision passed in JSON using `set_rev`.
         """
         response = self.database.client.get(self.url)
         response_data = response.json()
