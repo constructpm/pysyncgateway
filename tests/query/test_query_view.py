@@ -69,12 +69,9 @@ def test_unstale(all_query, database_with_doc):
     database_with_doc.get_document('moarstuff').create_update()
 
     result = all_query.query_view('everything', stale=False)
-    result = all_query.query_view('everything', stale=False)
-    result = all_query.query_view('everything', stale=False)
-    result = all_query.query_view('everything', stale=False)
 
     assert result['total_rows'] == 2
-    assert sorted([r['key'] for r in result['rows']]) == ['stuff', 'moarstuff']
+    assert sorted([r['key'] for r in result['rows']]) == ['moarstuff', 'stuff']
 
 
 # --- FAILURES ---
