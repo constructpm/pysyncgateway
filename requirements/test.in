@@ -6,5 +6,6 @@ Sphinx
 flake8
 isort
 pytest
+responses
 sphinx-rtd-theme
 yapf
