@@ -8,7 +8,7 @@ class Query(Resource):
     Query a design document.
 
     Attributes:
-        data (DataDict): Data from the design document using the `DataDict`
+        data (DataDict): Data from the design document using the ``DataDict``
             manager.
         doc_id (str): ID of design document.
         url (str): URL for this resource on Sync Gateway.
@@ -38,7 +38,7 @@ class Query(Resource):
         """
         Create or update design document with data.
 
-        `PUT /<database_name>/_design/<doc_id>`
+        ``PUT /<database_name>/_design/<doc_id>``
 
         Returns:
             bool: Design document was created or updated successfully.
@@ -72,47 +72,56 @@ class Query(Resource):
         """
         return self.database.client.delete(self.url).status_code == 200
 
-    def query_view(self, view_name, stale=True):  # , key=None, timeout=None):
+    def query_view(self, view_name, key=None, stale=True, timeout=None):
         """
-        GET a view function from this view.
+        Load a view function from this design Document. Document must be
+        written to Sync Gateway and view's Javascript function must be valid.
 
         Args:
+            view_name (str): View's name.
+            key (Optional): Value to use to search the view's key (the
+                left part of the map). Any type can be passed as long as:
+                * ``bool(key) is True``
+                * ``key`` can be converted to string.
+                NOTE: Currently only handles single keys.
             stale (bool, Optional): Allow stale results in the view. This is
                 currently the default value in Sync Gateway, so is only passed
-                when set to False. Default `True`.
+                when set to False. Default ``True``.
 
-                `'false'` is an undocumented option for this param. See
+                ``'false'`` is an undocumented option for this param. See
                 https://github.com/couchbase/sync_gateway/issues/727#issuecomment-83588984
 
                 It also doesn't work in Walrus mode, see
-                https://github.com/couchbaselabs/walrus/issues/18
-            view_name (str): View's name.
-
-        TODO:
-            key (int, Optional): ID (probably of Account) to be used to filter
-                the view. Default `None`.
-            timeout (int, Optional): Set a timeout as per requests' spec.
-                Default `None`.
+                https://github.com/constructpm/pysyncgateway/issues/7
+            timeout (int, Optional): Set a time out of seconds as per requests'
+                spec which means that if the Sync Gateway does not respond to
+                the GET request within the ``timeout`` period a ``ReadTimeout``
+                will be raised.  Default ``None`` which means that requests'
+                default is used.
 
         Returns:
             dict: Decoded JSON for view data result.
+
+        Raises:
+            DoesNotExist: When database, design document or contained view can
+                not be found.
+            requests.exceptions.ReadTimeout: When Sync Gateway does not respond
+                within given ``timeout``.
         """
         # Build params (passed to SG in the URL)
         params = {}
         if not stale:
             params['stale'] = 'false'
+        if key is not None:
+            params['key'] = '"{}"'.format(key)
 
         # Build kwargs (passed to requests.get)
         kwargs = {}
         if params:
             kwargs['params'] = params
-        '''
-        if key is not None:
-            params['key'] = '"{}"'.format(key)
-
         if timeout is not None:
             kwargs['timeout'] = timeout
-        '''
+
         url = self.build_view_url(view_name)
         response = self.database.client.get(url, **kwargs)
 

@@ -1,6 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 import pytest
+from requests.exceptions import ReadTimeout
 
 from pysyncgateway import Query
 from pysyncgateway.exceptions import DoesNotExist
@@ -77,9 +78,21 @@ def test_unstale(all_query, database_with_doc):
     assert sorted([r['key'] for r in result['rows']]) == ['moarstuff', 'stuff']
 
 
+def test_key(food_query):
+    result = food_query.query_view('all', key='a')
+
+    assert result['total_rows'] == 3
+    assert sorted([r['id'] for r in result['rows']]) == ['almond', 'apple', 'apricot']
+
+
 # --- FAILURES ---
 
 
 def test_missing(query):
     with pytest.raises(DoesNotExist):
         query.query_view('stuff')
+
+
+def test_timeout(slow_view):
+    with pytest.raises(ReadTimeout):
+        slow_view.query_view('all', timeout=1)
