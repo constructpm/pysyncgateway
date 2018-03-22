@@ -1,4 +1,4 @@
-.. image:: https://img.shields.io/circleci/project/github/constructpm/pysyncgateway.svg
+.. image:: https://img.shields.io/circleci/project/github/constructpm/pysyncgateway/master.svg
     :alt: CircleCI
     :target: https://circleci.com/gh/constructpm/pysyncgateway/tree/master
 .. image:: https://img.shields.io/github/license/constructpm/pysyncgateway.svg
