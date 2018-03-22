@@ -26,15 +26,27 @@ dev: pip-tools
 requirements: pip-tools
 	$(bin_prefix)pip-compile requirements.in
 
-.PHONY: lint
-lint:
+.PHONY: flake8
+flake8:
 	@echo "=== flake8 ==="
 	$(bin_prefix)flake8 pysyncgateway tests
+
+.PHONY: lint
+lint: flake8
 	@echo "=== isort ==="
 	$(bin_prefix)isort --quiet --recursive --diff pysyncgateway tests > isort.out
 	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
 	@echo "=== yapf ==="
 	$(bin_prefix)yapf --recursive --diff pysyncgateway tests
+
+.PHONY: fixlint
+fixlint: flake8
+	@echo "=== fixing isort ==="
+	$(bin_prefix)isort --recursive pysyncgateway tests
+	@echo "=== fixing yapf ==="
+	$(bin_prefix)yapf --recursive --in-place pysyncgateway tests
+
+
 
 .PHONY: test
 test:
