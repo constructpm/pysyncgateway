@@ -61,9 +61,12 @@ def test_default_stale(all_query, database_with_doc):
     assert result['rows'][0]['key'] == 'stuff'
 
 
+@pytest.mark.xfail(reason='Fix Walrus to obey stale=false, issue #7')
 def test_unstale(all_query, database_with_doc):
     """
     Hot view updates itself when `stale=False` is passed.
+
+    Xfail because walrus does not implement `stale=false`
     """
     all_query.query_view('everything')
     database_with_doc.get_document('moarstuff').create_update()
