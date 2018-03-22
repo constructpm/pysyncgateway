@@ -29,16 +29,19 @@ def query(database):
 def slow_view(database):
     """
     A view that returns all documents, but slowly. This uses a horrible
-    sleep-like function that locks up Walrus for 1s per document. Fixture
-    populates the database with enough documents to ensure that calling the
-    view takes at least 2 seconds total.
+    sleep-like function that locks up Walrus for 1.5s per document. Fixture
+    populates the database with a document to ensure that calling the
+    view takes at least 1 second in total.
+
+    NOTE: On Circle, it looks like processing the view might be done in
+    parallel because it is able to return a view containing 2 documents in just
+    over the time in the delay function.
 
     Returns:
         Query: Called 'slow_lists', written to Sync Gateway, with a single view
-            called 'all' that takes 1 second per document in the database.
+            called 'all' that takes 1.5 second per document in the database.
     """
     database.get_document('a').create_update()
-    database.get_document('b').create_update()
     query = Query(database, 'slow_lists')
     query.data = {
         'views': {
@@ -52,7 +55,7 @@ function(doc, meta) {
         do { curDate = new Date(); }
         while(curDate-date < millis);
     }
-    pausecomp(1000);
+    pausecomp(1500);
     emit(meta.id,doc);
 }
         """,
