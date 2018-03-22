@@ -76,6 +76,7 @@ def test_unstale(all_query, database_with_doc):
     assert result['total_rows'] == 2
     assert sorted([r['key'] for r in result['rows']]) == ['stuff', 'moarstuff']
 
+
 # --- FAILURES ---
 
 

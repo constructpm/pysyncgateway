@@ -106,7 +106,6 @@ class Query(Resource):
         kwargs = {}
         if params:
             kwargs['params'] = params
-
         '''
         if key is not None:
             params['key'] = '"{}"'.format(key)
