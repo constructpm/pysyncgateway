@@ -29,7 +29,7 @@ requirements: pip-tools
 .PHONY: flake8
 flake8:
 	@echo "=== flake8 ==="
-	$(bin_prefix)flake8 pysyncgateway tests
+	$(bin_prefix)flake8 pysyncgateway tests setup.py
 
 .PHONY: lint
 lint: flake8
@@ -45,8 +45,6 @@ fixlint: flake8
 	$(bin_prefix)isort --recursive pysyncgateway tests
 	@echo "=== fixing yapf ==="
 	$(bin_prefix)yapf --recursive --in-place pysyncgateway tests
-
-
 
 .PHONY: test
 test:
