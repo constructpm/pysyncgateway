@@ -1,8 +1,10 @@
 venv_folder=venv
 
-# If venv_folder does not exist:
+# If venv_folder does not exist and we're not running tox
 ifneq "$(wildcard $(venv_folder) )" ""
-    bin_prefix=$(venv_folder)/bin/
+ifneq "$(IN_TOX)" "1"
+bin_prefix=$(venv_folder)/bin/
+endif
 endif
 
 .PHONY: venv
@@ -24,6 +26,8 @@ pip-tools:
 dev: pip-tools
 	$(bin_prefix)pip-sync requirements/dev.txt
 
+# --- TESTING ---
+
 .PHONY: flake8
 flake8:
 	@echo "=== flake8 ==="
@@ -36,6 +40,10 @@ lint: flake8
 	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
 	@echo "=== yapf ==="
 	$(bin_prefix)yapf --recursive --diff pysyncgateway tests setup.py
+
+.PHONY: tox
+tox:
+	$(bin_prefix)tox
 
 .PHONY: fixlint
 fixlint: flake8
@@ -50,21 +58,21 @@ doc:
 	$(MAKE) -C docs html
 
 
-# Building / Publishing
+# --- Building / Publishing ---
 
 .PHONY: clean
 clean:
-	rm -rf dist build
+	rm -rf dist build .tox
 	find . -name '*.pyc' -delete
 
 .PHONY: sdist
-sdist: clean
+sdist: clean tox
 	$(bin_prefix)python setup.py sdist
 
 .PHONY: bdist_wheel
-bdist_wheel: clean
+bdist_wheel: clean tox
 	$(bin_prefix)python setup.py bdist_wheel
 
 .PHONY: testpypi
-testpypi: sdist bdist_wheel
+testpypi: clean sdist bdist_wheel
 	$(bin_prefix)twine upload --repository-url https://test.pypi.org/legacy/ dist/*
