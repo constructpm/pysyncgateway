@@ -8,4 +8,5 @@ isort
 pytest
 responses
 sphinx-rtd-theme
+tox
 yapf
