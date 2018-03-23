@@ -11,6 +11,5 @@ jobs:
     steps:
       - checkout
       - run: make install
-      - run: make lint
-      - run: make test
+      - run: tox
       - run: make doc
