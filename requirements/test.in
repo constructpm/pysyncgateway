@@ -7,6 +7,7 @@ flake8
 isort
 pytest
 responses
+restructuredtext_lint
 sphinx-rtd-theme
 tox
 yapf
