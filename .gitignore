@@ -3,7 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Distribution / packaging
+*.egg-info/
+
 # Unit test / coverage reports
+.tox/
 .pytest_cache/
 
 # Environments
