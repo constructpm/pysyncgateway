@@ -10,7 +10,7 @@ def readme():
 
 setup(
     name='pysyncgateway',
-    version='0.1.1',
+    version='0.1.2',
     description='Library for communication with Couchbase Sync Gateway',
     long_description=readme(),
     url='https://github.com/constructpm/pysyncgateway',

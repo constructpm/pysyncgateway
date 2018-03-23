@@ -19,6 +19,6 @@ port.
 
 * `Documentation <https://pysyncgateway.readthedocs.io/>`_
 
-* `Python package index (PyPI)`_ TODO
+* `Python package index (PyPI) <https://pypi.org/project/pysyncgateway/>`_
 
 Tested against Python 2.7, Sync Gateway 1.5 community edition (walrus mode).

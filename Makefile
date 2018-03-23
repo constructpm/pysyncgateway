@@ -40,6 +40,8 @@ lint: flake8
 	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
 	@echo "=== yapf ==="
 	$(bin_prefix)yapf --recursive --diff pysyncgateway tests setup.py
+	@echo "=== rst ==="
+	$(bin_prefix)restructuredtext-lint README.rst
 
 .PHONY: tox
 tox:
