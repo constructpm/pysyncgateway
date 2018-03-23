@@ -10,13 +10,17 @@ def readme():
 
 setup(
     name='pysyncgateway',
-    version='0.1.0',
+    version='0.1.1',
     description='Library for communication with Couchbase Sync Gateway',
     long_description=readme(),
     url='https://github.com/constructpm/pysyncgateway',
     author='James Cooke',
     author_email='github@jamescooke.info',
     license='Apache License 2.0',
+    install_requires=[
+        'requests>=2.18',
+        'six>=1.10',
+    ],
     packages=['pysyncgateway'],
     zip_safe=False,
     classifiers=[
