@@ -74,7 +74,7 @@ def assert_valid_database_name(name):
     """
     Raise exception if database name does not match Couchbase requirements
 
-    From docs (http://docs.couchdb.org/en/stable/api/database/common.html#put--db)j
+    From docs (http://docs.couchdb.org/en/stable/api/database/common.html#put--db):
 
         The database name must begin with a lowercase letter.
 
@@ -97,6 +97,9 @@ def assert_valid_database_name(name):
             database in Sync Gateway.
 
     Examples:
+
+            >>> from pysyncgateway.helpers import assert_valid_database_name
+
         #.  Empty string is invalid:
 
             >>> assert_valid_database_name('')
@@ -171,6 +174,9 @@ def assert_valid_document_id(doc_id):
             Document in Sync Gateway.
 
     Examples:
+
+            >>> from pysyncgateway.helpers import assert_valid_document_id
+
         #.  Empty string is invalid
 
             >>> assert_valid_document_id('')
@@ -241,44 +247,48 @@ def assert_valid_channel_name(name):
     Raises:
         InvalidChannelName
 
-    #.  Empty string is invalid:
+    Examples:
 
-        >>> assert_valid_channel_name('')
-        Traceback (most recent call last):
-        ...
-        InvalidChannelName: Empty channel name is not allowed
+            >>> from pysyncgateway.helpers import assert_valid_channel_name
 
-    #.  Special-special characters are not allowed:
+        #.  Empty string is invalid:
 
-        >>> assert_valid_channel_name('stuff!channel')
-        Traceback (most recent call last):
-        ...
-        InvalidChannelName: Special characters are not allowed in channels, first bad character is "!"
+            >>> assert_valid_channel_name('')
+            Traceback (most recent call last):
+            ...
+            InvalidChannelName: Empty channel name is not allowed
 
-    #.  White space is not allowed:
+        #.  Special-special characters are not allowed:
 
-        >>> assert_valid_channel_name('channel 2')
-        Traceback (most recent call last):
-        ...
-        InvalidChannelName: Special characters are not allowed in channels, first bad character is " "
+            >>> assert_valid_channel_name('stuff!channel')
+            Traceback (most recent call last):
+            ...
+            InvalidChannelName: Special characters are not allowed in channels, first bad character is "!"
 
-    #.  When bad character matches at start of line, it's found:
+        #.  White space is not allowed:
 
-        >>> assert_valid_channel_name('$1 channel')
-        Traceback (most recent call last):
-        ...
-        InvalidChannelName: Special characters are not allowed in channels, first bad character is "$"
+            >>> assert_valid_channel_name('channel 2')
+            Traceback (most recent call last):
+            ...
+            InvalidChannelName: Special characters are not allowed in channels, first bad character is " "
 
-    #.  When name is just bad characters, first bad char is returned:
+        #.  When bad character matches at start of line, it's found:
 
-        >>> assert_valid_channel_name('#&()`')
-        Traceback (most recent call last):
-        ...
-        InvalidChannelName: Special characters are not allowed in channels, first bad character is "#"
+            >>> assert_valid_channel_name('$1 channel')
+            Traceback (most recent call last):
+            ...
+            InvalidChannelName: Special characters are not allowed in channels, first bad character is "$"
 
-    #.  Some special characters are OK:
+        #.  When name is just bad characters, first bad char is returned:
 
-        >>> assert_valid_channel_name('-ABC_project=+/.,@1234')
+            >>> assert_valid_channel_name('#&()`')
+            Traceback (most recent call last):
+            ...
+            InvalidChannelName: Special characters are not allowed in channels, first bad character is "#"
+
+        #.  Some special characters are OK:
+
+            >>> assert_valid_channel_name('-ABC_project=+/.,@1234')
     """
     if not name:
         raise InvalidChannelName('Empty channel name is not allowed')
