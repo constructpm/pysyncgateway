@@ -13,20 +13,25 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
 
+base_dir = os.path.abspath('..')
+
+sys.path.insert(0, base_dir)
+
+# --- Load __about__ info ----------------------------------------------------
+
+about = {}
+with open(os.path.join(base_dir, '__about__.py')) as f:
+    exec (f.read(), about)
 
 # -- Project information -----------------------------------------------------
 
-project = u'pysyncgateway'
-copyright = u'2018, Construct Technology Ltd'
-author = u'Construct Technology'
+project = about['__name__']
+copyright = about['__copyright__']
+author = about['__author__']
 
-# The short X.Y version
-version = u''
-# The full version, including alpha/beta/rc tags
-release = u''
-
+# Version == release (strategy copied from Warehouse)
+version = release = about['__version__']
 
 # -- General configuration ---------------------------------------------------
 
@@ -70,7 +75,6 @@ exclude_patterns = [u'_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -99,12 +103,10 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 
-
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'pysyncgatewaydoc'
-
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -130,20 +132,20 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pysyncgateway.tex', u'pysyncgateway Documentation',
-     u'Construct Technology', 'manual'),
+    (
+        master_doc,
+        'pysyncgateway.tex',
+        u'{} Documentation'.format(project),
+        author,
+        'manual',
+    ),
 ]
-
 
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'pysyncgateway', u'pysyncgateway Documentation',
-     [author], 1)
-]
-
+man_pages = [(master_doc, project, u'{} Documentation'.format(project), [author], 1)]
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -151,10 +153,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'pysyncgateway', u'pysyncgateway Documentation',
-     author, 'pysyncgateway', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        project,
+        u'{} Documentation'.format(project),
+        author,
+        'pysyncgateway',
+        about['__description__'],
+        'Miscellaneous',
+    ),
 ]
-
 
 # -- Extension configuration -------------------------------------------------
