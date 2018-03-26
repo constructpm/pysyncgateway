@@ -7,11 +7,6 @@ Welcome to pysyncgateway's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   quickstart
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   pysyncgateway
