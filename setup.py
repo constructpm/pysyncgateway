@@ -13,7 +13,7 @@ def readme():
 
 
 about = {}
-with open(os.path.join(basedir, '__about__.py')) as f:
+with open(os.path.join(basedir, 'pysyncgateway', '__about__.py')) as f:
     exec (f.read(), about)
 
 setup(

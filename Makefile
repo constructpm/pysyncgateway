@@ -7,7 +7,7 @@ bin_prefix=$(venv_folder)/bin/
 endif
 endif
 
-lint_files=pysyncgateway tests setup.py __about__.py
+lint_files=pysyncgateway tests setup.py
 
 .PHONY: venv
 venv:
