@@ -67,7 +67,7 @@ class Database(object, ComparableMixin):
         server, since this function is intended for test functionality, rather
         than for API server to be regularly creating databases.
 
-        PUT /:name/
+        ``PUT /:name/``
 
         Returns:
             bool: Creation was successful.
@@ -78,7 +78,7 @@ class Database(object, ComparableMixin):
         """
         Return information about this Database from Sync Gateway.
 
-        GET /:name/
+        ``GET /:name/``
 
         Returns:
             dict: Information loaded from SG.
@@ -97,7 +97,7 @@ class Database(object, ComparableMixin):
         of all document IDs in the database and removes them before dropping
         the DB.
 
-        DELETE /:name/
+        ``DELETE /:name/``
 
         NOTE this code is not optimal and there may be some value in using a
         _purge call instead / as well. This from Simon @ couchbase:
@@ -123,9 +123,9 @@ class Database(object, ComparableMixin):
         """
         Get list of all Documents in database.
 
-        `GET /:_database_name/_all_docs`
+        ``GET /:name/_all_docs``
 
-        NOTE Use for testing only. From Simon @ couchbase::
+        NOTE Use for testing only. From Simon @ Couchbase:
 
             We would strongly advise against using the `_all_docs` endpoint. As
             your database grows relying on the View that this calls to return
@@ -160,9 +160,19 @@ class Database(object, ComparableMixin):
     # --- Users ---
 
     def get_user(self, username):
+        """
+        Returns:
+            User: An instance of ``User`` for the provided ``username``.
+        """
         return User(self, username)
 
     def all_users(self):
+        """
+        ``GET /:name/_user/`` (undocumented endpoint)
+
+        Returns:
+            list (User): All Users in Database.
+        """
         url = '{}_user/'.format(self.url)
         response = self.client.get(url)
         return [self.get_user(username) for username in response.json()]
