@@ -7,6 +7,8 @@ bin_prefix=$(venv_folder)/bin/
 endif
 endif
 
+lint_files=pysyncgateway tests setup.py __about__.py
+
 .PHONY: venv
 venv:
 	virtualenv $(venv_folder)
@@ -31,15 +33,15 @@ dev: pip-tools
 .PHONY: flake8
 flake8:
 	@echo "=== flake8 ==="
-	$(bin_prefix)flake8 pysyncgateway tests setup.py
+	$(bin_prefix)flake8 pysyncgateway $(lint_files)
 
 .PHONY: lint
 lint: flake8
 	@echo "=== isort ==="
-	$(bin_prefix)isort --quiet --recursive --diff pysyncgateway tests > isort.out
+	$(bin_prefix)isort --quiet --recursive --diff $(lint_files) > isort.out
 	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
 	@echo "=== yapf ==="
-	$(bin_prefix)yapf --recursive --diff pysyncgateway tests setup.py
+	$(bin_prefix)yapf --recursive --diff $(lint_files)
 	@echo "=== rst ==="
 	$(bin_prefix)restructuredtext-lint README.rst
 
@@ -50,13 +52,12 @@ tox:
 .PHONY: fixlint
 fixlint: flake8
 	@echo "=== fixing isort ==="
-	$(bin_prefix)isort --recursive pysyncgateway tests
+	$(bin_prefix)isort --recursive $(lint_files)
 	@echo "=== fixing yapf ==="
-	$(bin_prefix)yapf --recursive --in-place pysyncgateway tests setup.py
+	$(bin_prefix)yapf --recursive --in-place $(lint_files)
 
 .PHONY: doc
 doc:
-	$(bin_prefix)restructuredtext-lint README.rst
 	$(bin_prefix)sphinx-apidoc -f -o docs pysyncgateway/
 	$(MAKE) -C docs doctest html
 
@@ -67,6 +68,7 @@ doc:
 clean:
 	rm -rf dist build .tox
 	find . -name '*.pyc' -delete
+	$(MAKE) -C docs clean
 
 .PHONY: sdist
 sdist: clean tox
