@@ -56,6 +56,7 @@ fixlint: flake8
 
 .PHONY: doc
 doc:
+	$(bin_prefix)restructuredtext-lint README.rst
 	$(bin_prefix)sphinx-apidoc -f -o docs pysyncgateway/
 	$(MAKE) -C docs html
 
