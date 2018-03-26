@@ -1,21 +1,29 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+import os
+
 from setuptools import setup
+
+basedir = os.path.dirname(__file__)
 
 
 def readme():
-    with open('README.rst') as f:
+    with open(os.path.join(basedir, 'README.rst')) as f:
         return f.read()
 
 
+about = {}
+with open(os.path.join(basedir, '__about__.py')) as f:
+    exec (f.read(), about)
+
 setup(
-    name='pysyncgateway',
-    version='0.1.2',
-    description='Library for communication with Couchbase Sync Gateway',
+    name=about['__name__'],
+    version=about['__version__'],
+    description=about['__description__'],
     long_description=readme(),
     url='https://github.com/constructpm/pysyncgateway',
-    author='James Cooke',
-    author_email='github@jamescooke.info',
+    author=about['__author__'],
+    author_email=about['__email__'],
     license='Apache License 2.0',
     install_requires=[
         'requests>=2.18',

@@ -14,14 +14,15 @@
 import os
 import sys
 
-base_dir = os.path.abspath('..')
+# Base directory of project
+basedir = os.path.dirname(os.path.dirname(__file__))
 
-sys.path.insert(0, base_dir)
+sys.path.insert(0, basedir)
 
 # --- Load __about__ info ----------------------------------------------------
 
 about = {}
-with open(os.path.join(base_dir, '__about__.py')) as f:
+with open(os.path.join(basedir, '__about__.py')) as f:
     exec (f.read(), about)
 
 # -- Project information -----------------------------------------------------
