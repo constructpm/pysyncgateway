@@ -81,3 +81,11 @@ bdist_wheel: clean tox
 .PHONY: testpypi
 testpypi: clean sdist bdist_wheel
 	$(bin_prefix)twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+.PHONY: pypi
+pypi: clean sdist bdist_wheel
+	$(bin_prefix)twine upload dist/*
+
+.PHONY: tag
+tag:
+	git tag -a $$(python -c 'from pysyncgateway.__about__ import __version__; print "v{}".format(__version__)')
