@@ -12,4 +12,3 @@ jobs:
       - checkout
       - run: make install
       - run: tox
-      - run: make doc
