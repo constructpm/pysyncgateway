@@ -14,7 +14,8 @@ Make an Admin Client
 --------------------
 
 Assuming that you have a Sync Gateway running with its admin port on
-``http://localhost:4985/``, create an Admin Client to connect:
+``http://localhost:4985/``, create an instance of :class:`AdminClient
+<pysyncgateway.admin_client.AdminClient>` to connect:
 
 .. testsetup::
 
@@ -38,11 +39,10 @@ loading the server info from Sync Gateway:
     >>> server_info['version']
     u'Couchbase Sync Gateway/1.5.1(4;cb9522c)'
 
-
-You can use the Admin Client to load a list of databases currently on the Sync
+You can use the admin client to load a list of databases currently on the Sync
 Gateway (the `default Docker container
 <https://hub.docker.com/r/couchbase/sync-gateway/>`_ is initialised with a
-Database called 'db'):
+database called 'db'):
 
 .. doctest::
     :hide:
@@ -59,7 +59,8 @@ Database called 'db'):
 Create Database
 ---------------
 
-Create a new Database to contain our test User and Document:
+Create a new instance of :class:`Database <pysyncgateway.database.Database>` to
+contain our test user and document:
 
 .. doctest::
 
@@ -67,7 +68,7 @@ Create a new Database to contain our test User and Document:
     >>> database.create()
     True
 
-The new 'test' Database will not contain any Documents or Users:
+The new 'test' database will not contain any documents or users:
 
 .. doctest::
 
@@ -80,9 +81,9 @@ The new 'test' Database will not contain any Documents or Users:
 Create some Documents
 ---------------------
 
-First create a Document with the ID 'message'. This will have the "Hello
-World!" content and be in the 'world' channel (we'll use this to test with our
-User later):
+First create a :class:`Document <pysyncgateway.document.Document>` with the ID
+'message'. This will have the "Hello World!" content and be in the 'world'
+channel (we'll use this to test with our User later):
 
 .. doctest::
 
@@ -102,8 +103,8 @@ channels:
     >>> other_doc.create_update()
     1
 
-Finally, check with the Admin Client that those two documents are in the
-Database.
+Finally, check with the admin client that those two documents are in the
+database.
 
 .. doctest::
 
@@ -114,9 +115,9 @@ Database.
 Create a User
 -------------
 
-Now we need a User in the Database to check that our created Documents work OK
-- we create this from the Database instance. At first our User will not be
-subscribed to any channels:
+Now we need a :class:`User <pysyncgateway.user.User>` in the database to check
+that our created documents work OK - we create this from the database instance.
+At first the user instance will not be subscribed to any channels:
 
 .. doctest::
 
@@ -125,7 +126,8 @@ subscribed to any channels:
     >>> user.create_update()
     1
 
-``pysyncgateway`` provides a UserClient which we can now connect to the public
+``pysyncgateway`` provides a :class:`UserClient
+<pysyncgateway.user_client.UserClient>` which we can now connect to the public
 port at ``http://localhost:4984/`` with the credentials we created for the
 'friend' User above. Again, load the server info to ensure that the client is
 connected - but this time there is no 'ADMIN' key in the response because the
@@ -140,9 +142,9 @@ client is connected on the public port.
     >>> sorted(list(server_info))
     [u'couchdb', u'vendor', u'version']
 
-Now check a list of the documents that the User can access. We first have to
-generate a second Database instance - this one is for the User Client rather
-than the Admin Client.
+Now check a list of the documents that the user can access. We first have to
+generate a second database instance - this one is for the user client rather
+than the admin client.
 
 .. doctest::
 
@@ -152,7 +154,7 @@ than the Admin Client.
 
 They have no access to any documents!
 
-Grant access to the 'message' Document by using the Admin Client to subscribe
+Grant access to the 'message' document by using the admin client to subscribe
 the 'friend' User to the 'world' channel:
 
 .. doctest::
@@ -161,7 +163,7 @@ the 'friend' User to the 'world' channel:
     >>> user.create_update()
     2
 
-Now the 'friend' User can retrieve the message Document:
+Now the 'friend' user can retrieve the message document:
 
 .. doctest::
 
@@ -176,12 +178,13 @@ Now the 'friend' User can retrieve the message Document:
 
 Success!
 
+
 Clean up
 --------
 
-Finally, the Admin Client can be used to remove the 'test' Database. This will
-cascade into the Sync Gateway and remove all Users and Documents in that
-Database:
+Finally, the admin client can be used to remove the 'test' database. This will
+cascade into the Sync Gateway and remove all users and documents in that
+database:
 
 .. doctest::
 
