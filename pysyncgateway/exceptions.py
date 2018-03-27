@@ -23,6 +23,10 @@ class InvalidChannelName(PysyncgatewayException):
     pass
 
 
+class InvalidDataKey(PysyncgatewayException):
+    pass
+
+
 class InvalidDatabaseName(PysyncgatewayException):
     pass
 
