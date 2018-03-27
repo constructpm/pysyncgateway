@@ -8,6 +8,7 @@ endif
 endif
 
 lint_files=pysyncgateway tests setup.py
+rst_files=README.rst CHANGELOG.rst
 
 .PHONY: venv
 venv:
@@ -43,7 +44,7 @@ lint: flake8
 	@echo "=== yapf ==="
 	$(bin_prefix)yapf --recursive --diff $(lint_files)
 	@echo "=== rst ==="
-	$(bin_prefix)restructuredtext-lint README.rst
+	$(bin_prefix)restructuredtext-lint $(rst_files)
 
 .PHONY: tox
 tox:
