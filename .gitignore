@@ -28,7 +28,3 @@ docs/_build/
 
 # isort output
 /isort.out
-
-# Auto-generated docs
-/docs/modules.rst
-/docs/pysyncgateway.rst
