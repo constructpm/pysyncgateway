@@ -23,9 +23,10 @@ class AdminClient(Client):
             bool
 
         Raises:
-            AssertionError: When `other` is not an AdminClient.
+            ValueError: When `other` is not an AdminClient.
         """
-        assert isinstance(other, AdminClient)
+        if not isinstance(other, AdminClient):
+            raise ValueError('AdminClient compared to {}'.format(type(other)))
         return self.url < other.url
 
     # --- Databases ---

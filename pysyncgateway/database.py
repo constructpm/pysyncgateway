@@ -8,7 +8,7 @@ from .user import User
 
 class Database(object, ComparableMixin):
     """
-    A Couchbase Database.
+    A Database on Sync Gateway.
 
     Attributes:
         client (AdminClient)
@@ -23,15 +23,14 @@ class Database(object, ComparableMixin):
             client (AdminClient)
             name (str): A valid database name.
         """
-        try:
-            assert client.url > '', 'Please set a URL of something longer than empty string'
-        except (AttributeError):
-            message = (
-                'Database needs a `client` that provides a populated `url` '
-                'attribute (usually an `AdminClient` instance), '
-                'not {}'
-            ).format(type(client).__name__)
-            raise ValueError(message)
+        if not getattr(client, 'url', None):
+            raise ValueError(
+                '{class_name} needs a `client` that provides a populated '
+                '`url` (usually a `AdminClient` instance), not {found}'.format(
+                    class_name=self.__class__.__name__,
+                    found=type(client).__name__,
+                ),
+            )
 
         assert_valid_database_name(name)
 
@@ -54,9 +53,10 @@ class Database(object, ComparableMixin):
             bool
 
         Raises:
-            AssertionError: When other is not Database.
+            ValueError: When other is not Database.
         """
-        assert isinstance(other, Database)
+        if not isinstance(other, Database):
+            raise ValueError('Database compared to {}'.format(type(other)))
         return self.url < other.url
 
     def create(self):

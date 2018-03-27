@@ -110,5 +110,5 @@ def test_data_not_dict(resource):
     """
     resource.data raises when a non-`dict` is passed
     """
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         resource.data = '__STUFF__'

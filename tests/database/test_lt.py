@@ -46,5 +46,7 @@ def test_other_type():
     admin_client = AdminClient('__URL__')
     database = Database(admin_client, 'test')
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError) as excinfo:
         database < 1
+
+    assert 'int' in excinfo.value.message

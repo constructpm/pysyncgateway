@@ -21,6 +21,11 @@ def test_neq(admin_client):
     assert result is False
 
 
+# --- FAILURES ---
+
+
 def test_other_type(admin_client):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError) as excinfo:
         admin_client < 1
+
+    assert 'int' in excinfo.value.message

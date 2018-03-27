@@ -43,8 +43,12 @@ lint: flake8
 	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
 	@echo "=== yapf ==="
 	$(bin_prefix)yapf --recursive --diff $(lint_files)
+	@echo "=== bandit ==="
+	$(bin_prefix)bandit --recursive pysyncgateway
 	@echo "=== rst ==="
 	$(bin_prefix)restructuredtext-lint $(rst_files)
+	@echo "=== setup.py ==="
+	$(bin_prefix)python setup.py check --metadata --restructuredtext --strict
 
 .PHONY: tox
 tox:
@@ -82,3 +86,11 @@ bdist_wheel: clean tox
 .PHONY: testpypi
 testpypi: clean sdist bdist_wheel
 	$(bin_prefix)twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+.PHONY: pypi
+pypi: clean sdist bdist_wheel
+	$(bin_prefix)twine upload dist/*
+
+.PHONY: tag
+tag:
+	git tag -a $$(python -c 'from pysyncgateway.__about__ import __version__; print "v{}".format(__version__)')

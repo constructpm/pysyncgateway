@@ -1,5 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+import pytest
+
 from pysyncgateway.data_dict import DataDict
 
 
@@ -44,3 +46,11 @@ def test_keys_filtered():
     result = DataDict.from_dict(input_data)
 
     assert result == {}
+
+
+# --- FAILURES ---
+
+
+def test_non_dict():
+    with pytest.raises(ValueError):
+        DataDict.from_dict(1)

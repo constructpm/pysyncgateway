@@ -19,7 +19,7 @@ def test(admin_client):
 def test_empty_url():
     admin_client = AdminClient('')
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         Database(admin_client, 'test')
 
 

@@ -1,5 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+from .exceptions import InvalidDataKey
+
 
 class DataDict(dict):
     """
@@ -32,14 +34,15 @@ class DataDict(dict):
             DataDict: New instance created with cleaned, copied `data`.
 
         Raises:
-            AssertionError: When passed a non-dict.
+            ValueError: When passed a non-dict.
         """
-        assert isinstance(data, dict)
+        if not isinstance(data, dict):
+            raise ValueError('data argument is not dict')
         new = obj()
         for key, value in data.iteritems():
             try:
                 new[key] = value
-            except AssertionError:
+            except InvalidDataKey:
                 pass
         return new
 
@@ -51,8 +54,13 @@ class DataDict(dict):
         Args:
             key (str)
             value
+
+        Raises:
+            InvalidDataKey: When data is passed that is not managed by
+                DataDict.
         """
-        assert key not in self.filtered_keys, 'DataDict does not allow "{}" key'.format(key)
+        if key in self.filtered_keys:
+            raise InvalidDataKey('DataDict does not allow "{}" key'.format(key))
         return super(DataDict, self).__setitem__(key, value)
 
     def to_dict(self):

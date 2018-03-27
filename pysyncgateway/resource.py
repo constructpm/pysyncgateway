@@ -21,9 +21,7 @@ class Resource(object, ComparableMixin):
         Args:
             database (Database)
         """
-        try:
-            assert database.url > ''
-        except (AssertionError, AttributeError):
+        if not getattr(database, 'url', None):
             raise ValueError(
                 '{class_name} needs a `database` that provides a populated '
                 '`url` (usually a `Database` instance), not {found}'.format(
