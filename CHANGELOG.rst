@@ -11,6 +11,11 @@ Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased
 ----------
 
+Added
+.....
+
+* ``Database.get_query()`` shortcut for loading Query documents.
+
 Changed
 .......
 
