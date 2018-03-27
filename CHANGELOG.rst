@@ -11,10 +11,20 @@ Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased
 ----------
 
-Added
-.....
+Changed
+.......
+
+* Adjust Resource's data dict instance to raise ``InvalidDataKey`` rather than
+  ``AssertionError`` when a prohibited key is added.
+
+Internals
+.........
 
 * Module documentation added to git and RTD.
+
+* Bandit to test security. As a result removed many uses of ``assert`` in code.
+
+* Initialisation of Document and Database simplified.
 
 
 0.1.3 - 2018/03/26
