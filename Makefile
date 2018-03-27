@@ -43,6 +43,8 @@ lint: flake8
 	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
 	@echo "=== yapf ==="
 	$(bin_prefix)yapf --recursive --diff $(lint_files)
+	@echo "=== bandit ==="
+	$(bin_prefix)bandit --recursive pysyncgateway
 	@echo "=== rst ==="
 	$(bin_prefix)restructuredtext-lint $(rst_files)
 
