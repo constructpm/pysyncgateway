@@ -3,6 +3,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 from .document import Document
 from .exceptions import DoesNotExist
 from .helpers import ComparableMixin, assert_valid_database_name
+from .query import Query
 from .user import User
 
 
@@ -61,7 +62,7 @@ class Database(object, ComparableMixin):
 
     def create(self):
         """
-        Write this Database instance to the server.
+        Write this Database instance to Sync Gateway.
 
         Uses test orientated settings to create database, e.g. Walrus as
         server, since this function is intended for test functionality, rather
@@ -117,6 +118,11 @@ class Database(object, ComparableMixin):
     # --- Documents ---
 
     def get_document(self, doc_id):
+        """
+        Returns:
+            Document: An instance of Document in this Database with provided
+                ``doc_id``.
+        """
         return Document(self, doc_id)
 
     def all_docs(self):
@@ -162,7 +168,7 @@ class Database(object, ComparableMixin):
     def get_user(self, username):
         """
         Returns:
-            User: An instance of ``User`` for the provided ``username``.
+            User: An instance of User for the provided ``username``.
         """
         return User(self, username)
 
@@ -176,3 +182,13 @@ class Database(object, ComparableMixin):
         url = '{}_user/'.format(self.url)
         response = self.client.get(url)
         return [self.get_user(username) for username in response.json()]
+
+    # --- Queries ---
+
+    def get_query(self, doc_id):
+        """
+        Returns:
+            Query: An instance of a query design document in this Database with
+                the provided ``doc_id``.
+        """
+        return Query(self, doc_id)
