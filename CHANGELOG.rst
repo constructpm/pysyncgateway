@@ -11,6 +11,11 @@ Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased
 ----------
 
+Added
+.....
+
+* Module documentation added to git and RTD.
+
 
 0.1.3 - 2018/03/26
 ------------------
