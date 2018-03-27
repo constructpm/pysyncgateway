@@ -121,7 +121,7 @@ class Database(object, ComparableMixin):
         """
         Returns:
             Document: An instance of Document in this Database with provided
-                ``doc_id``.
+            ``doc_id``.
         """
         return Document(self, doc_id)
 
@@ -144,8 +144,8 @@ class Database(object, ComparableMixin):
 
         Returns:
             list (Document): An instance of Document for each document returned
-                by the endpoint. For each instance the `data['_rev']` value is
-                populated with the revision ID from `value.rev`.
+            by the endpoint. For each instance the ``data['_rev']`` value is
+            populated with the revision ID from ``value.rev``.
 
         Raises:
             DoesNotExist: Database can't be found on sync gateway.
@@ -189,6 +189,6 @@ class Database(object, ComparableMixin):
         """
         Returns:
             Query: An instance of a query design document in this Database with
-                the provided ``doc_id``.
+            the provided ``doc_id``.
         """
         return Query(self, doc_id)
