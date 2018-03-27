@@ -4,8 +4,10 @@
 
 Sphinx
 bandit
+docutils
 flake8
 isort
+pygments
 pytest
 responses
 restructuredtext_lint

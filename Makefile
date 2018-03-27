@@ -47,6 +47,8 @@ lint: flake8
 	$(bin_prefix)bandit --recursive pysyncgateway
 	@echo "=== rst ==="
 	$(bin_prefix)restructuredtext-lint $(rst_files)
+	@echo "=== setup.py ==="
+	$(bin_prefix)python setup.py check --metadata --restructuredtext --strict
 
 .PHONY: tox
 tox:
