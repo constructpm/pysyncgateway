@@ -64,6 +64,7 @@ fixlint: flake8
 .PHONY: doc
 doc:
 	$(bin_prefix)sphinx-apidoc -f -o docs pysyncgateway/
+	rm docs/modules.rst
 	$(MAKE) -C docs doctest html
 
 
