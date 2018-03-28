@@ -6,9 +6,6 @@ from .client import Client
 
 
 class UserClient(Client):
-    """
-    Attributes:
-    """
 
     def auth(self, un, pw):
         """
