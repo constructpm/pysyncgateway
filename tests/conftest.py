@@ -28,7 +28,7 @@ def cleanup_databases():
     """
     Returns:
         bool: admin_client fixture should ignore any existing databases at
-            start of test and clean them up.
+        start of test and clean them up.
     """
     return True
 
@@ -38,8 +38,8 @@ def admin_client(syncgateway_admin_url, cleanup_databases):
     """
     Returns:
         AdminClient: Pointed at default admin API URL. Asserts that there are
-            no databases at the start of test. Deletes all databases at end of
-            test.
+        no databases at the start of test. Deletes all databases at end of
+        test.
     """
     admin_client = AdminClient(syncgateway_admin_url)
 
