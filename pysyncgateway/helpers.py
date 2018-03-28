@@ -80,9 +80,12 @@ def assert_valid_database_name(name):
 
         The database name must contain only valid characters. The following
         characters are valid in database names:
-            * Lowercase letters: ``a-z``
-            * Numbers: ``0-9``
-            * Special characters: ``_$()+-/``
+
+        * Lowercase letters: ``a-z``
+
+        * Numbers: ``0-9``
+
+        * Special characters: ``_$()+-/``
 
     NOTE hyphen is allowed, compared to channel names below.
 
