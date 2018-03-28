@@ -6,7 +6,6 @@ from .client import Client
 
 
 class UserClient(Client):
-
     def auth(self, un, pw):
         """
         Authorise client with provided credentials. Does not check with Sync
