@@ -76,6 +76,14 @@ pysyncgateway.resource module
     :undoc-members:
     :show-inheritance:
 
+pysyncgateway.session module
+----------------------------
+
+.. automodule:: pysyncgateway.session
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 pysyncgateway.stats module
 --------------------------
 

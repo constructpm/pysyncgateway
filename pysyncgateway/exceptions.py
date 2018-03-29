@@ -46,6 +46,13 @@ class DoesNotExist(PysyncgatewayException):
     """
 
 
+class NotLoaded(PysyncgatewayException):
+    """
+    Item from a ``Resources`` data attribute was requested, but that resource
+    has not yet been successfully retrieved from Sync Gateway.
+    """
+
+
 class RevisionMismatch(PysyncgatewayException):
     pass
 

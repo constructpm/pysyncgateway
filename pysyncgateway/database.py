@@ -173,7 +173,7 @@ class Database(object, ComparableMixin):
 
     def all_users(self):
         """
-        ``GET /:name/_user/`` (undocumented endpoint)
+        ``GET /:name/_user/``
 
         Returns:
             list (User): All Users in Database.
