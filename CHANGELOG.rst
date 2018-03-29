@@ -16,6 +16,9 @@ Added
 
 * ``Database.get_query()`` shortcut for loading Query documents.
 
+* New ``Session`` class which operates on a Database. Additional
+  ``Database.get_session()`` shortcut for loading Sessions.
+
 Changed
 .......
 
