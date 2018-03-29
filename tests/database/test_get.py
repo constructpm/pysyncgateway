@@ -56,6 +56,15 @@ def test_missing(admin_client):
         database.get()
 
 
+def test_missing_unauthed(user_client):
+    user_database = user_client.get_database('db')
+
+    with pytest.raises(DoesNotExist) as excinfo:
+        user_database.get()
+
+    assert 'not found' in excinfo.value.message
+
+
 def test_user_unauthed(existing_database, user_client):
     user_database = user_client.get_database('db')
 

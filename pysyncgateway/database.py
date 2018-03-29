@@ -4,6 +4,7 @@ from .document import Document
 from .exceptions import DoesNotExist
 from .helpers import ComparableMixin, assert_valid_database_name
 from .query import Query
+from .session import Session
 from .user import User
 
 
@@ -64,9 +65,10 @@ class Database(object, ComparableMixin):
         """
         Write this Database instance to Sync Gateway.
 
-        Uses test orientated settings to create database, e.g. Walrus as
-        server, since this function is intended for test functionality, rather
-        than for API server to be regularly creating databases.
+        Uses test orientated settings (i.e. none - the empty dictionary ``{}``
+        is passed as data) to create database. This function is intended for
+        test functionality, rather than for clients to be regularly creating
+        databases.
 
         ``PUT /:name/``
 
@@ -83,6 +85,12 @@ class Database(object, ComparableMixin):
 
         Returns:
             dict: Information loaded from SG.
+
+        Raises:
+            DoesNotExist: When database is not written to Sync Gateway
+                regardless of whether the client is authorized or not.
+            ClientUnauthorized: When database exists and client is not
+                authorized.
         """
         response = self.client.get(self.url)
         return response.json()
@@ -91,20 +99,11 @@ class Database(object, ComparableMixin):
         """
         Remove database.
 
-        Whereas SyncGateway will raise 404 if the database is not found, this
+        Whereas Sync Gateway will raise 404 if the database is not found, this
         fails silently with the intention that it can be used 'scatter gun'
-        style at the end of test runs to clean up database lists. Since
-        documents appear to hang around after database delete, this gets a list
-        of all document IDs in the database and removes them before dropping
-        the DB.
+        style at the end of test runs to clean up database lists.
 
         ``DELETE /:name/``
-
-        NOTE this code is not optimal and there may be some value in using a
-        _purge call instead / as well. This from Simon @ couchbase:
-
-            I've just confirmed that you need to delete, then purge the
-            documents.
 
         Returns:
             bool: Database was found and deleted.
@@ -192,3 +191,12 @@ class Database(object, ComparableMixin):
             the provided ``doc_id``.
         """
         return Query(self, doc_id)
+
+    # --- Session ---
+
+    def get_session(self):
+        """
+        Returns:
+            Session
+        """
+        return Session(self)
