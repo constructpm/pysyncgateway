@@ -75,15 +75,15 @@ class Document(Resource):
     def create_update(self):
         """
         Save or update Document in Sync Gateway. Saves the received revision id
-        into Documents `rev` attribute.
+        into instance's ``rev`` attribute.
 
-        PUT /<database_name>/<doc_id>
-        Response has keys: ('id', 'rev', 'ok')
+        ``PUT /<database_name>/<doc_id>``
 
-        NOTE: works for updates but is not tested.
+        Note:
+            Works for updates but is not tested.
 
         Returns:
-            int: AdminClient.CREATED if document was created (matches 201).
+            int: ``AdminClient.CREATED`` if document was created (matches 201).
         """
 
         put_data = self.data.to_dict()
@@ -107,12 +107,7 @@ class Document(Resource):
         Load document contents. Once loaded, `_rev` and `channels` are used to
         update the internal attributes before the data is sent to the DataDict.
 
-        NOTE: DataDict never contains the private SG fields '_id', '_rev',
-        'channels'.
-
-        NOTE *not* running through `_raw`.
-
-        GET /<database_name>/<doc_id>
+        ``GET /<name>/<doc_id>``
 
         Returns:
             bool: Load was successful.
@@ -120,10 +115,24 @@ class Document(Resource):
         Raises:
             DoesNotExist: Document with provided doc_id can not be loaded.
 
-        Side effects:
-            channels: Updated based on returned JSON using `set_channels`.
-            data: Updates internal data dictionary with data loaded from JSON.
-            rev: Updated from revision passed in JSON using `set_rev`.
+        Note:
+            DataDict never contains the private Sync Gateway fields ``_id``,
+            ``_rev``, ``channels``.
+
+        Note:
+            **Not** running through ``/<name>/_raw/<doc_id>``.
+
+        Warning:
+            Side effect: ``self.channels`` is updated based on returned the
+            JSON using ``self.set_channels()``.
+
+        Warning:
+            Side effect: ``self.data`` is updated with data dictionary loaded
+            from JSON.
+
+        Warning:
+            Side effect: ``self.rev`` is updated from revision passed in JSON
+            using ``self.set_rev``.
         """
         response = self.database.client.get(self.url)
         response_data = response.json()
@@ -143,10 +152,10 @@ class Document(Resource):
         this information when a `delete` is asked for, then a pre-fetch will
         occur.
 
-        Uses the default `Resource.delete` action, but then inspects the
-        response to ensure that `ok` is `True`.
+        Uses the default ``Resource.delete`` action, but then inspects the
+        response to ensure that ``ok`` is ``True``.
 
-        DELETE /<database_name>/<doc_id>?rev=<revision id>
+        ``DELETE /<name>/<doc_id>?rev=<rev>``
 
         Returns:
             bool: Delete was successful.
