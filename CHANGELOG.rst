@@ -11,6 +11,9 @@ Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased
 ----------
 
+See also `latest documentation
+<https://pysyncgateway.readthedocs.io/en/latest/>`_
+
 Added
 .....
 
