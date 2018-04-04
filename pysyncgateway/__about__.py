@@ -1,7 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 __name__ = 'pysyncgateway'
-__version__ = '0.1.3'
+__version__ = '0.2.0'
 
 __author__ = 'Construct Technology Ltd'
 __copyright__ = '2018, {}'.format(__author__)

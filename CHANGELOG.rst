@@ -11,6 +11,13 @@ Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased
 ----------
 
+See also `latest documentation
+<https://pysyncgateway.readthedocs.io/en/latest/>`_
+
+
+0.2.0_ - 2018/04/18
+-------------------
+
 Added
 .....
 
@@ -39,3 +46,5 @@ Internals
 ------------------
 
 Initial beta release.
+
+.. _0.2.0: https://github.com/constructpm/pysyncgateway/compare/v0.1.3...v0.2.0
