@@ -4,7 +4,7 @@ from .data_dict import DataDict
 from .helpers import ComparableMixin
 
 
-class Resource(object, ComparableMixin):
+class Resource(ComparableMixin, object):
     """
     A Couchbase object stored within a Database, identified by a URL and
     accessible through REST verbs. Data is stored in a DataDict manager.

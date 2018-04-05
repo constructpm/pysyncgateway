@@ -20,4 +20,4 @@ def test_empty(user, password):
     with pytest.raises(InvalidPassword) as excinfo:
         user.set_password(password)
 
-    assert '"{}"'.format(password) in excinfo.value.message
+    assert '"{}"'.format(password) in excinfo.value.args[0]

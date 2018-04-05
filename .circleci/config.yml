@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: python:2.7
+      - image: kpndigital/tox:py27_py35
       - image: couchbase/sync-gateway:1.5.1-community
         # SG image starts up with a database called DB. Pass it empty JSON to
         # start with no databases.

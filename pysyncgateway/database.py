@@ -8,7 +8,7 @@ from .session import Session
 from .user import User
 
 
-class Database(object, ComparableMixin):
+class Database(ComparableMixin, object):
     """
     A Database on Sync Gateway.
 

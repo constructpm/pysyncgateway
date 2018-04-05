@@ -256,7 +256,7 @@ def assert_valid_channel_name(name):
 
         #.  Empty string is invalid:
 
-            >>> assert_valid_channel_name('')
+            >>> assert_valid_channel_name('')  # doctest: +IGNORE_EXCEPTION_DETAIL
             Traceback (most recent call last):
             ...
             InvalidChannelName: Empty channel name is not allowed
