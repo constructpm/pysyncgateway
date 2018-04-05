@@ -14,6 +14,10 @@
     :alt: PyPI 
     :target: https://pypi.org/project/pysyncgateway/
 
+.. image:: https://img.shields.io/pypi/pyversions/pysyncgateway.svg
+    :alt: PyPI - Python Versions
+
+
 pysyncgateway
 =============
 
@@ -34,4 +38,4 @@ Resources
 
 * `Changelog <https://github.com/constructpm/pysyncgateway/blob/master/CHANGELOG.rst>`_
 
-Tested against Python 2.7, Sync Gateway 1.5 community edition (walrus mode).
+Tested against Pythons 2.7 and 3.5; Sync Gateway 1.5 community edition (walrus mode).
