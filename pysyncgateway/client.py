@@ -6,7 +6,7 @@ from .database import Database
 from .helpers import ComparableMixin, sg_method
 
 
-class Client(object, ComparableMixin):
+class Client(ComparableMixin, object):
     """
     Abstract parent class for `AdminClient` and `UserClient`.
 
