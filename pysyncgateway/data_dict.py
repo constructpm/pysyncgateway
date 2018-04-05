@@ -1,5 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+import six
+
 from .exceptions import InvalidDataKey
 
 
@@ -39,7 +41,7 @@ class DataDict(dict):
         if not isinstance(data, dict):
             raise ValueError('data argument is not dict')
         new = obj()
-        for key, value in data.iteritems():
+        for key, value in six.iteritems(data):
             try:
                 new[key] = value
             except InvalidDataKey:
