@@ -12,9 +12,9 @@ def test_admin_client_existing_database(admin_client, syncgateway_admin_url):
     database.create()
 
     with pytest.raises(AssertionError) as excinfo:
-        admin_client_fn(syncgateway_admin_url, False).next()
+        next(admin_client_fn(syncgateway_admin_url, False))
 
-    assert '1 unexpected Databases [{}]'.format(database) in excinfo.value.message
+    assert '1 unexpected Databases [{}]'.format(database) in excinfo.value.args[0]
 
 
 def test_admin_client_cleanup(syncgateway_admin_url):
@@ -22,9 +22,9 @@ def test_admin_client_cleanup(syncgateway_admin_url):
     database = admin_client.get_database('test')
     database.create()
     admin_fixture = admin_client_fn(syncgateway_admin_url, True)
-    admin_fixture.next()
+    next(admin_fixture)
 
     with pytest.raises(StopIteration):
-        admin_fixture.next()
+        next(admin_fixture)
 
     assert admin_client.all_databases() == []
