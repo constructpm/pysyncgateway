@@ -8,14 +8,26 @@ The format is based on `Keep a Changelog
 Versioning <http://semver.org/spec/v2.0.0.html>`_.
 
 
-Unreleased
-----------
+Unreleased_
+-----------
 
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
 
-0.2.0_ - 2018/04/18
+1.0.0_ - 2018/04/09
+-------------------
+
+Stable release.
+
+Added
+.....
+
+* Extended test suite to include initial smoke tests on Python 3 which assert
+  that package is installable.
+
+
+0.2.0_ - 2018/04/04
 -------------------
 
 Added
@@ -47,4 +59,6 @@ Internals
 
 Initial beta release.
 
+.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.0.0...HEAD
+.. _1.0.0: https://github.com/constructpm/pysyncgateway/compare/v0.2.0...v1.0.0
 .. _0.2.0: https://github.com/constructpm/pysyncgateway/compare/v0.1.3...v0.2.0
