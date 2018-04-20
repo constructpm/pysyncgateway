@@ -2,7 +2,7 @@
     :alt: CircleCI
     :target: https://circleci.com/gh/constructpm/pysyncgateway/tree/master
 
-.. image:: https://img.shields.io/readthedocs/pip.svg
+.. image:: https://img.shields.io/readthedocs/pysyncgateway.svg
     :alt: Read the Docs
     :target: https://pysyncgateway.readthedocs.io/
 
