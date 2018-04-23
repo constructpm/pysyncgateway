@@ -14,7 +14,7 @@ chardet==3.0.4
 click==6.7                # via pip-tools
 configparser==3.5.0
 cookies==2.2.1
-decorator==4.2.1          # via ipython, traitlets
+decorator==4.3.0          # via ipython, traitlets
 docutils==0.14
 enum34==1.1.6
 first==2.0.1              # via pip-tools
@@ -35,11 +35,11 @@ mccabe==0.6.1
 mock==2.0.0
 more-itertools==4.1.0
 packaging==17.1
-pathlib2==2.3.0           # via ipython, pickleshare
-pbr==4.0.1
-pexpect==4.4.0            # via ipython
+pathlib2==2.3.2           # via ipython, pickleshare
+pbr==4.0.2
+pexpect==4.5.0            # via ipython
 pickleshare==0.7.4        # via ipython
-pip-tools==1.11.0
+pip-tools==2.0.1
 pkginfo==1.4.2            # via twine
 pluggy==0.6.0
 prompt-toolkit==1.0.15    # via ipython
@@ -50,7 +50,7 @@ pyflakes==1.6.0
 pygments==2.2.0
 pyparsing==2.2.0
 pytest==3.5.0
-pytz==2018.3
+pytz==2018.4
 pyyaml==3.12
 requests-toolbelt==0.8.0  # via twine
 requests==2.18.4
@@ -61,12 +61,12 @@ simplegeneric==0.8.1      # via ipython
 six==1.11.0
 smmap2==2.0.3
 snowballstemmer==1.2.1
-sphinx-rtd-theme==0.2.4
-sphinx==1.7.2
+sphinx-rtd-theme==0.3.0
+sphinx==1.7.3
 sphinxcontrib-websupport==1.0.1
 stevedore==1.28.0
 tox==3.0.0
-tqdm==4.20.0              # via twine
+tqdm==4.23.0              # via twine
 traitlets==4.3.2          # via ipython
 twine==1.11.0
 typing==3.6.4
