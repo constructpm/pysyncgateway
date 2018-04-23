@@ -22,7 +22,7 @@ install:
 
 .PHONY: pip-tools
 pip-tools:
-	$(bin_prefix)pip install pip-tools
+	$(bin_prefix)pip install -U pip-tools
 
 # Install dev environment
 .PHONY: dev
