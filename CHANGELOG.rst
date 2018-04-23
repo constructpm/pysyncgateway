@@ -14,6 +14,13 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+Changed
+.......
+
+* Adjusted how provided ``key`` values are serialized when querying a view in a
+  Query design document. Now ``key`` values are serialized to JSON allowing for
+  multi-key views to be queried.
+
 
 1.0.0_ - 2018/04/09
 -------------------
