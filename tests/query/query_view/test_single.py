@@ -12,7 +12,7 @@ def database_with_doc(database):
     """
     Returns:
         Database: Database with a single document called 'stuff' written to
-            Sync Gateway.
+        Sync Gateway.
     """
     database.get_document('stuff').create_update()
     return database
@@ -44,6 +44,7 @@ def all_query(database_with_doc):
 def test_default(all_query):
     result = all_query.query_view('everything')
 
+    assert sorted(list(result)) == ['Collator', 'rows', 'total_rows']
     assert result['total_rows'] == 1
     assert result['rows'][0]['key'] == 'stuff'
 
