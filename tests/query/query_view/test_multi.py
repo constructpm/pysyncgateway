@@ -78,7 +78,8 @@ def pupil_data_design_doc(database):
     query.data = {
         'views': {
             'list_pupils': {
-                'map': """
+                'map':
+                """
 function (doc,meta) {
     if(doc.type == "pupil") {
         emit([doc.parent, doc.school], doc);
@@ -109,12 +110,15 @@ def test_pupil_query_doc_with_data(pupil_data_design_doc, schools_database):
 # --- TESTS ---
 
 
-@pytest.mark.parametrize('keys, expected_names', [
-    (['Mel', 'St Barts'], ['Jo', 'Maggy']),
-    ((None, 'St Barts'), ['Chris']),  # Uses a tuple of keys
-    (['Maggy', None], ['Mary']),
-    ([None, None], ['Amy']),
-])
+@pytest.mark.parametrize(
+    'keys, expected_names',
+    [
+        (['Mel', 'St Barts'], ['Jo', 'Maggy']),
+        ((None, 'St Barts'), ['Chris']),  # Uses a tuple of keys
+        (['Maggy', None], ['Mary']),
+        ([None, None], ['Amy']),
+    ]
+)
 def test_both_keys(keys, expected_names, pupil_data_design_doc, schools_database):
     result = pupil_data_design_doc.query_view('list_pupils', key=keys)
 
@@ -122,13 +126,15 @@ def test_both_keys(keys, expected_names, pupil_data_design_doc, schools_database
     assert sorted([row['value']['name'] for row in result['rows']]) == expected_names
 
 
-@pytest.mark.parametrize('keys', [
-    ('Mel', []),
-    ([], 'Olives'),
-    ([{}, 'St Barts'], []),
-    ([(), 'St Barts'], []),
-    ([[], 'St Barts'], []),
-])
+@pytest.mark.parametrize(
+    'keys', [
+        ('Mel', []),
+        ([], 'Olives'),
+        ([{}, 'St Barts'], []),
+        ([(), 'St Barts'], []),
+        ([[], 'St Barts'], []),
+    ]
+)
 def test_bad(keys, pupil_data_design_doc, schools_database):
     """
     Pinning behaviour of badly formed keys - all give no data and no error.
