@@ -1,5 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+import json
+
 from .resource import Resource
 
 
@@ -113,7 +115,7 @@ class Query(Resource):
         if not stale:
             params['stale'] = 'false'
         if key is not None:
-            params['key'] = '"{}"'.format(key)
+            params['key'] = json.dumps(key)
 
         # Build kwargs (passed to requests.get)
         kwargs = {}

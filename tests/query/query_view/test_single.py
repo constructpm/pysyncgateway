@@ -12,7 +12,7 @@ def database_with_doc(database):
     """
     Returns:
         Database: Database with a single document called 'stuff' written to
-            Sync Gateway.
+        Sync Gateway.
     """
     database.get_document('stuff').create_update()
     return database
