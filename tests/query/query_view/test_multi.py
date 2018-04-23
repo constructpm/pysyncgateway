@@ -111,7 +111,7 @@ def test_pupil_query_doc_with_data(pupil_data_design_doc, schools_database):
 
 @pytest.mark.parametrize('keys, expected_names', [
     (['Mel', 'St Barts'], ['Jo', 'Maggy']),
-    ([None, 'St Barts'], ['Chris']),
+    ((None, 'St Barts'), ['Chris']),  # Uses a tuple of keys
     (['Maggy', None], ['Mary']),
     ([None, None], ['Amy']),
 ])
@@ -126,6 +126,8 @@ def test_both_keys(keys, expected_names, pupil_data_design_doc, schools_database
     ('Mel', []),
     ([], 'Olives'),
     ([{}, 'St Barts'], []),
+    ([(), 'St Barts'], []),
+    ([[], 'St Barts'], []),
 ])
 def test_bad(keys, pupil_data_design_doc, schools_database):
     """

@@ -83,12 +83,17 @@ class Query(Resource):
             view_name (str): View's name.
             key (Optional): Value to use to search the view's key (the
                 left part of the map). Any type can be passed as long as:
-                * ``bool(key) is True``
-                * ``key`` can be converted to string.
-                NOTE: Currently only handles single keys.
+
+                * ``key is not None``
+
+                * ``key`` can be serialized to a string by ``json.dumps()``.
+
+                To query a view with multiple keys set ``key`` as an iterable
+                which will be serialized to JSON as an array. E.g.
+                ``key=['left_id', 'right_id']``.
             stale (bool, Optional): Allow stale results in the view. This is
                 currently the default value in Sync Gateway, so is only passed
-                when set to False. Default ``True``.
+                when set to ``False``. Default ``True``.
 
                 ``'false'`` is an undocumented option for this param. See
                 https://github.com/couchbase/sync_gateway/issues/727#issuecomment-83588984
@@ -97,12 +102,13 @@ class Query(Resource):
                 https://github.com/constructpm/pysyncgateway/issues/7
             timeout (int, Optional): Set a time out of seconds as per requests'
                 spec which means that if the Sync Gateway does not respond to
-                the GET request within the ``timeout`` period a ``ReadTimeout``
+                the GET request within the ``timeout`` period, a ``ReadTimeout``
                 will be raised.  Default ``None`` which means that requests'
                 default is used.
 
         Returns:
-            dict: Decoded JSON for view data result.
+            dict: Decoded JSON for view data result. Will usually be a
+            dictionary contain keys 'Collator', 'rows' and 'total_rows'.
 
         Raises:
             DoesNotExist: When database, design document or contained view can

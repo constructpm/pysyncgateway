@@ -44,6 +44,7 @@ def all_query(database_with_doc):
 def test_default(all_query):
     result = all_query.query_view('everything')
 
+    assert sorted(list(result)) == ['Collator', 'rows', 'total_rows']
     assert result['total_rows'] == 1
     assert result['rows'][0]['key'] == 'stuff'
 
