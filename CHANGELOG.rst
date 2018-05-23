@@ -14,12 +14,19 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+1.1.0_ - 2018/05/23
+-------------------
+
 Changed
 .......
 
 * Adjusted how provided ``key`` values are serialized when querying a view in a
   Query design document. Now ``key`` values are serialized to JSON allowing for
   multi-key views to be queried.
+
+  This is a breaking change because any single key value was previously
+  converted to a string before serialization to JSON. Now ``key`` is serialized
+  to JSON directly in ``Query.query_view()``.
 
 
 1.0.0_ - 2018/04/09
@@ -66,6 +73,7 @@ Internals
 
 Initial beta release.
 
-.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.0.0...HEAD
+.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.1.0...HEAD
+.. _1.1.0: https://github.com/constructpm/pysyncgateway/compare/v1.0.0...v1.1.0
 .. _1.0.0: https://github.com/constructpm/pysyncgateway/compare/v0.2.0...v1.0.0
 .. _0.2.0: https://github.com/constructpm/pysyncgateway/compare/v0.1.3...v0.2.0
