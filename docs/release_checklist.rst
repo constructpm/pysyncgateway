@@ -25,3 +25,22 @@ Items to be completed for each release. Given a new version called ``x.y.z``:
 * Commit changes and push ``bump-vx.y.z`` branch for testing.
 
 * Now is a good time to build and check the documentation locally.
+
+* When branch ``bump-vx.y.z`` is green, then merge it to ``master``.
+
+* Update master locally and ensure that you remain on master for the rest of
+  the process.
+
+* Test that a build can be shipped to test PyPI with ``make testpypi``. (Every
+  build runs the full clean test suite locally to ensure that nothing has
+  broken before building)
+
+* After successful push, check the `TestPyPI page
+  <https://test.pypi.org/project/pysyncgateway/>`_.
+
+* Then tag the repo with ``make tag``. Add a short message about what the key
+  change is.
+
+* Make the new tag public with ``git push origin --tags``.
+
+* Build and push to PyPI with ``make pypi``.
