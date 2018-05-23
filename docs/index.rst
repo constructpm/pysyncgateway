@@ -10,3 +10,5 @@ Welcome to pysyncgateway's documentation!
    quickstart
 
    pysyncgateway
+
+   release_checklist
