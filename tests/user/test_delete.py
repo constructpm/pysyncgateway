@@ -9,9 +9,9 @@ def test(existing_user):
     result = existing_user.delete()
 
     assert result is True
-    assert existing_user.retrieved is False
+    assert result.retrieved is False
     with pytest.raises(DoesNotExist):
-        existing_user.retrieve()
+        result.retrieve()
 
 
 def test_retrieved(existing_user):
