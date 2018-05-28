@@ -34,7 +34,7 @@ dev: pip-tools
 .PHONY: flake8
 flake8:
 	@echo "=== flake8 ==="
-	$(bin_prefix)flake8 pysyncgateway $(lint_files)
+	$(bin_prefix)flake8 $(lint_files)
 
 .PHONY: lint
 lint: flake8
