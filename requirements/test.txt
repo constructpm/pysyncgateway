@@ -5,6 +5,7 @@
 #    pip-compile --output-file test.txt test.in
 #
 alabaster==0.7.10         # via sphinx
+asttokens==1.1.10         # via flake8-aaa
 attrs==18.1.0             # via pytest
 babel==2.5.3              # via sphinx
 bandit==1.4.0
@@ -14,6 +15,7 @@ configparser==3.5.0       # via flake8
 cookies==2.2.1            # via responses
 docutils==0.14
 enum34==1.1.6             # via flake8
+flake8-aaa==0.2.0
 flake8==3.5.0
 funcsigs==1.0.2           # via mock, pytest
 futures==3.2.0            # via isort

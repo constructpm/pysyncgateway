@@ -6,6 +6,7 @@ Sphinx
 bandit
 docutils
 flake8
+flake8-aaa
 isort
 pygments
 pytest

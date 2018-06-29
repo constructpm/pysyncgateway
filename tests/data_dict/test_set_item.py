@@ -9,7 +9,7 @@ from pysyncgateway.exceptions import InvalidDataKey
 def test():
     dd = DataDict()
 
-    dd['stuff'] = 1
+    dd['stuff'] = 1  # act
 
     assert dd == {'stuff': 1}
 
