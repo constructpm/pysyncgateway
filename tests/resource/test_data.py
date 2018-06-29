@@ -44,7 +44,7 @@ def test_happy(resource):
         'recipe': ['channels', 'ridges', 'hills', 'valleys'],
     }
 
-    resource.data = data
+    resource.data = data  # act
 
     assert resource._data == data
 
@@ -57,7 +57,7 @@ def test_clean_protected(resource):
         '_id': 1234,
     }
 
-    resource.data = mixed_data
+    resource.data = mixed_data  # act
 
     assert resource.data == {'__INFO__': '__STUFF__'}
 
@@ -70,7 +70,7 @@ def test_end_to_end(resource):
     getting matches the requirements of the clean data enforced when
     setting.
     """
-    resource.data = resource.data
+    resource.data = resource.data  # act
 
     assert resource.data == {
         'result': {
@@ -83,7 +83,7 @@ def test_set_key(resource):
     """
     resource.data can be set with a key
     """
-    resource.data['info'] = {
+    resource.data['info'] = {  # act
         'person': {
             'name': 'Fry',
             'species': 'human',
