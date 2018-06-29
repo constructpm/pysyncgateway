@@ -14,6 +14,11 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+Added
+.....
+
+* Extended linting to include ``flake8-aaa`` to lint tests.
+
 1.1.0_ - 2018/05/23
 -------------------
 
