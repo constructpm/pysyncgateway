@@ -36,8 +36,13 @@ flake8:
 	@echo "=== flake8 ==="
 	$(bin_prefix)flake8 $(lint_files)
 
+.PHONY: pylint
+pylint:
+	@echo "=== pylint ==="
+	$(bin_prefix)pylint pysyncgateway
+
 .PHONY: lint
-lint: flake8
+lint: flake8 pylint
 	@echo "=== isort ==="
 	$(bin_prefix)isort --quiet --recursive --diff $(lint_files) > isort.out
 	if [ "$$(wc -l isort.out)" != "0 isort.out" ]; then cat isort.out; exit 1; fi
