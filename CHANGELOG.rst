@@ -19,6 +19,12 @@ Added
 
 * Extended linting to include ``flake8-aaa`` to lint tests.
 
+Changed
+.......
+
+* Bumped version of ``requests`` in requirements to ``2.19.1``, but kept
+  requirement in ``setup.py`` the same at ``>=2.18``.
+
 1.1.0_ - 2018/05/23
 -------------------
 
