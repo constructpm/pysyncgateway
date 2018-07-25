@@ -23,7 +23,7 @@ pysyncgateway
 =============
 
 Basic object orientated library for communicating with `Couchbase Sync Gateway
-<https://github.com/couchbase/sync_gateway/)>`_, primarily through the admin
+<https://github.com/couchbase/sync_gateway/>`_, primarily through the admin
 port.
 
 Resources
