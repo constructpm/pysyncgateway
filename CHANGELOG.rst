@@ -14,6 +14,9 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+1.1.1_ - 2018/08/17
+-------------------
+
 Added
 .....
 
@@ -87,7 +90,8 @@ Internals
 
 Initial beta release.
 
-.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.1.0...HEAD
+.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.1.1...HEAD
+.. _1.1.1: https://github.com/constructpm/pysyncgateway/compare/v1.1.0...v1.1.1
 .. _1.1.0: https://github.com/constructpm/pysyncgateway/compare/v1.0.0...v1.1.0
 .. _1.0.0: https://github.com/constructpm/pysyncgateway/compare/v0.2.0...v1.0.0
 .. _0.2.0: https://github.com/constructpm/pysyncgateway/compare/v0.1.3...v0.2.0
