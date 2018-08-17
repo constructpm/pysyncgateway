@@ -14,6 +14,7 @@ def test(admin_client):
 
     assert result.database == database
     assert result._data.to_dict() == {}
+    assert result.url == ''
 
 
 def test_happy_unicode():

@@ -17,7 +17,7 @@ from .exceptions import (
 )
 
 
-class ComparableMixin:
+class ComparableMixin(object):
     """
     Alex Martelli's suggestion from https://stackoverflow.com/a/1061350/1286705
     """
@@ -54,8 +54,8 @@ def sg_method(func, *args, **kwargs):
     def wrapper(*args, **kwargs):
         try:
             response = func(*args, **kwargs)
-        except ConnectionError as ce:
-            raise GatewayDown(ce.message)
+        except ConnectionError as exc_info:
+            raise GatewayDown(exc_info.message)
 
         if response.status_code == 401:
             raise ClientUnauthorized(response.json()['reason'])

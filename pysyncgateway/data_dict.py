@@ -24,7 +24,7 @@ class DataDict(dict):
     )
 
     @classmethod
-    def from_dict(obj, data):
+    def from_dict(cls, data):
         """
         Given a dictionary `data`, create a new DataDict from a dictionary
         `data`, silently removing all filtered keys from that input.
@@ -40,7 +40,7 @@ class DataDict(dict):
         """
         if not isinstance(data, dict):
             raise ValueError('data argument is not dict')
-        new = obj()
+        new = cls()
         for key, value in six.iteritems(data):
             try:
                 new[key] = value
