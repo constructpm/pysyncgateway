@@ -4,6 +4,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 import pytest
 
 from pysyncgateway import Document
+from pysyncgateway.exceptions import RevisionMismatch
 
 
 def test(database):
@@ -56,3 +57,36 @@ def test_all_valid_doc_keys(doc_id, database):
 
     assert result == database.client.CREATED
     assert document in database.all_docs()
+
+
+# --- FAILURES ---
+
+
+def test_recreate_existing_document(database):
+    """
+    Second request attempts to create a document that already exists.
+    """
+    doc_id = 'double.dribble'
+    document = Document(database, doc_id)
+    document.create_update()
+    document = Document(database, doc_id)
+
+    with pytest.raises(RevisionMismatch) as exc_info:
+        document.create_update()
+
+    assert exc_info.value.args == (document.url, '')
+
+
+def test_update_bumped_document(database):
+    doc_id = 'double.dribble'
+    document = Document(database, doc_id)
+    document.create_update()
+    initial_rev = document.rev
+    document.create_update()
+    document = Document(database, doc_id)
+    document.set_rev(initial_rev)
+
+    with pytest.raises(RevisionMismatch) as exc_info:
+        document.create_update()
+
+    assert exc_info.value.args == (document.url, initial_rev)
