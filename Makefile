@@ -39,7 +39,7 @@ flake8:
 .PHONY: pylint
 pylint:
 	@echo "=== pylint ==="
-	$(bin_prefix)pylint pysyncgateway
+	./run_pylint.sh pysyncgateway
 
 .PHONY: lint
 lint: flake8 pylint
