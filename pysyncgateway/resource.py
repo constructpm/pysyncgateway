@@ -12,6 +12,7 @@ class Resource(ComparableMixin, object):
     Attributes:
         _data (DataDict)
         database (Database)
+        url (str)
     """
 
     def __init__(self, database):
@@ -31,6 +32,7 @@ class Resource(ComparableMixin, object):
             )
         self.database = database
         self.data = {}
+        self.url = ''
 
     @property
     def data(self):

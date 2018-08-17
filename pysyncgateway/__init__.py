@@ -9,13 +9,13 @@ from .stats import Stats
 from .user import User
 from .user_client import UserClient
 
-__all_ = [
-    AdminClient,
-    Database,
-    Document,
-    Query,
-    Session,
-    Stats,
-    User,
-    UserClient,
+__all__ = [
+    'AdminClient',
+    'Database',
+    'Document',
+    'Query',
+    'Session',
+    'Stats',
+    'User',
+    'UserClient',
 ]

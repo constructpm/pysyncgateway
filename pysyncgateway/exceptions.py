@@ -71,7 +71,7 @@ class SyncGatewayClientErrorResponse(PysyncgatewayException):
         self.json = json
 
     @classmethod
-    def from_response(obj, response):
+    def from_response(cls, response):
         """
         Args:
             response (requests.Response)
@@ -79,7 +79,7 @@ class SyncGatewayClientErrorResponse(PysyncgatewayException):
         Returns:
             SyncGatewayClientErrorResponse
         """
-        return obj(response.status_code, response.json())
+        return cls(response.status_code, response.json())
 
     def __repr__(self):
         """

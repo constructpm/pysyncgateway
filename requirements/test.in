@@ -9,6 +9,7 @@ flake8
 flake8-aaa
 isort
 pygments
+pylint
 pytest
 responses
 restructuredtext_lint
