@@ -25,6 +25,9 @@ Changed
 * Bumped version of ``requests`` in requirements to ``2.19.1``, but kept
   requirement in ``setup.py`` the same at ``>=2.18``.
 
+* Improved output in stacktraces when ``RevisionMismatch`` is raised. Now
+  includes URL of resource and any revision number that was sent.
+
 1.1.0_ - 2018/05/23
 -------------------
 

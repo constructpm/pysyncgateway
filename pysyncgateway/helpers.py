@@ -46,6 +46,9 @@ def sg_method(func, *args, **kwargs):
     Raises:
         DoesNotExist: 404 was received for a request.
         GatewayDown: SyncGateway can't be reached.
+        RevisionMismatch: When a 409 conflict is received from Sync Gateway.
+            Two args are passed to the exception: url of the resource and any
+            revision that was passed.
         SyncGatewayClientErrorResponse: When any "not OK" response (according
             to ``requests.Response.ok`` is received that is not a 404.
     """
@@ -62,7 +65,12 @@ def sg_method(func, *args, **kwargs):
         elif response.status_code == 404:
             raise DoesNotExist('{} not found'.format(response.url))
         elif response.status_code == 409:
-            raise RevisionMismatch()
+            url = args[1]
+            try:
+                rev = kwargs['data']['_rev']
+            except KeyError:
+                rev = None
+            raise RevisionMismatch(url, rev)
         if not response.ok:
             raise SyncGatewayClientErrorResponse.from_response(response)
         return response

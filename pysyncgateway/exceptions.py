@@ -54,16 +54,24 @@ class NotLoaded(PysyncgatewayException):
 
 
 class RevisionMismatch(PysyncgatewayException):
-    pass
+    """
+    Sync Gateway was not able to update a resource because either a rev number
+    was not provided and the resource unexpectedly existed or the provided rev
+    number did not match what Sync Gateway has.
+
+    Attributes:
+        (str): URL resource that update was attempted for.
+        (str): Revision that was sent with the update request.
+    """
 
 
 class SyncGatewayClientErrorResponse(PysyncgatewayException):
     """
-    Sync gateway responded with a 4xx error.
+    Sync Gateway responded with a 4xx error.
 
     Attributes:
-        status_code (int): Error code in the response from sync gateway.
-        json (dict): Body of response from sync gateway.
+        status_code (int): Error code in the response from Sync Gateway.
+        json (dict): Body of response from Sync Gateway.
     """
 
     def __init__(self, status_code, json):

@@ -84,6 +84,13 @@ class Document(Resource):
 
         Returns:
             int: ``AdminClient.CREATED`` if document was created (matches 201).
+
+        Raises:
+            RevisionMismatch: When create (no revision) is tried on an existing
+                Document or update is tried on an existing document, but the
+                revision numbers do not match. Two args are passed to the
+                exception: url of the document and any revision that was
+                passed with the ``PUT`` request.
         """
 
         put_data = self.data.to_dict()
@@ -165,8 +172,8 @@ class Document(Resource):
                 first to retrieve the revision number, which can yield a 404 if
                 it doesn't exist). Also can be raised if the Database does not
                 exist.
-            RevisionMismatch: If provided `rev` parameter does not match the
-                live revision ID at request time.
+            RevisionMismatch: Provided ``rev`` parameter did not match the live
+                revision ID on Sync Gateway at request time.
         """
         if not self.rev:
             self.retrieve()
