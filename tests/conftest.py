@@ -30,7 +30,7 @@ def cleanup_databases():
         bool: admin_client fixture should ignore any existing databases at
         start of test and clean them up.
     """
-    return True
+    return False
 
 
 @pytest.fixture
