@@ -20,7 +20,7 @@ class Document(Resource):
             document has been retrieved.
         open_revisions (list (Document)): List of previous revisions as
             Document instances. This will be populated when
-            :py:meth:`.Document.retrive()` is called with ``revs=True``.
+            :py:meth:`.Document.retrieve()` is called with ``revs=True``.
         url (str): URL for this resource on Sync Gateway.
     """
 
@@ -183,10 +183,10 @@ class Document(Resource):
         that one or other is the current document. Therefore this function
         makes two requests:
 
-        * A ``GET`` request using :py:meth:`.Document.retrieve()`. This is used
-            to find the currently winning revision.
+        * A GET request using :py:meth:`.Document.retrieve()`. This is used to
+          find the currently winning revision.
 
-        * A ``GET`` request with ``?open_revs=all`` to collect all leaf nodes.
+        * A GET request with ``?open_revs=all`` to collect all leaf nodes.
 
         The list of leaf nodes is iterated and the currently winning revision
         is used to update this instance. Losing leaf revisions are blown up

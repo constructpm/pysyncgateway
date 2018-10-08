@@ -172,7 +172,7 @@ class Database(ComparableMixin, object):
         Args:
             docs (list (Document)): Documents to be created.
             new_edits (bool, Optional): Value for the ``new_edits`` value
-                passed in the ``POST`` data. Defaults to ``False``.
+                passed in the POST data. Defaults to ``False``.
 
         Returns:
             bool: Bulk document update was accepted.
