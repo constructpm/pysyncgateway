@@ -23,7 +23,7 @@ class AdminClient(Client):
             bool
 
         Raises:
-            ValueError: When `other` is not an AdminClient.
+            ValueError: When ``other`` is not an AdminClient.
         """
         if not isinstance(other, AdminClient):
             raise ValueError('AdminClient compared to {}'.format(type(other)))
@@ -35,13 +35,13 @@ class AdminClient(Client):
         """
         Provide all Databases on the server.
 
-        GET /_all_dbs
+        ``GET /_all_dbs``
 
         Returns:
             list (Database): All databases found, connected with this client.
 
         Raises:
-            GatewayDown: When sync gateway instance can not be reached by
+            .GatewayDown: When sync gateway instance can not be reached by
                 client.
         """
         response = self.get('{}{}'.format(self.url, '_all_dbs')).json()

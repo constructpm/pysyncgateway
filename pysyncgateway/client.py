@@ -1,6 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
-from requests import delete, get, put
+from requests import delete, get, post, put
 
 from .database import Database
 from .helpers import ComparableMixin, sg_method
@@ -8,11 +8,11 @@ from .helpers import ComparableMixin, sg_method
 
 class Client(ComparableMixin, object):
     """
-    Abstract parent class for `AdminClient` and `UserClient`.
+    Abstract parent class for ``AdminClient`` and ``UserClient``.
 
     Attributes:
-        _auth (requests.HTTPBasicAuth): Initialises to `None` and is only used
-            by `UserClient`.
+        _auth (requests.HTTPBasicAuth): Initialises to ``None`` and is only
+            used by ``UserClient``.
         url (str): Sync Gateway REST API URL.
     """
     CREATED = 1
@@ -37,7 +37,7 @@ class Client(ComparableMixin, object):
 
     def get_database(self, database_name):
         """
-        Get a `Database` instance connected to this client.
+        Get a ``Database`` instance connected to this client.
 
         Args:
             database_name (str): Name of database.
@@ -54,6 +54,10 @@ class Client(ComparableMixin, object):
         if self._auth:
             kwargs['auth'] = self._auth
         return get(url, **kwargs)
+
+    @sg_method
+    def post(self, url, data):
+        return post(url, json=data)
 
     @sg_method
     def put(self, url, data):
