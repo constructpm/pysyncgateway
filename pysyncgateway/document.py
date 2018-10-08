@@ -72,6 +72,20 @@ class Document(Resource):
             raise ValueError('Empty revision received')
         self.rev = revision_id
 
+    def flatten_data(self):
+        """
+        Used when posting multiple documents
+        to the ``_bulk_docs`` endpoint.
+
+        Returns:
+            dict: Data for this document including ``_rev`` and ``_id``.
+        """
+        data = self.data.to_dict()
+        data['_id'] = self.doc_id
+        if self.rev:
+            data['_rev'] = self.rev
+        return data
+
     def create_update(self):
         """
         Save or update Document in Sync Gateway. Saves the received revision id
@@ -111,8 +125,9 @@ class Document(Resource):
 
     def retrieve(self):
         """
-        Load document contents. Once loaded, `_rev` and `channels` are used to
-        update the internal attributes before the data is sent to the DataDict.
+        Load document contents. Once loaded, ``_rev`` and ``channels`` are used
+        to update the internal attributes before the data is sent to the
+        DataDict.
 
         ``GET /<name>/<doc_id>``
 
