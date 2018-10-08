@@ -19,4 +19,4 @@ def test_channels_bad(empty_document):
     with pytest.raises(InvalidChannelName) as excinfo:
         empty_document.set_channels('good@1', 'good@2', 'bad#1')
 
-    assert '#' in excinfo.value.message
+    assert '#' in str(excinfo.value)
