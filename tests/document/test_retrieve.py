@@ -5,49 +5,6 @@ import pytest
 from pysyncgateway.exceptions import DoesNotExist
 
 
-@pytest.fixture
-def recipe_document(database):
-    """
-    Returns:
-        Document: Contains a recipe and written to sync gateway.
-    """
-    data = {
-        'ingredients': ['chicken', 'butter'],
-        'recipe': 'Mix the chicken and the butter. Voila!',
-    }
-    document = database.get_document('butter_chicken')
-    document.data = data
-    document.create_update()
-    return document
-
-
-def test_recipe_document(recipe_document, database):
-    result = recipe_document
-
-    assert result in database.all_docs()
-
-
-@pytest.fixture
-def permissions_document(database):
-    """
-    Returns:
-        Document: Written to SG with empty data, just channels set.
-    """
-    document = database.get_document('permission-list')
-    document.set_channels('acc.1234', 'acc.7882')
-    document.create_update()
-    return document
-
-
-def test_permissions_document(permissions_document, database):
-    result = permissions_document
-
-    assert result in database.all_docs()
-
-
-# --- TESTS ---
-
-
 def test(recipe_document, database):
     reload_document = database.get_document('butter_chicken')
 

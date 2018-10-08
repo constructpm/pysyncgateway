@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+from .exceptions import RevisionMismatch
 from .helpers import assert_valid_channel_name, assert_valid_document_id
 from .resource import Resource
 
@@ -17,6 +18,9 @@ class Document(Resource):
         doc_id (str): ID of document.
         rev (str): Revision identifier of document. Set to empty string when no
             document has been retrieved.
+        open_revisions (list (Document)): List of previous revisions as
+            Document instances. This will be populated when
+            :py:meth:`.Document.retrive()` is called with ``revs=True``.
         url (str): URL for this resource on Sync Gateway.
     """
 
@@ -35,6 +39,7 @@ class Document(Resource):
         self.rev = ''
         self.channels = ()
         self.url = '{}{}'.format(self.database.url, self.doc_id)
+        self.open_revisions = []
 
     def set_channels(self, *channels):
         """
@@ -106,7 +111,6 @@ class Document(Resource):
                 the exception: url of the document and any revision that was
                 passed with the ``PUT`` request.
         """
-
         put_data = self.data.to_dict()
 
         if self.channels is not None:
@@ -122,6 +126,16 @@ class Document(Resource):
             return self.database.client.CREATED
 
         return False
+
+    def _update_from_response(self, response_data):
+        """
+        Use response data from SG to update Document.
+        """
+        self.set_rev(response_data['_rev'])
+        if 'channels' in response_data:
+            self.set_channels(*response_data['channels'])
+
+        self.data = response_data
 
     def retrieve(self):
         """
@@ -157,15 +171,69 @@ class Document(Resource):
             using ``self.set_rev``.
         """
         response = self.database.client.get(self.url)
-        response_data = response.json()
-
-        self.set_rev(response_data['_rev'])
-        if 'channels' in response_data:
-            self.set_channels(*response_data['channels'])
-
-        self.data = response_data
-
+        self._update_from_response(response.json())
         return True
+
+    def get_open_revisions(self):
+        """
+        Retrieve all leaf revisions of this document and update this instance
+        with the currently winning revision's data.
+
+        Sync Gateway provides the leaf revision documents "as is" with no flag
+        that one or other is the current document. Therefore this function
+        makes two requests:
+
+        * A ``GET`` request using :py:meth:`.Document.retrieve()`. This is used
+            to find the currently winning revision.
+
+        * A ``GET`` request with ``?open_revs=all`` to collect all leaf nodes.
+
+        The list of leaf nodes is iterated and the currently winning revision
+        is used to update this instance. Losing leaf revisions are blown up
+        into :py:class:`.Document` instances and stored in the
+        ``open_revisions`` list.
+
+        Returns:
+            int: Number of open revisions found including the current revision.
+
+        Raises:
+            RevisionMismatch: When winning revision's rev was not found when
+                the open revisions were loaded. This usually means that the
+                winning revision was deleted before the open revisions could be
+                retrieved. (untested and needs improvement to avoid race
+                condition.)
+        """
+        self.open_revisions = []
+        winning_check = self.database.client.get(self.url)
+        winning_rev = winning_check.json()['_rev']
+
+        response = self.database.client.get(
+            self.url,
+            params={'open_revs': 'all'},
+            # When requesting open_revs, response switches to be multipart
+            # format unless JSON is explicitly requested:
+            # https://docs.couchbase.com/sync-gateway/1.5/admin-rest-api.html#/document/get__db___doc_
+            headers={'Accept': 'application/json'},
+        )
+
+        found_winning = False
+        count = 0
+        for leaf in response.json():
+            count += 1
+            if leaf['ok']['_rev'] == winning_rev:
+                # Use winning revision to update this instance
+                found_winning = True
+                self._update_from_response(leaf['ok'])
+            else:
+                # Push open revisions into open_revisions list
+                open_rev = Document(self.database, self.doc_id)
+                open_rev._update_from_response(leaf['ok'])
+                self.open_revisions.append(open_rev)
+
+        if not found_winning:
+            raise RevisionMismatch('Revision "{}" not found in leaf revisions'.format(winning_rev))
+
+        return count
 
     def delete(self):
         """

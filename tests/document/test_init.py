@@ -13,6 +13,7 @@ def test(database):
     assert result.rev == ''
     assert result.channels == ()
     assert result.url.endswith('__DOC_ID__')
+    assert result.open_revisions == []
 
 
 # --- FAILURES ---
