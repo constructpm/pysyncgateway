@@ -27,7 +27,7 @@ class Document(Resource):
             doc_id (str)
 
         Raises:
-            InvalidDocumentID: When doc_id is not valid.
+            .InvalidDocumentID: When doc_id is not valid.
         """
         super(Document, self).__init__(database)
         assert_valid_document_id(doc_id)
@@ -48,7 +48,7 @@ class Document(Resource):
             None
 
         Raises:
-            InvalidChannelName: When a bad channel name is passed.
+            .InvalidChannelName: When a bad channel name is passed.
         """
         for channel in channels:
             assert_valid_channel_name(channel)
@@ -74,8 +74,8 @@ class Document(Resource):
 
     def flatten_data(self):
         """
-        Used when posting multiple documents
-        to the ``_bulk_docs`` endpoint.
+        Used when posting multiple documents with
+        :py:meth:`.Database.bulk_docs()` to the ``/_bulk_docs`` endpoint.
 
         Returns:
             dict: Data for this document including ``_rev`` and ``_id``.
@@ -100,10 +100,10 @@ class Document(Resource):
             int: ``AdminClient.CREATED`` if document was created (matches 201).
 
         Raises:
-            RevisionMismatch: When create (no revision) is tried on an existing
-                Document or update is tried on an existing document, but the
-                revision numbers do not match. Two args are passed to the
-                exception: url of the document and any revision that was
+            .RevisionMismatch: When create (no revision) is tried on an
+                existing Document or update is tried on an existing document,
+                but the revision numbers do not match.  Two args are passed to
+                the exception: url of the document and any revision that was
                 passed with the ``PUT`` request.
         """
 
@@ -135,7 +135,7 @@ class Document(Resource):
             bool: Load was successful.
 
         Raises:
-            DoesNotExist: Document with provided doc_id can not be loaded.
+            .DoesNotExist: Document with provided doc_id can not be loaded.
 
         Note:
             DataDict never contains the private Sync Gateway fields ``_id``,
@@ -174,8 +174,8 @@ class Document(Resource):
         this information when a `delete` is asked for, then a pre-fetch will
         occur.
 
-        Uses the default ``Resource.delete`` action, but then inspects the
-        response to ensure that ``ok`` is ``True``.
+        Uses the default :py:meth:`.Client.delete()` action, but then inspects
+        the response to ensure that ``{"ok": true}``.
 
         ``DELETE /<name>/<doc_id>?rev=<rev>``
 
@@ -183,12 +183,12 @@ class Document(Resource):
             bool: Delete was successful.
 
         Raises:
-            DoesNotExist: If Document can't be found (doc has to be loaded
+            .DoesNotExist: If Document can't be found (doc has to be loaded
                 first to retrieve the revision number, which can yield a 404 if
                 it doesn't exist). Also can be raised if the Database does not
                 exist.
-            RevisionMismatch: Provided ``rev`` parameter did not match the live
-                revision ID on Sync Gateway at request time.
+            .RevisionMismatch: Provided ``rev`` parameter did not match the
+                live revision ID on Sync Gateway at request time.
         """
         if not self.rev:
             self.retrieve()
