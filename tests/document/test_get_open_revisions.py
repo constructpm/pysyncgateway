@@ -56,8 +56,12 @@ def test_revisions_include_deleted(conflicted_document, database):
 
     assert result == 3
     assert [doc.data for doc in conflicted_document.open_revisions] == [
-        {'_deleted': True},
-        {'_deleted': True},
+        {
+            '_deleted': True
+        },
+        {
+            '_deleted': True
+        },
     ]
 
 
