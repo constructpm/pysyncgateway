@@ -189,7 +189,7 @@ class Document(Resource):
         self._update_from_response(response.json())
         return True
 
-    def get_open_revisions(self):
+    def get_open_revisions(self, include_deleted=False):
         """
         Retrieve all leaf revisions of this document and update this instance
         with the currently winning revision's data.
@@ -207,6 +207,11 @@ class Document(Resource):
         is used to update this instance. Losing leaf revisions are blown up
         into :py:class:`.Document` instances and stored in the
         ``open_revisions`` list.
+
+        Args:
+            include_deleted (bool, Optional): When set to ``True``, Documents
+                found that are not currently the winning revision and contain
+                ``{'_deleted': True}`` are ignored. Defaults to ``False``.
 
         Returns:
             int: Number of open revisions found including the current revision.
@@ -234,19 +239,23 @@ class Document(Resource):
         found_winning = False
         count = 0
         for leaf in response.json():
-            count += 1
-            if leaf['ok']['_rev'] == winning_rev:
+            leaf_data = leaf['ok']
+            if leaf_data['_rev'] == winning_rev:
                 # Use winning revision to update this instance
+                count += 1
                 found_winning = True
-                self._update_from_response(leaf['ok'])
+                self._update_from_response(leaf_data)
             else:
                 # Push open revisions into open_revisions list
+                if leaf_data.get('_deleted') and not include_deleted:
+                    continue
+                count += 1
                 open_rev = Document(self.database, self.doc_id)
-                open_rev._update_from_response(leaf['ok'])
+                open_rev._update_from_response(leaf_data)
                 self.open_revisions.append(open_rev)
 
         if not found_winning:
-            raise RevisionMismatch('Revision "{}" not found in leaf revisions'.format(winning_rev))
+            raise RevisionMismatch('Revision "{}" not found in open revisions'.format(winning_rev))
 
         return count
 

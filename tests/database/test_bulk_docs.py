@@ -103,11 +103,8 @@ def test_delete_conflicts(database, doc_123, doc_456, doc_789):
 
     assert result is True
     assert database.all_docs() == [doc_123]
-    assert doc_123.get_open_revisions() == 3
-    assert [doc.data for doc in doc_123.open_revisions] == [
-        {'_deleted': True},
-        {'_deleted': True},
-    ]
+    assert doc_123.get_open_revisions() == 1
+    assert doc_123.open_revisions == []
     assert doc_123.rev == '1-789'
     assert doc_123.delete()
     with pytest.raises(DoesNotExist):

@@ -35,6 +35,32 @@ def test_revisions(conflicted_document):
     ]
 
 
+def test_revisions_ignores_deleted(conflicted_document, database):
+    conflicted_document.get_open_revisions()
+    conflicted_document.open_revisions[0].to_delete = True
+    database.bulk_docs(conflicted_document.open_revisions[:1], new_edits=None)
+
+    result = conflicted_document.get_open_revisions()
+
+    assert result == 2
+    assert [doc.rev for doc in conflicted_document.open_revisions] == ['1-456']
+
+
+def test_revisions_include_deleted(conflicted_document, database):
+    conflicted_document.get_open_revisions()
+    conflicted_document.open_revisions[0].to_delete = True
+    conflicted_document.open_revisions[1].to_delete = True
+    database.bulk_docs(conflicted_document.open_revisions, new_edits=None)
+
+    result = conflicted_document.get_open_revisions(include_deleted=True)
+
+    assert result == 3
+    assert [doc.data for doc in conflicted_document.open_revisions] == [
+        {'_deleted': True},
+        {'_deleted': True},
+    ]
+
+
 def test_reload(conflicted_document):
     conflicted_document.get_open_revisions()
 
