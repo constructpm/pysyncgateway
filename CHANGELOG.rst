@@ -14,6 +14,14 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+Added
+.....
+
+* ``Document.get_open_revisions()`` added to load all leaf revisions of a Document.
+
+* ``Database.bulk_docs()`` added for updating multiple documents and deleting
+  open revisions.
+
 1.1.1_ - 2018/08/17
 -------------------
 
