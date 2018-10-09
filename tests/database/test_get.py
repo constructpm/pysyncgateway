@@ -62,7 +62,7 @@ def test_missing_unauthed(user_client):
     with pytest.raises(DoesNotExist) as excinfo:
         user_database.get()
 
-    assert 'not found' in excinfo.value.message
+    assert 'not found' in str(excinfo.value)
 
 
 def test_user_unauthed(existing_database, user_client):
@@ -71,4 +71,4 @@ def test_user_unauthed(existing_database, user_client):
     with pytest.raises(ClientUnauthorized) as excinfo:
         user_database.get()
 
-    assert 'Login required' in excinfo.value.message
+    assert 'Login required' in str(excinfo.value)
