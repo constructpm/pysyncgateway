@@ -49,4 +49,4 @@ def test_other_type():
     with pytest.raises(ValueError) as excinfo:
         database < 1
 
-    assert 'int' in excinfo.value.message
+    assert 'int' in str(excinfo.value)

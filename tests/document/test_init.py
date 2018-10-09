@@ -9,9 +9,11 @@ from pysyncgateway.exceptions import InvalidDocumentID
 def test(database):
     result = Document(database, '__DOC_ID__')
 
-    assert result.doc_id == '__DOC_ID__'
-    assert result.rev == ''
     assert result.channels == ()
+    assert result.doc_id == '__DOC_ID__'
+    assert result.open_revisions == []
+    assert result.rev == ''
+    assert result.to_delete is False
     assert result.url.endswith('__DOC_ID__')
 
 

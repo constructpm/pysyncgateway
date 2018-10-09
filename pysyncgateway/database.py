@@ -87,9 +87,9 @@ class Database(ComparableMixin, object):
             dict: Information loaded from SG.
 
         Raises:
-            DoesNotExist: When database is not written to Sync Gateway
+            .DoesNotExist: When database is not written to Sync Gateway
                 regardless of whether the client is authorized or not.
-            ClientUnauthorized: When database exists and client is not
+            .ClientUnauthorized: When database exists and client is not
                 authorized.
         """
         response = self.client.get(self.url)
@@ -130,16 +130,17 @@ class Database(ComparableMixin, object):
 
         ``GET /:name/_all_docs``
 
-        NOTE Use for testing only. From Simon @ Couchbase:
+        Warning:
+            Use for testing only. From Simon @ Couchbase:
 
-            We would strongly advise against using the `_all_docs` endpoint. As
-            your database grows relying on the View that this calls to return
-            to you every document key is inadvisable and does not scale well to
-            very high numbers of documents.
+                We would strongly advise against using the ``_all_docs``
+                endpoint. As your database grows relying on the View that this
+                calls to return to you every document key is inadvisable and
+                does not scale well to very high numbers of documents.
 
-            If you need to retrieve or update multiple documents please use the
-            _bulk_get and _bulk_docs end points to supply a list of keys (or
-            documents) for retrieval or update.
+                If you need to retrieve or update multiple documents please use
+                the ``_bulk_get`` and ``_bulk_docs`` end points to supply a
+                list of keys (or documents) for retrieval or update.
 
         Returns:
             list (Document): An instance of Document for each document returned
@@ -147,7 +148,7 @@ class Database(ComparableMixin, object):
             populated with the revision ID from ``value.rev``.
 
         Raises:
-            DoesNotExist: Database can't be found on sync gateway.
+            .DoesNotExist: Database can't be found on Sync Gateway.
         """
         url = '{}{}'.format(self.url, '_all_docs')
 
@@ -161,6 +162,38 @@ class Database(ComparableMixin, object):
             documents.append(document)
 
         return documents
+
+    def bulk_docs(self, docs, new_edits=False):
+        """
+        Update multiple documents.
+
+        ``POST /:name/_bulk_docs``
+
+        Args:
+            docs (list (Document)): Documents to be created.
+            new_edits (bool, Optional): Value for the ``new_edits`` value
+                passed in the POST data. When deleting open revisions, this
+                should be set to ``None`` so that no ``new_edits`` value is
+                sent in the POST data - this is required for the deletion to be
+                successful. Defaults to ``False``.
+
+        Returns:
+            bool: Bulk document update was accepted.
+
+        Raises:
+            .DoesNotExist: Database can't be found on Sync Gateway.
+        """
+        url = '{}{}'.format(self.url, '_bulk_docs')
+
+        data = {
+            'docs': [doc.flatten_data() for doc in docs],
+        }
+        if new_edits is not None:
+            data['new_edits'] = new_edits
+
+        response = self.client.post(url, data)
+
+        return response.status_code == 201
 
     # --- Users ---
 
