@@ -68,11 +68,15 @@ fixlint: flake8
 
 .PHONY: doc
 doc:
-	$(MAKE) -C docs clean
 	$(bin_prefix)sphinx-apidoc -f -o docs pysyncgateway/
 	rm docs/modules.rst
 	$(MAKE) -C docs doctest html
-	rm -r /vagrant/html
+
+.PHONY: export_doc
+export_doc:
+	$(MAKE) -C docs clean
+	$(MAKE) doc
+	rm -rf /vagrant/html
 	cp -r docs/_build/html /vagrant
 
 
