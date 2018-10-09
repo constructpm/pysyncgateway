@@ -18,6 +18,9 @@ class Document(Resource):
         doc_id (str): ID of document.
         rev (str): Revision identifier of document. Set to empty string when no
             document has been retrieved.
+        to_delete (bool): Flag used by :py:meth:`.Document.flatten_data()`.
+            When set it generates data used to delete the Document when posted
+            with :py:meth:`.Database.bulk_docs()`.
         open_revisions (list (Document)): List of previous revisions as
             Document instances. This will be populated when
             :py:meth:`.Document.retrieve()` is called with ``revs=True``.
@@ -35,11 +38,12 @@ class Document(Resource):
         """
         super(Document, self).__init__(database)
         assert_valid_document_id(doc_id)
-        self.doc_id = doc_id
-        self.rev = ''
         self.channels = ()
-        self.url = '{}{}'.format(self.database.url, self.doc_id)
+        self.doc_id = doc_id
         self.open_revisions = []
+        self.rev = ''
+        self.to_delete = False
+        self.url = '{}{}'.format(self.database.url, self.doc_id)
 
     def set_channels(self, *channels):
         """
@@ -80,15 +84,26 @@ class Document(Resource):
     def flatten_data(self):
         """
         Used when posting multiple documents with
-        :py:meth:`.Database.bulk_docs()` to the ``/_bulk_docs`` endpoint.
+        :py:meth:`.Database.bulk_docs()` to the ``/_bulk_docs`` endpoint. Set
+        the ``to_delete`` flag on the Document instance if it should be
+        deleted - only the particular revision will be marked for deletion, not
+        all open revisions.
 
         Returns:
             dict: Data for this document including ``_rev`` and ``_id``.
+
+        Raises:
+            ValueError: Document needs a rev to be deletable.
         """
-        data = self.data.to_dict()
+        if self.to_delete:
+            data = {'_deleted': True}
+        else:
+            data = self.data.to_dict()
         data['_id'] = self.doc_id
         if self.rev:
             data['_rev'] = self.rev
+        elif self.to_delete:
+            raise ValueError('Document needs a rev to be deletable')
         return data
 
     def create_update(self):
