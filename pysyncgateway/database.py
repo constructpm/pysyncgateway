@@ -87,9 +87,9 @@ class Database(ComparableMixin, object):
             dict: Information loaded from SG.
 
         Raises:
-            DoesNotExist: When database is not written to Sync Gateway
+            .DoesNotExist: When database is not written to Sync Gateway
                 regardless of whether the client is authorized or not.
-            ClientUnauthorized: When database exists and client is not
+            .ClientUnauthorized: When database exists and client is not
                 authorized.
         """
         response = self.client.get(self.url)
@@ -148,7 +148,7 @@ class Database(ComparableMixin, object):
             populated with the revision ID from ``value.rev``.
 
         Raises:
-            exceptions.DoesNotExist: Database can't be found on Sync Gateway.
+            .DoesNotExist: Database can't be found on Sync Gateway.
         """
         url = '{}{}'.format(self.url, '_all_docs')
 
@@ -172,7 +172,10 @@ class Database(ComparableMixin, object):
         Args:
             docs (list (Document)): Documents to be created.
             new_edits (bool, Optional): Value for the ``new_edits`` value
-                passed in the POST data. Defaults to ``False``.
+                passed in the POST data. When deleting open revisions, this
+                should be set to ``None`` so that no ``new_edits`` value is
+                sent in the POST data - this is required for the deletion to be
+                successful. Defaults to ``False``.
 
         Returns:
             bool: Bulk document update was accepted.
@@ -184,8 +187,9 @@ class Database(ComparableMixin, object):
 
         data = {
             'docs': [doc.flatten_data() for doc in docs],
-            'new_edits': new_edits,
         }
+        if new_edits is not None:
+            data['new_edits'] = new_edits
 
         response = self.client.post(url, data)
 
