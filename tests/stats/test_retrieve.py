@@ -7,13 +7,13 @@ from pysyncgateway import Stats
 from pysyncgateway.exceptions import GatewayDown
 
 
-def test(admin_client):
-    stats = Stats(admin_client)
-
-    result = stats.retrieve()
-
-    assert result is True
-    assert sorted(list(stats.data)) == [
+@pytest.fixture
+def expected_stats(syncgateway_version_str):
+    """
+    Returns:
+        list (str): List of stats returned by the current version of SG.
+    """
+    stats = [
         'cb',
         'cmdline',
         'goroutine_stats',
@@ -29,6 +29,28 @@ def test(admin_client):
         'syncGateway_rest',
         'syncGateway_stats',
     ]
+    if syncgateway_version_str.startswith('1.5.'):
+        return stats
+    return sorted(stats + [
+        'goblip',
+        'syncGateway_import',
+        'syncGateway_query',
+    ])
+
+
+# --- TESTS ---
+
+
+def test(admin_client, expected_stats):
+    stats = Stats(admin_client)
+
+    result = stats.retrieve()
+
+    assert result is True
+    assert sorted(list(stats.data)) == expected_stats
+
+
+# --- FAILURES ---
 
 
 @responses.activate

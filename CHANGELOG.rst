@@ -14,6 +14,11 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+Added
+.....
+
+* Tested support for version 2.1.0 of Sync Gateway.
+
 1.2.0_ - 2018/10/20
 -------------------
 

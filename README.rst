@@ -40,5 +40,5 @@ Resources
 * `Changelog <https://github.com/constructpm/pysyncgateway/blob/master/CHANGELOG.rst>`_
 
 Tested against Pythons 2.7 and `3.5 (WIP)
-<https://github.com/constructpm/pysyncgateway/issues/23>`_; Sync Gateway 1.5
-community edition (walrus mode).
+<https://github.com/constructpm/pysyncgateway/issues/23>`_; Sync Gateways 1.5
+and 2.1 community editions (walrus mode).
