@@ -1,14 +1,35 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: kpndigital/tox:py27_py35
-      - image: couchbase/sync-gateway:1.5.1-community
-        # SG image starts up with a database called DB. Pass it empty JSON to
-        # start with no databases.
-        command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
+    build_1_5_1:
+        docker:
+            - image: kpndigital/tox:py27_py35
+            - image: couchbase/sync-gateway:1.5.1-community
+              # SG image starts up with a database called DB. Pass it empty JSON to
+              # start with no databases.
+              command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
 
-    steps:
-      - checkout
-      - run: make install
-      - run: tox
+        steps:
+            - checkout
+            - run: make install
+            - run: tox
+
+    build_2_1_0:
+        docker:
+            - image: kpndigital/tox:py27_py35
+            - image: couchbase/sync-gateway:2.1.0-community
+              # SG image starts up with a database called DB. Pass it empty JSON to
+              # start with no databases.
+              command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
+
+        steps:
+            - checkout
+            - run: make install
+            - run: tox
+
+workflows:
+    version: 2
+    all_builds:
+        jobs:
+            - build_1_5_1
+              # There is no 1.5.2 docker container yet.
+            - build_2_1_0
