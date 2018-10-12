@@ -14,10 +14,14 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+1.2.0_ - 2018/10/20
+-------------------
+
 Added
 .....
 
-* ``Document.get_open_revisions()`` added to load all leaf revisions of a Document.
+* ``Document.get_open_revisions()`` added to load all leaf revisions of a
+  Document.
 
 * ``Database.bulk_docs()`` added for updating multiple documents and deleting
   open revisions.
@@ -98,7 +102,8 @@ Internals
 
 Initial beta release.
 
-.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.1.1...HEAD
+.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.2.0...HEAD
+.. _1.2.0: https://github.com/constructpm/pysyncgateway/compare/v1.1.1...v1.2.0
 .. _1.1.1: https://github.com/constructpm/pysyncgateway/compare/v1.1.0...v1.1.1
 .. _1.1.0: https://github.com/constructpm/pysyncgateway/compare/v1.0.0...v1.1.0
 .. _1.0.0: https://github.com/constructpm/pysyncgateway/compare/v0.2.0...v1.0.0
