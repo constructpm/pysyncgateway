@@ -1,8 +1,22 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
+import os
+
 import pytest
 
 from pysyncgateway import AdminClient
+
+
+@pytest.fixture
+def syncgateway_version_str():
+    """
+    Returns:
+        str: Value of "SG_VERSION" environment variable.
+    """
+    value = os.environ.get('SG_VERSION')
+    if not value:
+        raise ValueError('Please set an SG_VERSION envvar. Like "1.5.1".')
+    return value
 
 
 @pytest.fixture

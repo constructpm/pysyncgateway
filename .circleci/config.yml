@@ -8,6 +8,9 @@ jobs:
               # start with no databases.
               command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
 
+        environment:
+            SG_VERSION: "1.5.1"
+
         steps:
             - checkout
             - run: make install
@@ -20,6 +23,9 @@ jobs:
               # SG image starts up with a database called DB. Pass it empty JSON to
               # start with no databases.
               command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
+
+        environment:
+            SG_VERSION: "2.1.0"
 
         steps:
             - checkout
