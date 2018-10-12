@@ -30,7 +30,7 @@ jobs:
         steps:
             - checkout
             - run: make install
-            - run: tox
+            - run: tox -e py27-test
 
 workflows:
     version: 2
