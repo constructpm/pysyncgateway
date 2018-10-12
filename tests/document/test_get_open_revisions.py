@@ -36,14 +36,20 @@ def test_revisions(conflicted_document):
 
 
 def test_revisions_ignores_deleted(conflicted_document, database):
+    """
+    Remove open rev at position 0 and this leaves the other open rev which was
+    the one at position 1. Note: The open revisions are returned in a
+    non-deterministic way.
+    """
     conflicted_document.get_open_revisions()
     conflicted_document.open_revisions[0].to_delete = True
+    expected_remaining_rev = conflicted_document.open_revisions[1].rev
     database.bulk_docs(conflicted_document.open_revisions[:1], new_edits=None)
 
     result = conflicted_document.get_open_revisions()
 
     assert result == 2
-    assert [doc.rev for doc in conflicted_document.open_revisions] == ['1-456']
+    assert [doc.rev for doc in conflicted_document.open_revisions] == [expected_remaining_rev]
 
 
 def test_revisions_include_deleted(conflicted_document, database):
