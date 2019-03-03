@@ -8,7 +8,7 @@ The format is based on `Keep a Changelog
 Versioning <http://semver.org/spec/v2.0.0.html>`_.
 
 
-Unreleased_
+1.2.1_
 -----------
 
 See also `latest documentation
@@ -17,6 +17,7 @@ See also `latest documentation
 Added
 .....
 
+* Upgrade requests library to fix security warnings https://nvd.nist.gov/vuln/detail/CVE-2018-18074
 * Tested support for version 2.1.0 of Sync Gateway.
 
 1.2.0_ - 2018/10/20
