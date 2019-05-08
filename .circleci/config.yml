@@ -6,7 +6,7 @@ jobs:
             - image: couchbase/sync-gateway:1.5.1-community
               # SG image starts up with a database called DB. Pass it empty JSON to
               # start with no databases.
-              command: ["{}"]
+              command: ["https://sw.biosite.in/empty.json"]
 
         environment:
             SG_VERSION: "1.5.1"
@@ -22,7 +22,7 @@ jobs:
             - image: couchbase/sync-gateway:2.1.0-community
               # SG image starts up with a database called DB. Pass it empty JSON to
               # start with no databases.
-              command: ["{}"]
+              command: ["https://sw.biosite.in/empty.json"]
 
         environment:
             SG_VERSION: "2.1.0"
