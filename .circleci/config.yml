@@ -6,7 +6,7 @@ jobs:
             - image: couchbase/sync-gateway:1.5.1-community
               # SG image starts up with a database called DB. Pass it empty JSON to
               # start with no databases.
-              command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
+              command: ["https://gist.githubusercontent.com/ChrisDouglasBiosite/84a51c2caf59ea53c8526acbe84f3335/raw/b8f8652210f247a3658a539fdcd3e7bc132bfa59/empty.json"]
 
         environment:
             SG_VERSION: "1.5.1"
@@ -22,7 +22,7 @@ jobs:
             - image: couchbase/sync-gateway:2.1.0-community
               # SG image starts up with a database called DB. Pass it empty JSON to
               # start with no databases.
-              command: ["https://gist.githubusercontent.com/jamescooke/9deac5367b5818f8e52fac9f06450c03/raw/de4573e9e92fbf50df860ce55e252cfecbb6a77f/empty.json"]
+              command: ["https://gist.githubusercontent.com/ChrisDouglasBiosite/84a51c2caf59ea53c8526acbe84f3335/raw/b8f8652210f247a3658a539fdcd3e7bc132bfa59/empty.json"]
 
         environment:
             SG_VERSION: "2.1.0"
