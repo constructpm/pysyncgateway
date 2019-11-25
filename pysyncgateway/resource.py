@@ -1,5 +1,3 @@
-
-
 from .data_dict import DataDict
 from .helpers import ComparableMixin
 
@@ -22,17 +20,16 @@ class Resource(ComparableMixin, object):
         Args:
             database (Database)
         """
-        if not getattr(database, 'url', None):
+        if not getattr(database, "url", None):
             raise ValueError(
-                '{class_name} needs a `database` that provides a populated '
-                '`url` (usually a `Database` instance), not {found}'.format(
-                    class_name=self.__class__.__name__,
-                    found=type(database).__name__,
+                "{class_name} needs a `database` that provides a populated "
+                "`url` (usually a `Database` instance), not {found}".format(
+                    class_name=self.__class__.__name__, found=type(database).__name__,
                 ),
             )
         self.database = database
         self.data = {}
-        self.url = ''
+        self.url = ""
 
     @property
     def data(self):
@@ -54,13 +51,11 @@ class Resource(ComparableMixin, object):
         falls back to default.
         """
         try:
-            nice_output = str(self)
-            return nice_output.encode('UTF8')
+            return str(self)
         except (AttributeError, UnicodeEncodeError):
             return super(Resource, self).__repr__()
 
     def __str__(self):
         return '<{class_name} "{url}">'.format(
-            class_name=self.__class__.__name__,
-            url=self.url,
+            class_name=self.__class__.__name__, url=self.url,
         )

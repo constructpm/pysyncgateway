@@ -33,11 +33,11 @@ loading the server info from Sync Gateway:
 
     >>> server_info = admin_client.get_server()
     >>> sorted(list(server_info))
-    [u'ADMIN', u'couchdb', u'vendor', u'version']
+    ['ADMIN', 'couchdb', 'vendor', 'version']
     >>> server_info['ADMIN']
     True
     >>> server_info['version']
-    u'Couchbase Sync Gateway/1.5.1(4;cb9522c)'
+    'Couchbase Sync Gateway/1.5.1(4;cb9522c)'
 
 You can use the admin client to load a list of databases currently on the Sync
 Gateway (the `default Docker container
@@ -140,7 +140,7 @@ client is connected on the public port.
     >>> user_client.auth('friend', '__PASSWORD__')
     >>> server_info = user_client.get_server()
     >>> sorted(list(server_info))
-    [u'couchdb', u'vendor', u'version']
+    ['couchdb', 'vendor', 'version']
 
 Now check a list of the documents that the user can access. We first have to
 generate a second database instance - this one is for the user client rather
@@ -174,7 +174,7 @@ Now the 'friend' user can retrieve the message document:
     >>> message.retrieve()
     True
     >>> message.data
-    {u'content': u'Hello World!'}
+    {'content': 'Hello World!'}
 
 Success!
 
