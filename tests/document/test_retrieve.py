@@ -11,12 +11,12 @@ def test(recipe_document, database):
     result = reload_document.retrieve()
 
     assert result is True
-    for key in reload_document.data.keys():
-        assert isinstance(key, unicode)
+    for key in list(reload_document.data.keys()):
+        assert isinstance(key, str)
     assert sorted(list(reload_document.data)) == ['ingredients', 'recipe']
     assert reload_document.data['ingredients'] == ['chicken', 'butter']
     assert reload_document.data['recipe'] == 'Mix the chicken and the butter. Voila!'
-    assert isinstance(reload_document.data['recipe'], unicode)
+    assert isinstance(reload_document.data['recipe'], str)
     assert reload_document.rev == recipe_document.rev
     assert reload_document.channels == ()
 

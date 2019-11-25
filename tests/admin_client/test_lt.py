@@ -28,4 +28,4 @@ def test_other_type(admin_client):
     with pytest.raises(ValueError) as excinfo:
         admin_client < 1
 
-    assert 'int' in excinfo.value.message
+    assert 'int' in excinfo.value.args[0]

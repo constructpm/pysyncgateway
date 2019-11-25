@@ -54,12 +54,12 @@ class Resource(ComparableMixin, object):
         falls back to default.
         """
         try:
-            nice_output = unicode(self)
+            nice_output = str(self)
             return nice_output.encode('UTF8')
         except (AttributeError, UnicodeEncodeError):
             return super(Resource, self).__repr__()
 
-    def __unicode__(self):
+    def __str__(self):
         return '<{class_name} "{url}">'.format(
             class_name=self.__class__.__name__,
             url=self.url,

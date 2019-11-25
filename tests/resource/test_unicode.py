@@ -13,6 +13,6 @@ def test(admin_client):
     resource = Resource(database)
     resource.url = 'http://mockhőst/db/__Café__'
 
-    result = unicode(resource)
+    result = str(resource)
 
     assert result == '<Resource "http://mockhőst/db/__Café__">'

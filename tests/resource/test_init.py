@@ -41,4 +41,4 @@ def test_valid_database_required():
     with pytest.raises(ValueError) as excinfo:
         Resource(1)
 
-    assert 'Resource' in excinfo.value.message
+    assert 'Resource' in excinfo.value.args[0]

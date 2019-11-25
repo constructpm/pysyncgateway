@@ -25,7 +25,7 @@ def schools_database(database):
         Database: Containing pupil information as above. Plus one extra 'class'
         document and one extra 'teacher' document.
     """
-    teacher_doc = database.get_document(uuid.uuid4().get_hex())
+    teacher_doc = database.get_document(uuid.uuid4().hex)
     teacher_doc.data = {
         'type': 'teacher',
         'school': 'Olives',
@@ -39,7 +39,7 @@ def schools_database(database):
         ('Maggy', 'Mel', 'St Barts'),
         ('Mary', 'Maggy', None),
     ]:
-        doc = database.get_document(uuid.uuid4().get_hex())
+        doc = database.get_document(uuid.uuid4().hex)
         doc.data = {
             'type': 'pupil',
             'name': name,
@@ -47,7 +47,7 @@ def schools_database(database):
             'school': school,
         }
         doc.create_update()
-    class_doc = database.get_document(uuid.uuid4().get_hex())
+    class_doc = database.get_document(uuid.uuid4().hex)
     class_doc.data = {
         'type': 'class',
         'subject': 'Geography',
@@ -62,7 +62,7 @@ def test_schools_database(schools_database):
     all_docs = result.all_docs()
     assert len(all_docs) == 8
     [doc.retrieve() for doc in all_docs]
-    not_at_school = filter(lambda doc: 'school' in doc.data and doc.data['school'] is None, all_docs)
+    not_at_school = [doc for doc in all_docs if 'school' in doc.data and doc.data['school'] is None]
     assert len(not_at_school) == 2
     assert sorted([doc.data['name'] for doc in not_at_school]) == ['Amy', 'Mary']
 
