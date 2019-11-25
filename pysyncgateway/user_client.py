@@ -1,5 +1,3 @@
-
-
 from requests.auth import HTTPBasicAuth
 
 from .client import Client

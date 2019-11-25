@@ -1,5 +1,3 @@
-
-
 import six
 
 from .exceptions import DoesNotExist, InvalidPassword
@@ -34,7 +32,7 @@ class User(Resource):
         self.name = name
         self.password = None
         self.retrieved = False
-        self.url = '{}_user/{}'.format(self.database.url, self.name)
+        self.url = "{}_user/{}".format(self.database.url, self.name)
 
     def set_password(self, password):
         """
@@ -46,7 +44,9 @@ class User(Resource):
             InvalidPassword: Password provided for User was invalid.
         """
         if not password or not isinstance(password, six.string_types):
-            raise InvalidPassword('"{}" is not a valid password for a User'.format(password))
+            raise InvalidPassword(
+                '"{}" is not a valid password for a User'.format(password)
+            )
         self.password = password
 
     def set_admin_channels(self, *channels):
@@ -89,12 +89,12 @@ class User(Resource):
                 error HTTP code.
         """
         data = {
-            'admin_channels': self.admin_channels,
-            'name': self.name,
+            "admin_channels": self.admin_channels,
+            "name": self.name,
         }
 
         if not self.retrieved:
-            data['password'] = self.password
+            data["password"] = self.password
 
         response = self.database.client.put(self.url, data)
 
@@ -136,7 +136,7 @@ class User(Resource):
         self.retrieved = True
 
         try:
-            self.set_admin_channels(*self.data['admin_channels'])
+            self.set_admin_channels(*self.data["admin_channels"])
         except KeyError:
             self.set_admin_channels()
 

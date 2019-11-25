@@ -1,5 +1,4 @@
 import os
-
 import pytest
 
 from pysyncgateway import AdminClient

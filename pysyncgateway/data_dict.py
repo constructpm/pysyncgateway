@@ -1,5 +1,3 @@
-
-
 import six
 
 from .exceptions import InvalidDataKey

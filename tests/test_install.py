@@ -1,5 +1,3 @@
-
-
 import pysyncgateway  # NOQA
 
 # Small script to assert that pysyncgateway installs correctly. This is

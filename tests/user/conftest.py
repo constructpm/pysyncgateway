@@ -1,5 +1,3 @@
-
-
 import pytest
 
 from pysyncgateway import Database, User
