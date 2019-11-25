@@ -1,4 +1,4 @@
-from __future__ import absolute_import, print_function, unicode_literals
+
 
 from .exceptions import NotLoaded
 from .resource import Resource
