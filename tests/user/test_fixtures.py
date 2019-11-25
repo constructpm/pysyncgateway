@@ -1,6 +1,3 @@
-
-
-
 def test_existing_user(existing_user, database):
     result = existing_user
 

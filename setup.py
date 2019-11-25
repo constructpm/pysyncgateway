@@ -25,7 +25,7 @@ setup(
     author=about["__author__"],
     author_email=about["__email__"],
     license="Apache License 2.0",
-    install_requires=["requests>=2.19.1", "six>=1.10",],
+    install_requires=["requests>=2.19.1", "six>=1.10"],
     packages=["pysyncgateway"],
     zip_safe=False,
     classifiers=[
