@@ -1,6 +1,6 @@
 objects = $(wildcard *.in)
 outputs := $(objects:.in=.txt)
-compile_cmd = ../venv/bin/pip-compile
+compile_cmd = pip-compile
 
 .PHONY: all
 all: $(outputs)
