@@ -26,7 +26,7 @@ def all_query(database_with_doc):
     """
     query = Query(database_with_doc, "all")
     query.data = {
-        "views": {"everything": {"map": "function(doc,meta){emit(meta.id,doc);}",},},
+        "views": {"everything": {"map": "function(doc,meta){emit(meta.id,doc);}"}},
     }
     query.create_update()
     return query

@@ -1,7 +1,4 @@
 # encoding: utf-8
-
-
-
 def test(empty_document):
     """
     Assert that type in repr is Document because this function is provided by
@@ -9,4 +6,4 @@ def test(empty_document):
     """
     result = str(empty_document)
 
-    assert result.startswith('<Document ')
+    assert result.startswith("<Document ")

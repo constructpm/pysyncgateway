@@ -1,6 +1,3 @@
-
-
-
 def test_database(database, admin_client):
     result = database
 
@@ -11,7 +8,7 @@ def test_empty_document(empty_document):
     result = empty_document
 
     assert result.data == {}
-    assert result.rev == ''
+    assert result.rev == ""
 
 
 def test_recipe_document(recipe_document, database):
@@ -30,6 +27,6 @@ def test_conflicted_document(conflicted_document, database):
     result = conflicted_document
 
     assert database.all_docs() == [result]
-    assert result.rev == '1-123'
+    assert result.rev == "1-123"
     assert result.retrieve()
-    assert result.rev == '1-789'
+    assert result.rev == "1-789"

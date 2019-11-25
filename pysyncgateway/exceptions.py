@@ -1,6 +1,3 @@
-
-
-
 class PysyncgatewayException(Exception):
     """
     The root of all Evil >:D
@@ -94,7 +91,7 @@ class SyncGatewayClientErrorResponse(PysyncgatewayException):
         Returns:
             str
         """
-        return '<SyncGatewayClientErrorResponse {}>'.format(self)
+        return "<SyncGatewayClientErrorResponse {}>".format(self)
 
     def __str__(self):
         """
@@ -103,4 +100,4 @@ class SyncGatewayClientErrorResponse(PysyncgatewayException):
         Returns:
             str: Containing `status_code` and `json['error']`.
         """
-        return '{} "{}"'.format(self.status_code, self.json['error'])
+        return '{} "{}"'.format(self.status_code, self.json["error"])

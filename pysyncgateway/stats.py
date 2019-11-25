@@ -1,6 +1,3 @@
-
-
-
 class Stats(object):
     """
     Stats object from the expvars endpoint on the Sync Gateway. See
@@ -21,7 +18,7 @@ class Stats(object):
             client (AdminClient): Used to communicate with the server.
         """
         self.client = client
-        self.url = '{}_expvar'.format(self.client.url)
+        self.url = "{}_expvar".format(self.client.url)
         self.data = {}
 
     def retrieve(self):
