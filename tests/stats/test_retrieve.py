@@ -21,7 +21,7 @@ def expected_stats(syncgateway_version_str):
         "syncGateway_dcp",
     ]
     if syncgateway_version_str.startswith("1.5."):
-        return stats + [
+        return sorted(stats + [
             "goroutine_stats",
             "syncGateway_db",
             "syncGateway_gocb",
@@ -29,8 +29,7 @@ def expected_stats(syncgateway_version_str):
             "syncGateway_index",
             "syncGateway_index_clocks",
             "syncGateway_rest",
-            "syncGateway_stats",
-        ]
+        ])
     return sorted(stats + ["goblip"])
 
 
