@@ -16,7 +16,6 @@ def expected_stats(syncgateway_version_str):
         "cmdline",
         "mc",
         "memstats",
-        "syncgateway",
         "syncGateway_changeCache",
         "syncGateway_dcp",
     ]
@@ -29,8 +28,9 @@ def expected_stats(syncgateway_version_str):
             "syncGateway_index",
             "syncGateway_index_clocks",
             "syncGateway_rest",
+            "syncGateway_stats",
         ])
-    return sorted(stats + ["goblip"])
+    return sorted(stats + ["goblip", "syncgateway"])
 
 
 # --- TESTS ---
