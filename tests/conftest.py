@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 import os
 
 import pytest
@@ -13,7 +11,7 @@ def syncgateway_version_str():
     Returns:
         str: Value of "SG_VERSION" environment variable.
     """
-    value = os.environ.get('SG_VERSION')
+    value = os.environ.get("SG_VERSION")
     if not value:
         raise ValueError('Please set an SG_VERSION envvar. Like "1.5.1".')
     return value
@@ -25,7 +23,7 @@ def syncgateway_admin_url():
     Returns:
         str: URL to reach admin port of SG.
     """
-    return 'http://localhost:4985/'
+    return "http://localhost:4985/"
 
 
 @pytest.fixture
@@ -34,7 +32,7 @@ def syncgateway_public_url():
     Returns:
         str: URL to reach public SG.
     """
-    return 'http://localhost:4984/'
+    return "http://localhost:4984/"
 
 
 @pytest.fixture
@@ -62,8 +60,8 @@ def admin_client(syncgateway_admin_url, cleanup_databases):
 
     all_databases = admin_client.all_databases()
     assert len(all_databases) == 0, (
-        'Test initialised with {} unexpected Databases {}. '
-        'Try setting `cleanup_databases` fixture to `True`?'.format(len(all_databases), all_databases)
+        "Test initialised with {} unexpected Databases {}. "
+        "Try setting `cleanup_databases` fixture to `True`?".format(len(all_databases), all_databases)
     )
 
     yield admin_client

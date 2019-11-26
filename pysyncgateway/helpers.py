@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 import functools
 import re
 
@@ -58,7 +56,7 @@ def sg_method(func, *args, **kwargs):
         try:
             response = func(*args, **kwargs)
         except ConnectionError as exc_info:
-            raise GatewayDown(exc_info.message)
+            raise GatewayDown(exc_info)
 
         if response.status_code == 401:
             raise ClientUnauthorized(response.json()['reason'])

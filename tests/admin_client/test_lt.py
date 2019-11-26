@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 import pytest
 
 from pysyncgateway import AdminClient
@@ -28,4 +26,4 @@ def test_other_type(admin_client):
     with pytest.raises(ValueError) as excinfo:
         admin_client < 1
 
-    assert 'int' in excinfo.value.message
+    assert 'int' in excinfo.value.args[0]

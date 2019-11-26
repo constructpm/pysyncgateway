@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 import json
 
 from .resource import Resource
@@ -24,7 +22,7 @@ class Query(Resource):
         """
         super(Query, self).__init__(database)
         self.doc_id = doc_id
-        self.url = '{}_design/{}'.format(self.database.url, self.doc_id)
+        self.url = "{}_design/{}".format(self.database.url, self.doc_id)
 
     def build_view_url(self, view_name):
         """
@@ -34,7 +32,7 @@ class Query(Resource):
         Returns:
             str: URL for querying view.
         """
-        return '{}/_view/{}'.format(self.url, view_name)
+        return "{}/_view/{}".format(self.url, view_name)
 
     def create_update(self):
         """
@@ -119,16 +117,16 @@ class Query(Resource):
         # Build params (passed to SG in the URL)
         params = {}
         if not stale:
-            params['stale'] = 'false'
+            params["stale"] = "false"
         if key is not None:
-            params['key'] = json.dumps(key)
+            params["key"] = json.dumps(key)
 
         # Build kwargs (passed to requests.get)
         kwargs = {}
         if params:
-            kwargs['params'] = params
+            kwargs["params"] = params
         if timeout is not None:
-            kwargs['timeout'] = timeout
+            kwargs["timeout"] = timeout
 
         url = self.build_view_url(view_name)
         response = self.database.client.get(url, **kwargs)

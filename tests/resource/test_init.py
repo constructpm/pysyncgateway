@@ -1,6 +1,4 @@
 # encoding: utf-8
-from __future__ import absolute_import, print_function, unicode_literals
-
 import pytest
 
 from pysyncgateway import Database
@@ -41,4 +39,4 @@ def test_valid_database_required():
     with pytest.raises(ValueError) as excinfo:
         Resource(1)
 
-    assert 'Resource' in excinfo.value.message
+    assert 'Resource' in excinfo.value.args[0]

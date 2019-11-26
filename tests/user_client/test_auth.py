@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 import pytest
 
 from pysyncgateway import UserClient
@@ -24,7 +22,7 @@ def database(admin_client):
     Returns:
         Database: 'auth_test' database written to Sync Gateway.
     """
-    database = admin_client.get_database('auth_test')
+    database = admin_client.get_database("auth_test")
     database.create()
     return database
 
@@ -36,7 +34,7 @@ def user_client_database(database, user_client):
         Database: Named 'auth_test', with ``user_client`` set as the client in
         an unauthed state.
     """
-    return user_client.get_database('auth_test')
+    return user_client.get_database("auth_test")
 
 
 def test_user_client_database(user_client_database):
@@ -55,8 +53,8 @@ def user(database):
     Returns:
         User: 'test_user' in 'auth_test' database written to Sync Gateway.
     """
-    user = database.get_user('test_user')
-    user.set_password('__PASSWORD__')
+    user = database.get_user("test_user")
+    user.set_password("__PASSWORD__")
     user.create_update()
     return user
 
@@ -74,10 +72,10 @@ def test(user, user_client, user_client_database):
     """
     Setting auth on UserClient allows access to Database.
     """
-    result = user_client.auth('test_user', '__PASSWORD__')
+    result = user_client.auth("test_user", "__PASSWORD__")
 
     assert result is None
-    assert user_client_database.get()['db_name'] == 'auth_test'
+    assert user_client_database.get()["db_name"] == "auth_test"
 
 
 # --- FAILURES ---
@@ -87,7 +85,7 @@ def test_bad_auth(user, user_client, user_client_database):
     """
     Incorrect credentials are only tested when making a subsequent request.
     """
-    result = user_client.auth('test_user', 'OTHER_PASSWORD')
+    result = user_client.auth("test_user", "OTHER_PASSWORD")
 
     assert result is None
     with pytest.raises(ClientUnauthorized):

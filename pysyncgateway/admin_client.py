@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 from .client import Client
 
 
@@ -26,7 +24,7 @@ class AdminClient(Client):
             ValueError: When ``other`` is not an AdminClient.
         """
         if not isinstance(other, AdminClient):
-            raise ValueError('AdminClient compared to {}'.format(type(other)))
+            raise ValueError("AdminClient compared to {}".format(type(other)))
         return self.url < other.url
 
     # --- Databases ---
@@ -44,5 +42,5 @@ class AdminClient(Client):
             .GatewayDown: When sync gateway instance can not be reached by
                 client.
         """
-        response = self.get('{}{}'.format(self.url, '_all_dbs')).json()
+        response = self.get("{}{}".format(self.url, "_all_dbs")).json()
         return [self.get_database(name) for name in response]

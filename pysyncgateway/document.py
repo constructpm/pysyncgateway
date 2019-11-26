@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 from .exceptions import RevisionMismatch
 from .helpers import assert_valid_channel_name, assert_valid_document_id
 from .resource import Resource

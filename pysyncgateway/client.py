@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 from requests import delete, get, post, put
 
 from .database import Database
@@ -15,6 +13,7 @@ class Client(ComparableMixin, object):
             used by ``UserClient``.
         url (str): Sync Gateway REST API URL.
     """
+
     CREATED = 1
     UPDATED = 2
     CONFLICT = 3
@@ -52,7 +51,7 @@ class Client(ComparableMixin, object):
     @sg_method
     def get(self, url, **kwargs):
         if self._auth:
-            kwargs['auth'] = self._auth
+            kwargs["auth"] = self._auth
         return get(url, **kwargs)
 
     @sg_method

@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 import pytest
 import responses
 
@@ -14,28 +12,27 @@ def expected_stats(syncgateway_version_str):
         list (str): List of stats returned by the current version of SG.
     """
     stats = [
-        'cb',
-        'cmdline',
-        'goroutine_stats',
-        'mc',
-        'memstats',
-        'syncGateway_changeCache',
-        'syncGateway_db',
-        'syncGateway_dcp',
-        'syncGateway_gocb',
-        'syncGateway_httpListener',
-        'syncGateway_index',
-        'syncGateway_index_clocks',
-        'syncGateway_rest',
-        'syncGateway_stats',
+        "cb",
+        "cmdline",
+        "mc",
+        "memstats",
+        "syncGateway_changeCache",
+        "syncGateway_dcp",
     ]
-    if syncgateway_version_str.startswith('1.5.'):
-        return stats
-    return sorted(stats + [
-        'goblip',
-        'syncGateway_import',
-        'syncGateway_query',
-    ])
+    if syncgateway_version_str.startswith("1.5."):
+        return sorted(
+            stats + [
+                "goroutine_stats",
+                "syncGateway_db",
+                "syncGateway_gocb",
+                "syncGateway_httpListener",
+                "syncGateway_index",
+                "syncGateway_index_clocks",
+                "syncGateway_rest",
+                "syncGateway_stats",
+            ]
+        )
+    return sorted(stats + ["goblip", "syncgateway"])
 
 
 # --- TESTS ---
@@ -59,7 +56,7 @@ def test_bad_json(admin_client):
     expvars endpoint returns something non-JSON nasty, raises ValueError
     """
     stats = Stats(admin_client)
-    responses.add(responses.GET, stats.url, body=':D')
+    responses.add(responses.GET, stats.url, body=":D")
 
     with pytest.raises(ValueError):
         stats.retrieve()

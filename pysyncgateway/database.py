@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-
 from .document import Document
 from .exceptions import DoesNotExist
 from .helpers import ComparableMixin, assert_valid_database_name
@@ -25,10 +23,10 @@ class Database(ComparableMixin, object):
             client (AdminClient)
             name (str): A valid database name.
         """
-        if not getattr(client, 'url', None):
+        if not getattr(client, "url", None):
             raise ValueError(
-                '{class_name} needs a `client` that provides a populated '
-                '`url` (usually a `AdminClient` instance), not {found}'.format(
+                "{class_name} needs a `client` that provides a populated "
+                "`url` (usually a `AdminClient` instance), not {found}".format(
                     class_name=self.__class__.__name__,
                     found=type(client).__name__,
                 ),
@@ -38,7 +36,7 @@ class Database(ComparableMixin, object):
 
         self.client = client
         self.name = name
-        self.url = '{}{}/'.format(self.client.url, self.name)
+        self.url = "{}{}/".format(self.client.url, self.name)
 
     def __repr__(self):
         return '<Database "{url}">'.format(url=self.url)
@@ -58,7 +56,7 @@ class Database(ComparableMixin, object):
             ValueError: When other is not Database.
         """
         if not isinstance(other, Database):
-            raise ValueError('Database compared to {}'.format(type(other)))
+            raise ValueError("Database compared to {}".format(type(other)))
         return self.url < other.url
 
     def create(self):
@@ -150,15 +148,15 @@ class Database(ComparableMixin, object):
         Raises:
             .DoesNotExist: Database can't be found on Sync Gateway.
         """
-        url = '{}{}'.format(self.url, '_all_docs')
+        url = "{}{}".format(self.url, "_all_docs")
 
         response = self.client.get(url)
 
         documents = []
 
-        for doc_info in response.json()['rows']:
-            document = self.get_document(doc_info['id'])
-            document.set_rev(doc_info['value']['rev'])
+        for doc_info in response.json()["rows"]:
+            document = self.get_document(doc_info["id"])
+            document.set_rev(doc_info["value"]["rev"])
             documents.append(document)
 
         return documents
@@ -183,13 +181,13 @@ class Database(ComparableMixin, object):
         Raises:
             .DoesNotExist: Database can't be found on Sync Gateway.
         """
-        url = '{}{}'.format(self.url, '_bulk_docs')
+        url = "{}{}".format(self.url, "_bulk_docs")
 
         data = {
-            'docs': [doc.flatten_data() for doc in docs],
+            "docs": [doc.flatten_data() for doc in docs],
         }
         if new_edits is not None:
-            data['new_edits'] = new_edits
+            data["new_edits"] = new_edits
 
         response = self.client.post(url, data)
 
@@ -211,7 +209,7 @@ class Database(ComparableMixin, object):
         Returns:
             list (User): All Users in Database.
         """
-        url = '{}_user/'.format(self.url)
+        url = "{}_user/".format(self.url)
         response = self.client.get(url)
         return [self.get_user(username) for username in response.json()]
 
