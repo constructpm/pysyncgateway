@@ -14,10 +14,15 @@ Unreleased_
 See also `latest documentation
 <https://pysyncgateway.readthedocs.io/en/latest/>`_
 
+2.0.0_ - 2018/11/26
+-------------------
+
 Added
 .....
 
-* Tested support for version 2.1.0 of Sync Gateway.
+* Added support for Python 3.5+
+* Removed support for Python 2
+* Tested support for version 2.5.0 of Sync Gateway.
 
 1.2.0_ - 2018/10/20
 -------------------
@@ -107,7 +112,8 @@ Internals
 
 Initial beta release.
 
-.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v1.2.0...HEAD
+.. _Unreleased: https://github.com/constructpm/pysyncgateway/compare/v2.0.0...HEAD
+.. _2.0.0: https://github.com/constructpm/pysyncgateway/compare/v1.2.0...v2.0.0
 .. _1.2.0: https://github.com/constructpm/pysyncgateway/compare/v1.1.1...v1.2.0
 .. _1.1.1: https://github.com/constructpm/pysyncgateway/compare/v1.1.0...v1.1.1
 .. _1.1.0: https://github.com/constructpm/pysyncgateway/compare/v1.0.0...v1.1.0
