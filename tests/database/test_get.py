@@ -1,4 +1,5 @@
 import pytest
+
 from pysyncgateway import Database, UserClient
 from pysyncgateway.exceptions import ClientUnauthorized, DoesNotExist
 

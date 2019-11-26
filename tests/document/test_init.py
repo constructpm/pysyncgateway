@@ -1,4 +1,5 @@
 import pytest
+
 from pysyncgateway import Document
 from pysyncgateway.exceptions import InvalidDocumentID
 

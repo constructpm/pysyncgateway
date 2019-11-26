@@ -1,4 +1,5 @@
 import pytest
+
 from pysyncgateway import AdminClient
 from pysyncgateway.exceptions import GatewayDown
 

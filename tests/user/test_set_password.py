@@ -1,4 +1,5 @@
 import pytest
+
 from pysyncgateway.exceptions import InvalidPassword
 
 

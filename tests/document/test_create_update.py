@@ -1,5 +1,6 @@
 # encoding: utf-8
 import pytest
+
 from pysyncgateway import Document
 from pysyncgateway.exceptions import RevisionMismatch
 

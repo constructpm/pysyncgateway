@@ -1,4 +1,5 @@
 import pytest
+
 from pysyncgateway import User
 from pysyncgateway.exceptions import DoesNotExist, SyncGatewayClientErrorResponse
 

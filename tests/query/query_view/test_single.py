@@ -1,7 +1,8 @@
 import pytest
+from requests.exceptions import ReadTimeout
+
 from pysyncgateway import Query
 from pysyncgateway.exceptions import DoesNotExist
-from requests.exceptions import ReadTimeout
 
 
 @pytest.fixture()

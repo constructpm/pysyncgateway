@@ -1,4 +1,5 @@
 import pytest
+
 from pysyncgateway.exceptions import DoesNotExist
 
 # See also: Tests on Document.create_update: where `all_docs` is used to assert

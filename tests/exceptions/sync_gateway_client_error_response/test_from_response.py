@@ -1,6 +1,7 @@
 import pytest
-from pysyncgateway.exceptions import SyncGatewayClientErrorResponse
 from requests import get
+
+from pysyncgateway.exceptions import SyncGatewayClientErrorResponse
 
 
 @pytest.fixture

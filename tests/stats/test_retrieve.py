@@ -1,5 +1,6 @@
 import pytest
 import responses
+
 from pysyncgateway import Stats
 from pysyncgateway.exceptions import GatewayDown
 
