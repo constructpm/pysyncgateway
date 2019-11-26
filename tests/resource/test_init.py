@@ -1,6 +1,5 @@
 # encoding: utf-8
 import pytest
-
 from pysyncgateway import Database
 from pysyncgateway.resource import Resource
 

@@ -1,5 +1,4 @@
 import pytest
-
 from pysyncgateway import Database, Document
 from pysyncgateway.exceptions import DoesNotExist, RevisionMismatch
 

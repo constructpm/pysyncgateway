@@ -1,5 +1,4 @@
 import pytest
-
 from pysyncgateway.data_dict import DataDict
 
 

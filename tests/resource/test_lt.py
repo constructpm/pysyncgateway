@@ -1,5 +1,4 @@
 import pytest
-
 from pysyncgateway import Database
 from pysyncgateway.resource import Resource
 

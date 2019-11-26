@@ -20,7 +20,6 @@ class User(Resource):
             to know if there should be a password sent at `create_update` time.
         url (str): URL for this User on sync gateway.
     """
-
     def __init__(self, database, name):
         """
         Args:
@@ -44,9 +43,7 @@ class User(Resource):
             InvalidPassword: Password provided for User was invalid.
         """
         if not password or not isinstance(password, six.string_types):
-            raise InvalidPassword(
-                '"{}" is not a valid password for a User'.format(password)
-            )
+            raise InvalidPassword('"{}" is not a valid password for a User'.format(password))
         self.password = password
 
     def set_admin_channels(self, *channels):

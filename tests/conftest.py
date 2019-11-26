@@ -1,7 +1,6 @@
 import os
 
 import pytest
-
 from pysyncgateway import AdminClient
 
 
@@ -61,9 +60,7 @@ def admin_client(syncgateway_admin_url, cleanup_databases):
     all_databases = admin_client.all_databases()
     assert len(all_databases) == 0, (
         "Test initialised with {} unexpected Databases {}. "
-        "Try setting `cleanup_databases` fixture to `True`?".format(
-            len(all_databases), all_databases
-        )
+        "Try setting `cleanup_databases` fixture to `True`?".format(len(all_databases), all_databases)
     )
 
     yield admin_client

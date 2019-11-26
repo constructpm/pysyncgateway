@@ -70,7 +70,6 @@ class SyncGatewayClientErrorResponse(PysyncgatewayException):
         status_code (int): Error code in the response from Sync Gateway.
         json (dict): Body of response from Sync Gateway.
     """
-
     def __init__(self, status_code, json):
         self.status_code = status_code
         self.json = json

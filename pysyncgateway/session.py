@@ -1,5 +1,3 @@
-
-
 from .exceptions import NotLoaded
 from .resource import Resource
 
@@ -20,7 +18,6 @@ class Session(Resource):
         database (Database)
         url (str): URL for the session in the Database on Sync Gateway.
     """
-
     def __init__(self, database):
         """
         Args:

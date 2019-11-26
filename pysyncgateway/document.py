@@ -1,5 +1,3 @@
-
-
 from .exceptions import RevisionMismatch
 from .helpers import assert_valid_channel_name, assert_valid_document_id
 from .resource import Resource
@@ -26,7 +24,6 @@ class Document(Resource):
             :py:meth:`.Document.retrieve()` is called with ``revs=True``.
         url (str): URL for this resource on Sync Gateway.
     """
-
     def __init__(self, database, doc_id):
         """
         Args:

@@ -13,7 +13,6 @@ class Query(Resource):
         doc_id (str): ID of design document.
         url (str): URL for this resource on Sync Gateway.
     """
-
     def __init__(self, database, doc_id):
         """
         Args:

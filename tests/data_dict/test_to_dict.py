@@ -1,5 +1,3 @@
-
-
 from pysyncgateway.data_dict import DataDict
 
 

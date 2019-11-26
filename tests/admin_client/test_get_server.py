@@ -9,6 +9,4 @@ def test(admin_client, syncgateway_version_str):
         "version",
     ]
     assert result["ADMIN"] is True
-    assert result["version"].startswith(
-        "Couchbase Sync Gateway/{}(".format(syncgateway_version_str)
-    )
+    assert result["version"].startswith("Couchbase Sync Gateway/{}(".format(syncgateway_version_str))

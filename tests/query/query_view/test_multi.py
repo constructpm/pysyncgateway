@@ -60,9 +60,7 @@ def test_schools_database(schools_database):
     all_docs = result.all_docs()
     assert len(all_docs) == 8
     [doc.retrieve() for doc in all_docs]
-    not_at_school = [
-        doc for doc in all_docs if "school" in doc.data and doc.data["school"] is None
-    ]
+    not_at_school = [doc for doc in all_docs if "school" in doc.data and doc.data["school"] is None]
     assert len(not_at_school) == 2
     assert sorted([doc.data["name"] for doc in not_at_school]) == ["Amy", "Mary"]
 
@@ -78,7 +76,8 @@ def pupil_data_design_doc(database):
     query.data = {
         "views": {
             "list_pupils": {
-                "map": """
+                "map":
+                """
 function (doc,meta) {
     if(doc.type == "pupil") {
         emit([doc.parent, doc.school], doc);

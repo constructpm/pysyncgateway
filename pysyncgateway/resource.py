@@ -12,7 +12,6 @@ class Resource(ComparableMixin, object):
         database (Database)
         url (str)
     """
-
     def __init__(self, database):
         """
         Initialise a Resource with a database.
@@ -24,7 +23,8 @@ class Resource(ComparableMixin, object):
             raise ValueError(
                 "{class_name} needs a `database` that provides a populated "
                 "`url` (usually a `Database` instance), not {found}".format(
-                    class_name=self.__class__.__name__, found=type(database).__name__,
+                    class_name=self.__class__.__name__,
+                    found=type(database).__name__,
                 ),
             )
         self.database = database
@@ -57,5 +57,6 @@ class Resource(ComparableMixin, object):
 
     def __str__(self):
         return '<{class_name} "{url}">'.format(
-            class_name=self.__class__.__name__, url=self.url,
+            class_name=self.__class__.__name__,
+            url=self.url,
         )

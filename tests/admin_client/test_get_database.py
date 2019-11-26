@@ -1,5 +1,3 @@
-
-
 from pysyncgateway import Database
 
 

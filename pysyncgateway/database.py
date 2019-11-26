@@ -16,7 +16,6 @@ class Database(ComparableMixin, object):
         url (str): URL to the database, created at init time, including
             trailing slash.
     """
-
     def __init__(self, client, name):
         """
         Args:
@@ -27,7 +26,8 @@ class Database(ComparableMixin, object):
             raise ValueError(
                 "{class_name} needs a `client` that provides a populated "
                 "`url` (usually a `AdminClient` instance), not {found}".format(
-                    class_name=self.__class__.__name__, found=type(client).__name__,
+                    class_name=self.__class__.__name__,
+                    found=type(client).__name__,
                 ),
             )
 
