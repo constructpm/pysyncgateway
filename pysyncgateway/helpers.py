@@ -19,6 +19,7 @@ class ComparableMixin(object):
     """
     Alex Martelli's suggestion from https://stackoverflow.com/a/1061350/1286705
     """
+
     def __eq__(self, other):
         return not self < other and not other < self
 
@@ -49,6 +50,7 @@ def sg_method(func, *args, **kwargs):
         SyncGatewayClientErrorResponse: When any "not OK" response (according
             to ``requests.Response.ok`` is received that is not a 404.
     """
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:

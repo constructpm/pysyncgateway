@@ -16,6 +16,7 @@ class Database(ComparableMixin, object):
         url (str): URL to the database, created at init time, including
             trailing slash.
     """
+
     def __init__(self, client, name):
         """
         Args:

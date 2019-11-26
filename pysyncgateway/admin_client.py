@@ -8,6 +8,7 @@ class AdminClient(Client):
     Attributes:
         url (str): Sync Gateway admin REST API URL.
     """
+
     def __repr__(self):
         return '<AdminClient on "{url}">'.format(url=self.url)
 

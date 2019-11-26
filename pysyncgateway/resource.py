@@ -12,6 +12,7 @@ class Resource(ComparableMixin, object):
         database (Database)
         url (str)
     """
+
     def __init__(self, database):
         """
         Initialise a Resource with a database.

@@ -20,6 +20,7 @@ class User(Resource):
             to know if there should be a password sent at `create_update` time.
         url (str): URL for this User on sync gateway.
     """
+
     def __init__(self, database, name):
         """
         Args:

@@ -11,6 +11,7 @@ class Stats(object):
             dictionary before retrieval.
         url (str): Location of stats.
     """
+
     def __init__(self, client):
         """
         Args:
