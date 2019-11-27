@@ -35,7 +35,7 @@ loading the server info from Sync Gateway:
     True
     >>> import os
     >>> sg_version = os.environ.get('SG_VERSION')
-    >>> sg_version && sg_version in server_info['version']
+    >>> sg_version and sg_version in server_info['version']
     True
 
 You can use the admin client to load a list of databases currently on the Sync
