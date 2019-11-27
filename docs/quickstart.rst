@@ -17,9 +17,6 @@ Assuming that you have a Sync Gateway running with its admin port on
 ``http://localhost:4985/``, create an instance of :class:`AdminClient
 <pysyncgateway.admin_client.AdminClient>` to connect:
 
-.. testsetup::
-
-    from __future__ import absolute_import, print_function, unicode_literals
 
 .. doctest::
 
@@ -37,7 +34,7 @@ loading the server info from Sync Gateway:
     >>> server_info['ADMIN']
     True
     >>> server_info['version']
-    'Couchbase Sync Gateway/1.5.1(4;cb9522c)'
+    'Couchbase Sync Gateway/2.5.0(271;bf3ddf6) CE'
 
 You can use the admin client to load a list of databases currently on the Sync
 Gateway (the `default Docker container
