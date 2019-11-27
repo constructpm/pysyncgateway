@@ -5,12 +5,12 @@
 #    pip-compile --output-file=test.txt test.in
 #
 alabaster==0.7.12         # via sphinx
-astroid==1.6.5            # via pylint
-asttokens==1.1.11         # via flake8-aaa
+astroid==2.3.3            # via pylint
+asttokens==2.0.2         # via flake8-aaa
 attrs==18.2.0             # via pytest
 babel==2.6.0              # via sphinx
 backports.functools-lru-cache==1.5  # via astroid, pylint
-bandit==1.5.1
+bandit==1.6.2
 certifi==2018.8.24
 chardet==3.0.4
 configparser==3.5.0       # via flake8, importlib-metadata, pylint
@@ -19,8 +19,8 @@ cookies==2.2.1            # via responses
 docutils==0.14
 enum34==1.1.6             # via astroid, flake8
 filelock==3.0.9           # via tox
-flake8-aaa==0.4.0
-flake8==3.5.0
+flake8-aaa==0.7.1
+flake8==3.7.9
 funcsigs==1.0.2           # via mock
 gitdb2==2.0.4             # via gitpython
 gitpython==2.1.11         # via bandit
@@ -29,7 +29,7 @@ imagesize==1.1.0          # via sphinx
 importlib-metadata==0.23  # via pluggy, pytest
 isort==4.3.4
 jinja2==2.10.3              # via sphinx
-lazy-object-proxy==1.3.1  # via astroid
+lazy-object-proxy==1.4.3  # via astroid
 markupsafe==1.0           # via jinja2
 mccabe==0.6.1             # via flake8, pylint
 mock==2.0.0               # via responses
@@ -39,10 +39,10 @@ pathlib2==2.3.2           # via importlib-metadata, pytest
 pbr==4.3.0                # via mock, stevedore
 pluggy==0.13.1            # via pytest, tox
 py==1.6.0                 # via pytest, tox
-pycodestyle==2.3.1        # via flake8
-pyflakes==1.6.0           # via flake8
+pycodestyle==2.5.0        # via flake8
+pyflakes==2.1.1           # via flake8
 pygments==2.2.0
-pylint==1.9.3
+pylint==2.4.4
 pyparsing==2.2.2          # via packaging
 pytest==5.3.0
 pytz==2018.5              # via babel
@@ -52,7 +52,7 @@ responses==0.10.6
 restructuredtext-lint==1.1.3
 scandir==1.9.0            # via pathlib2
 singledispatch==3.4.0.3   # via astroid, pylint
-six==1.11.0
+six==1.13.0
 smmap2==2.0.4             # via gitdb2
 snowballstemmer==1.2.1    # via sphinx
 sphinx-rtd-theme==0.4.2
@@ -65,7 +65,7 @@ typing==3.6.6             # via sphinx
 urllib3==1.23
 virtualenv==16.0.0        # via tox
 wcwidth==0.1.7            # via pytest
-wrapt==1.10.11            # via astroid
+wrapt==1.11.2            # via astroid
 yapf==0.24.0
 zipp==0.6.0               # via importlib-metadata
 
