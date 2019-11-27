@@ -21,12 +21,13 @@ gitdb2==2.0.4             # via gitpython
 gitpython==2.1.11         # via bandit
 idna==2.7
 imagesize==1.1.0          # via sphinx
+importlib-metadata==0.23  # via pluggy, pytest
 isort==4.3.4
 jinja2==2.10.3            # via sphinx
 lazy-object-proxy==1.4.3  # via astroid
 markupsafe==1.0           # via jinja2
 mccabe==0.6.1             # via flake8, pylint
-more-itertools==4.3.0     # via pytest
+more-itertools==4.3.0     # via pytest, zipp
 packaging==18.0           # via pytest, sphinx
 pbr==4.3.0                # via stevedore
 pluggy==0.13.1            # via pytest, tox
@@ -51,11 +52,13 @@ sphinxcontrib-websupport==1.1.0  # via sphinx
 stevedore==1.29.0         # via bandit
 toml==0.10.0              # via tox
 tox==3.5.0
-urllib3==1.23
+typed-ast==1.4.0          # via astroid
+urllib3==1.24.2
 virtualenv==16.0.0        # via tox
 wcwidth==0.1.7            # via pytest
 wrapt==1.11.2             # via astroid
 yapf==0.24.0
+zipp==0.6.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools
+# setuptools==42.0.1        # via sphinx, tox
