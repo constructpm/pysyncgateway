@@ -1,4 +1,4 @@
 # Base requirements - should mirror setup.py's install_requires
 
 requests>=2.22.0
-six>=1.10
+six>=1.13.0

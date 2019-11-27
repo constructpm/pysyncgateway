@@ -15,11 +15,12 @@ def test(admin_client):
     assert result.url == ''
 
 
-def test_happy_unicode():
-    class Database(object):
-        pass
+class MockDatabase(object):
+    pass
 
-    database = Database()
+
+def test_happy_unicode():
+    database = MockDatabase()
     database.url = 'http://localhost/caféculture'
 
     result = Resource(database)
