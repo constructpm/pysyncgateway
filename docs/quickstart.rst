@@ -33,8 +33,10 @@ loading the server info from Sync Gateway:
     ['ADMIN', 'couchdb', 'vendor', 'version']
     >>> server_info['ADMIN']
     True
-    >>> server_info['version']
-    'Couchbase Sync Gateway/2.5.0(271;bf3ddf6) CE'
+    >>> import os
+    >>> sg_version = os.environ.get('SG_VERSION')
+    >>> sg_version && sg_version in server_info['version']
+    True
 
 You can use the admin client to load a list of databases currently on the Sync
 Gateway (the `default Docker container
