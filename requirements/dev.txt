@@ -10,7 +10,7 @@ asttokens==2.0.2
 attrs==18.2.0
 babel==2.6.0
 bandit==1.6.2
-bleach==3.0.0             # via readme-renderer
+bleach==3.1.1             # via readme-renderer
 certifi==2018.8.24
 cffi==1.13.2              # via cmarkgfm
 chardet==3.0.4
