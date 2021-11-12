@@ -26,7 +26,7 @@ babel==2.9.1
     #   sphinx
 bandit==1.6.2
     # via -r test.txt
-bleach==3.0.0
+bleach==3.3.0
     # via readme-renderer
 certifi==2018.8.24
     # via
@@ -116,6 +116,7 @@ more-itertools==4.3.0
 packaging==18.0
     # via
     #   -r test.txt
+    #   bleach
     #   pytest
     #   sphinx
 pbr==4.3.0
