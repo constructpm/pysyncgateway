@@ -172,7 +172,7 @@ pytz==2018.5
     # via
     #   -r test.txt
     #   babel
-pyyaml==5.1.2
+pyyaml==5.4
     # via
     #   -r test.txt
     #   bandit
