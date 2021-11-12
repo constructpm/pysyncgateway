@@ -1,6 +1,6 @@
-.. image:: https://img.shields.io/circleci/project/github/constructpm/pysyncgateway/master.svg
-    :alt: CircleCI
-    :target: https://circleci.com/gh/constructpm/pysyncgateway/tree/master
+.. image:: https://github.com/constructpm/pysyncgateway/actions/workflows/build.yml/badge.svg
+    :alt: Build
+    :target: https://github.com/constructpm/pysyncgateway/actions/workflows/build.yml
 
 .. image:: https://img.shields.io/readthedocs/pysyncgateway.svg
     :alt: Read the Docs

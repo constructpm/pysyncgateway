@@ -1,0 +1,31 @@
+name: build
+
+on:
+  pull_request:
+  push:
+    tags:
+      - v*.*.*
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        sg_version: ["1.5.1", "2.5.0"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Start sync-gateway
+        run: docker run --name sync-gateway --detach --publish 127.0.0.1:4984:4984 --publish 127.0.0.1:4985:4985 --rm couchbase/sync-gateway:${{ matrix.sg_version }}-community -adminInterface :4985 https://sw.biosite.in/empty.json
+      - name: Install dependencies
+        run: make install
+      - name: Tests
+        run: tox -e py3-test
+        env:
+          SG_VERSION: "${{ matrix.sg_version }}"
+      - name: Stop sync-gateway
+        run: docker stop sync-gateway
+        continue-on-error: true
