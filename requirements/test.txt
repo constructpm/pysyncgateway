@@ -4,61 +4,148 @@
 #
 #    pip-compile --output-file=test.txt test.in
 #
-alabaster==0.7.12         # via sphinx
-astroid==2.3.3            # via pylint
-asttokens==2.0.2          # via flake8-aaa
-attrs==18.2.0             # via pytest
-babel==2.6.0              # via sphinx
+alabaster==0.7.12
+    # via sphinx
+astroid==2.3.3
+    # via pylint
+asttokens==2.0.2
+    # via flake8-aaa
+attrs==18.2.0
+    # via pytest
+babel==2.9.1
+    # via sphinx
 bandit==1.6.2
+    # via -r test.in
 certifi==2018.8.24
+    # via
+    #   -r base.txt
+    #   requests
 chardet==3.0.4
+    # via
+    #   -r base.txt
+    #   requests
 docutils==0.14
-entrypoints==0.3          # via flake8
-filelock==3.0.9           # via tox
-flake8-aaa==0.7.1
+    # via
+    #   -r test.in
+    #   restructuredtext-lint
+    #   sphinx
+entrypoints==0.3
+    # via flake8
+filelock==3.0.9
+    # via tox
 flake8==3.7.9
-gitdb2==2.0.4             # via gitpython
-gitpython==2.1.11         # via bandit
+    # via -r test.in
+flake8-aaa==0.7.1
+    # via -r test.in
+gitdb2==2.0.4
+    # via gitpython
+gitpython==2.1.11
+    # via bandit
 idna==2.7
-imagesize==1.1.0          # via sphinx
-importlib-metadata==0.23  # via pluggy, pytest
+    # via
+    #   -r base.txt
+    #   requests
+imagesize==1.1.0
+    # via sphinx
 isort==4.3.4
-jinja2==2.10.3            # via sphinx
-lazy-object-proxy==1.4.3  # via astroid
-markupsafe==2.0.1         # via jinja2
-mccabe==0.6.1             # via flake8, pylint
-more-itertools==4.3.0     # via pytest, zipp
-packaging==18.0           # via pytest, sphinx
-pbr==4.3.0                # via stevedore
-pluggy==0.13.1            # via pytest, tox
-py==1.6.0                 # via pytest, tox
-pycodestyle==2.5.0        # via flake8
-pyflakes==2.1.1           # via flake8
+    # via
+    #   -r test.in
+    #   pylint
+jinja2==2.10.3
+    # via sphinx
+lazy-object-proxy==1.4.3
+    # via astroid
+markupsafe==2.0.1
+    # via jinja2
+mccabe==0.6.1
+    # via
+    #   flake8
+    #   pylint
+more-itertools==4.3.0
+    # via pytest
+packaging==18.0
+    # via
+    #   pytest
+    #   sphinx
+pbr==4.3.0
+    # via stevedore
+pluggy==0.13.1
+    # via
+    #   pytest
+    #   tox
+py==1.6.0
+    # via
+    #   pytest
+    #   tox
+pycodestyle==2.5.0
+    # via flake8
+pyflakes==2.1.1
+    # via flake8
 pygments==2.2.0
+    # via
+    #   -r test.in
+    #   sphinx
 pylint==2.4.4
-pyparsing==2.2.2          # via packaging
+    # via -r test.in
+pyparsing==2.2.2
+    # via packaging
 pytest==5.3.0
-pytz==2018.5              # via babel
-pyyaml==5.1.2             # via bandit
+    # via -r test.in
+pytz==2018.5
+    # via babel
+pyyaml==5.1.2
+    # via bandit
 requests==2.22.0
+    # via
+    #   -r base.txt
+    #   responses
+    #   sphinx
 responses==0.10.6
+    # via -r test.in
 restructuredtext-lint==1.1.3
+    # via -r test.in
 six==1.13.0
-smmap2==2.0.4             # via gitdb2
-snowballstemmer==1.2.1    # via sphinx
-sphinx-rtd-theme==0.4.2
+    # via
+    #   -r base.txt
+    #   astroid
+    #   asttokens
+    #   bandit
+    #   more-itertools
+    #   packaging
+    #   responses
+    #   sphinx
+    #   stevedore
+    #   tox
+smmap2==2.0.4
+    # via gitdb2
+snowballstemmer==1.2.1
+    # via sphinx
 sphinx==1.8.1
-sphinxcontrib-websupport==1.1.0  # via sphinx
-stevedore==1.29.0         # via bandit
-toml==0.10.0              # via tox
+    # via
+    #   -r test.in
+    #   sphinx-rtd-theme
+sphinx-rtd-theme==0.4.2
+    # via -r test.in
+sphinxcontrib-websupport==1.1.0
+    # via sphinx
+stevedore==1.29.0
+    # via bandit
+toml==0.10.0
+    # via tox
 tox==3.5.0
-typed-ast==1.4.0          # via astroid
+    # via -r test.in
 urllib3==1.24.2
-virtualenv==16.0.0        # via tox
-wcwidth==0.1.7            # via pytest
-wrapt==1.11.2             # via astroid
+    # via
+    #   -r base.txt
+    #   requests
+virtualenv==16.0.0
+    # via tox
+wcwidth==0.1.7
+    # via pytest
+wrapt==1.11.2
+    # via astroid
 yapf==0.24.0
-zipp==0.6.0               # via importlib-metadata
+    # via -r test.in
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools==42.0.1        # via sphinx, tox
+# setuptools
