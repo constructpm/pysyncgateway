@@ -3,5 +3,5 @@
 -r test.txt
 
 ipdb
-pip-tools
+pip-tools>=6.4.0
 twine
