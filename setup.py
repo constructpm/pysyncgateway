@@ -23,7 +23,7 @@ setup(
     author=about["__author__"],
     author_email=about["__email__"],
     license="Apache License 2.0",
-    install_requires=["requests>=2.19.1", "six>=1.10"],
+    install_requires=["requests>=2.23.0", "six>=1.13"],
     packages=["pysyncgateway"],
     python_requires=">=3.5, <4",
     zip_safe=False,
