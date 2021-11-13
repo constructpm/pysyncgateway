@@ -66,11 +66,15 @@ fixlint: flake8
 	@echo "=== fixing yapf ==="
 	$(bin_prefix)yapf --recursive --in-place $(lint_files)
 
+
+docs/.venv:
+	cd docs && python -m virtualenv .venv
+	cd docs && .venv/bin/python -m pip install --upgrade --no-cache-dir pip setuptools
+
 .PHONY: doc
-doc:
-	$(bin_prefix)sphinx-apidoc -f -o docs pysyncgateway/
-	rm docs/modules.rst
-	$(MAKE) -C docs doctest html
+doc: docs/.venv
+	cd docs && .venv/bin/python -m pip install --upgrade --no-cache-dir -r requirements.txt
+	cd docs && .venv/bin/python -m sphinx -T -E -b html -d _build/doctrees -D language=en . _build/html
 
 .PHONY: export_doc
 export_doc:
