@@ -30,7 +30,7 @@ bandit==1.6.2
     # via -r test.txt
 bleach==3.3.0
     # via readme-renderer
-certifi==2018.8.24
+certifi==2022.12.7
     # via
     #   -r test.txt
     #   requests
