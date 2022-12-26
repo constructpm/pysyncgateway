@@ -266,7 +266,7 @@ wcwidth==0.1.7
     #   pytest
 webencodings==0.5.1
     # via bleach
-wheel==0.37.0
+wheel==0.38.1
     # via pip-tools
 wrapt==1.11.2
     # via
